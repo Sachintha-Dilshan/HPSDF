@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+
+.layout{
+    margin: 0%;
+    padding-top: 80px; 
+    padding-bottom: 55px;
+    font-family: "Outfit";
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #eceaff;
+    color: #525252;
+}
