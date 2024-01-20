@@ -22,7 +22,7 @@ function Navbar() {
         <label  className="organizationName"> Hakmana Pradeshiya Sabha </label>
         <ul style={{left: show[0] ? "0%" : "-100%"}}>
             <li>
-              <Link to="/home">
+              <Link to="/dashboard">
                 <i className="fas fa-home icon"></i>
               <label className="iconLabels">Home</label>
               </Link>
