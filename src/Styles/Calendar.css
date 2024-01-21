@@ -1,0 +1,37 @@
+  .calendar-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .calendar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .event {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    max-width: 200px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .event:hover {
+    transform: scale(1.05);
+  }
+  
+  .event-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .event-title {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  /* Add more styles for event details as needed */
