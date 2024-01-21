@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../Components/Card';
+import Calendar from '../Components/Calendar';
 import "../Styles/HRDashBoard.css"
 
 
@@ -22,7 +23,7 @@ function HRDashBoard() {
       </div>
 
       <div className="item-5">
-        Calender
+        <Calendar/>
       </div>
       <div className="item-6">
         Pending Leaves
