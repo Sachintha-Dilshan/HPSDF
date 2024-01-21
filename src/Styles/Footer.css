@@ -1,5 +1,5 @@
 .footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background: rgba(1, 9, 34, 0.80);
