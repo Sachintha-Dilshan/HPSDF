@@ -5,7 +5,7 @@ import FooterBar from '../Components/FooterBar';
 
 function Layout() {
   return (
-    <div className="pt-16">
+    <div className="pt-16 pb-12">
       <NavigationBar/>
       <Outlet/>      
       <FooterBar/>
