@@ -1,4 +1,4 @@
-import "./Styles/App.css";
+//import "./Styles/App.css";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./Pages/Layout";
 //import HRDashBoard from "./Pages/HR/HRDashBoard";
