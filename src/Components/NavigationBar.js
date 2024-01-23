@@ -1,7 +1,8 @@
 "use client";
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
+import { HiLogout, HiViewGrid, HiUserCircle } from 'react-icons/hi';
+import { Link } from "react-router-dom";
 
 
 function NavigationBar() {
@@ -23,7 +24,7 @@ function NavigationBar() {
           alt="Sabha Logo"
         />
         <span className="self-center  text-center   flex-wrap text-lg font-semibold text-white uppercase ">
-          Hakmana PS
+          Hakmana Pradeshiya Sabha
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
@@ -40,38 +41,43 @@ function NavigationBar() {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm font-bold">MS. Chani Ekanayake</span>
+            <span className="block text-sm font-bold">Mr. Sachintha Dilshan</span>
             <span className="block truncate text-sm font-medium">
-              chaniekanayake@gmail.com
+              sachinthadilshan335@gmail.com
             </span>
           </Dropdown.Header>
-          <Dropdown.Item icon={HiViewGrid}>Dashboard</Dropdown.Item>
-          <Dropdown.Item icon={HiCog}>Settings</Dropdown.Item>
-          <Dropdown.Item icon={HiCurrencyDollar}>Earnings</Dropdown.Item>
+          <Link to="dashboard"><Dropdown.Item icon={HiViewGrid}> Dashboard </Dropdown.Item></Link>
+          <Link to="alerts"><Dropdown.Item icon={HiUserCircle}>Profile</Dropdown.Item></Link>
           <Dropdown.Divider />
           <Dropdown.Item icon={HiLogout}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse >
-        <Navbar.Link href="dashboard" active>
+        <Link to="dashboard" active>
           <span className="block text-white text-center uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white md:bg-cyan-800 md:hover:bg-cyan-700  transition ease-in-out duration-300">
             <i className="fas fa-home text-lg md:text-white mr-2"></i>
             Home
           </span>
-        </Navbar.Link>
-        <Navbar.Link href="reports">
+        </Link>
+        <Link to="reports">
           <span className="block text-center hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
-          <i className="fas fa-chart-line text-lg md:text-white mr-2"></i>
-            Reports
+          <i className="	fa fa-calendar text-lg md:text-white mr-2"></i>
+            Leaves
           </span>
-        </Navbar.Link>
-        <Navbar.Link href="alerts">
+        </Link>
+        <Link to="alerts">
           <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
-          <i className="far fa-bell text-lg md:text-white mr-2"></i>
-            Alerts
+          <i className="fas fa-archive text-lg md:text-white mr-2"></i>
+            Archive
           </span>
-        </Navbar.Link>
+        </Link>
+        <Link to="alerts">
+          <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
+          <i className="fas fa-store-alt text-lg md:text-white mr-2"></i>
+            Store
+          </span>
+        </Link>
       </Navbar.Collapse>
     </Navbar>
   );

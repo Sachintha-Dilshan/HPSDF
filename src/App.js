@@ -9,6 +9,7 @@ import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import HREmployees from "./Pages/HR/HREmployees";
 import HRAddEmployee from "./Pages/HR/HRAddEmployee";
+import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="dashboard" element={<HREmployees/>} />
             <Route path="reports" element={<HRAddEmployee />} />
-            <Route path="alerts" element={<Alert />} />
+            <Route path="alerts" element={<HREmployeeProfile />} />
             <Route path="profile" element={<Profile />} />
             <Route path="logout" element={<Logout />} />
             <Route path="*" element={<NoPage />} />

@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../../Components/UI/Card";
 import CollapseBar from "../../Components/UI/CollapseBar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
+import employees from "../../Data";
 
 function HREmployees() {
   return (
@@ -31,31 +32,8 @@ function HREmployees() {
         {/* Search option ends here */}
 
         {/* Employees card grid starts here */}
-        <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 ">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
+        {employees.map(employee => <Card name={employee.name} designation={employee.designation} contact={employee.contactNo} key={employee.contactNo}/>)}
         </div>
         {/* Employees card grid ends here */}
       </div>
