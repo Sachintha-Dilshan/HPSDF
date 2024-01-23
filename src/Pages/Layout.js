@@ -1,15 +1,14 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import "../Styles/Layout.css";
-import Navbar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+import NavigationBar from '../Components/NavigationBar';
+import FooterBar from '../Components/FooterBar';
 
 function Layout() {
   return (
-    <div className="layout">
-      <Navbar/>
+    <div className="pt-16">
+      <NavigationBar/>
       <Outlet/>      
-      <Footer/>
+      <FooterBar/>
     </div>
   )
 }

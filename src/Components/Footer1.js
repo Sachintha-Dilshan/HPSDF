@@ -1,6 +1,6 @@
 import "../Styles/Footer.css";
 
-function Footer(){
+function Footer1(){
     return(
         <footer className="footer">
             <p className="footer--content">
@@ -11,4 +11,4 @@ function Footer(){
     );
 };
 
-export default Footer;
+export default Footer1;

@@ -5,12 +5,18 @@ function Calendar() {
   const [events] = React.useState([ 
     { id: 1, title: 'Meeting', date: '2024-01-31' },
     { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
+    { id: 2, title: 'Conference', date: '2024-02-15' },
     // Add more events as needed
   ]);
 
   return (
     <div className="calendar-container">
-      <h1>Event Calendar</h1>
+      <h1 className="calendar-title">Events</h1>
       <div className="calendar">
         {events.map((event) => (
           <div key={event.id} className="event">

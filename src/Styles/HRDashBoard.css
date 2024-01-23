@@ -43,7 +43,13 @@
 
 .dashboard-container .date-time{
     width: 20%;
+    margin-right: 5%;
+}
+
+.calendar-box{
+    width: 26%;
     margin-right: 2%;
+    margin-left: auto;
 }
 .dashboard-container .card-set{
     display: flex;
@@ -52,7 +58,6 @@
 
 .row-2{
     display: flex;
-    flex-wrap: wrap;
 }
 
 .inner-row-2{

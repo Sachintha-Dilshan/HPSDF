@@ -1,7 +1,8 @@
 import React from 'react';
-import Card from '../Components/Card';
-import DateTimeWidget from '../Components/DateTimeWidget';
-import "../Styles/HRDashBoard.css"
+import Card from '../../Components/Card';
+import DateTimeWidget from '../../Components/DateTimeWidget';
+import Calendar from '../../Components/Calendar';
+//import "../Styles/HRDashBoard.css"
 
 
 function HRDashBoard() {
@@ -32,12 +33,12 @@ function HRDashBoard() {
           </div> 
           <div className="leave-status">
             Leave Status
-          </div>
+          </div> 
         </div>
         
 
-        <div className="calender">
-          Calender
+        <div className="calendar-box">
+          <Calendar/>
         </div>
       </div>
     </div>
