@@ -5,7 +5,7 @@ import Calendar from '../../Components/Calendar';
 //import "../Styles/HRDashBoard.css"
 
 
-function HRDashBoard() {
+function HRDashBoard1() {
   return (
     <div className="dashboard-container">
       <div className="section">Admin Section</div>
@@ -45,4 +45,4 @@ function HRDashBoard() {
     );
   }
 
-export default HRDashBoard;
+export default HRDashBoard1;

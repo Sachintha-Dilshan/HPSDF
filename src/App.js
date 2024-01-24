@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./Pages/Layout";
 //import HRDashBoard from "./Pages/HR/HRDashBoard";
 //import Report from "./Pages/Report";
-import Alert from "./Pages/Alert";
+//import Alert from "./Pages/Alert";
 import Profile from "./Pages/Profile";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import HREmployees from "./Pages/HR/HREmployees";
-import HRAddEmployee from "./Pages/HR/HRAddEmployee";
+//import HRAddEmployee from "./Pages/HR/HRAddEmployee";
 import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
+import HRDashboard from "./Pages/HR/HRDashboard";
 
 
 function App() {
@@ -17,9 +18,9 @@ function App() {
     <div className="App">
        <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout />}>
             <Route path="dashboard" element={<HREmployees/>} />
-            <Route path="reports" element={<HRAddEmployee />} />
+            <Route path="reports" element={<HRDashboard />} />
             <Route path="alerts" element={<HREmployeeProfile />} />
             <Route path="profile" element={<Profile />} />
             <Route path="logout" element={<Logout />} />

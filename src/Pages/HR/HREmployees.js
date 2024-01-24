@@ -20,7 +20,7 @@ function HREmployees() {
             <FloatingLabel variant="filled" label="File Number" />
             <FloatingLabel variant="filled" label="Leave ID" />
             <Select id="sections">
-              <option selected className="text-center">-----Section-----</option>
+              <option  className="text-center">-----Section-----</option>
               <option>Administration</option>
               <option>Development</option>
               <option>Account</option>

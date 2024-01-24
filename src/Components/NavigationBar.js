@@ -1,15 +1,14 @@
 "use client";
-
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { HiLogout, HiViewGrid, HiUserCircle } from 'react-icons/hi';
+import React from "react";
+import { Avatar, Dropdown, Navbar, NavbarLink } from "flowbite-react";
+import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
 
 function NavigationBar() {
   return (
     <Navbar
       fluid
-      style={{ backgroundColor: "rgba(1, 9, 34, 0.80)"}}
+      style={{ backgroundColor: "rgba(1, 9, 34, 0.80)" }}
       className="fixed top-0 w-full z-50 shadow"
     >
       <Navbar.Brand href="https://hakmana.ps.gov.lk/">
@@ -24,7 +23,7 @@ function NavigationBar() {
           alt="Sabha Logo"
         />
         <span className="self-center  text-center   flex-wrap text-lg font-semibold text-white uppercase ">
-          Hakmana Pradeshiya Sabha
+          HPDF
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
@@ -41,43 +40,59 @@ function NavigationBar() {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm font-bold">Mr. Sachintha Dilshan</span>
+            <span className="block text-sm font-bold">
+              Mr. Sachintha Dilshan
+            </span>
             <span className="block truncate text-sm font-medium">
               sachinthadilshan335@gmail.com
             </span>
           </Dropdown.Header>
-          <Link to="dashboard"><Dropdown.Item icon={HiViewGrid}> Dashboard </Dropdown.Item></Link>
-          <Link to="alerts"><Dropdown.Item icon={HiUserCircle}>Profile</Dropdown.Item></Link>
+          <Link to="dashboard">
+            <Dropdown.Item icon={HiViewGrid}> Dashboard </Dropdown.Item>
+          </Link>
+          <Link to="alerts">
+            <Dropdown.Item icon={HiUserCircle}>Profile</Dropdown.Item>
+          </Link>
           <Dropdown.Divider />
           <Dropdown.Item icon={HiLogout}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
-      <Navbar.Collapse >
-        <Link to="dashboard" active>
-          <span className="block text-white text-center uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white md:bg-cyan-800 md:hover:bg-cyan-700  transition ease-in-out duration-300">
-            <i className="fas fa-home text-lg md:text-white mr-2"></i>
-            Home
-          </span>
-        </Link>
-        <Link to="reports">
-          <span className="block text-center hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
-          <i className="	fa fa-calendar text-lg md:text-white mr-2"></i>
-            Leaves
-          </span>
-        </Link>
-        <Link to="alerts">
-          <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
-          <i className="fas fa-archive text-lg md:text-white mr-2"></i>
-            Archive
-          </span>
-        </Link>
-        <Link to="alerts">
-          <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
-          <i className="fas fa-store-alt text-lg md:text-white mr-2"></i>
-            Store
-          </span>
-        </Link>
+      <Navbar.Collapse>
+        <NavbarLink active>
+          <Link to="dashboard">
+            <span className="block text-white text-center uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white md:bg-cyan-800 md:hover:bg-cyan-700  transition ease-in-out duration-300">
+              <i className="fas fa-home text-lg md:text-white mr-2"></i>
+              Home
+            </span>
+          </Link>
+        </NavbarLink>
+
+        <NavbarLink>
+          <Link to="reports">
+            <span className="block text-center hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
+              <i className="	fa fa-calendar text-lg md:text-white mr-2"></i>
+              Leaves
+            </span>
+          </Link>
+        </NavbarLink>
+
+        <NavbarLink>
+          <Link to="alerts">
+            <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
+              <i className="fas fa-archive text-lg md:text-white mr-2"></i>
+              Archive
+            </span>
+          </Link>
+        </NavbarLink>
+        <NavbarLink>
+          <Link to="alerts">
+            <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
+              <i className="fas fa-store-alt text-lg md:text-white mr-2"></i>
+              Store
+            </span>
+          </Link>
+        </NavbarLink>
       </Navbar.Collapse>
     </Navbar>
   );
