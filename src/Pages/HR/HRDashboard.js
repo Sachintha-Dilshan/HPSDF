@@ -2,6 +2,7 @@ import React from "react";
 import CollapseBar from "../../Components/UI/CollapseBar";
 import DashboardCard from "../../Components/UI/DashboardCard";
 import Tab from "../../Components/UI/Tab";
+import LeaveTracker from "../../Components/LeaveTracker";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
 
 function HRDashboard() {
@@ -36,9 +37,9 @@ function HRDashboard() {
     {
       id: 1 ,
       active: true,
-      title: "Employee Leave Requests",
+      title: "Track Leaves",
       icon: FaCheckDouble,
-      content: "" 
+      content: <LeaveTracker/> 
     },
     {
       id: 2,
@@ -64,17 +65,14 @@ function HRDashboard() {
    ];
 
   return (
-    <main className="flex">
-      <div>
-        <CollapseBar />
-      </div>
-
-      <div className="flex-grow p-2">
+    <main className="flex justify-between">
+      <CollapseBar />
+      <div className="flex-grow m-5">
         <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase">
           Administration Section
         </h3>
         {/* Dashboard cards starts here */}
-        <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-3 mx-5">
+        <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5 mx-5">
           {cardData.map((data) => (
             <DashboardCard
               key={data.id}
@@ -85,8 +83,8 @@ function HRDashboard() {
           ))}
         </div>
 
-        <div>
-        <Tab para={tabData}/>
+        <div className="grid grid-cols-1">
+            <Tab para={tabData}/>
         </div>
       </div>
     </main>

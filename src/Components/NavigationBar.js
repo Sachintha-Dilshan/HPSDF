@@ -23,7 +23,7 @@ function NavigationBar() {
           alt="Sabha Logo"
         />
         <span className="self-center  text-center   flex-wrap text-lg font-semibold text-white uppercase ">
-          HPDF
+          HPSDF
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">

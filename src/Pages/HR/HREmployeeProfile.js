@@ -59,7 +59,7 @@ function HREmployeeProfile() {
           <div>Employee Data</div>
         </div>
 
-        <div>
+        <div className="grid grid-cols-1">
           <Tab para={data}/>
         </div>
       </div>
