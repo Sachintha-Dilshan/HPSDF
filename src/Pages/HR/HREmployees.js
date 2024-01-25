@@ -6,7 +6,7 @@ import employees from "../../Data";
 
 function HREmployees() {
   return (
-    <main className="flex justify-between">
+    <main>
       {/* Collapse bar starts here */}
      <CollapseBar/>
       {/* Collapse bae ends here */}

@@ -47,20 +47,22 @@ function NavigationBar() {
               sachinthadilshan335@gmail.com
             </span>
           </Dropdown.Header>
-          <Link to="dashboard">
+          <Link to="HR/dashboard">
             <Dropdown.Item icon={HiViewGrid}> Dashboard </Dropdown.Item>
           </Link>
-          <Link to="alerts">
+          <Link to="/HR/employeeProfile">
             <Dropdown.Item icon={HiUserCircle}>Profile</Dropdown.Item>
           </Link>
           <Dropdown.Divider />
-          <Dropdown.Item icon={HiLogout}>Sign out</Dropdown.Item>
+          <Link to="logout">
+            <Dropdown.Item icon={HiLogout}>Sign out</Dropdown.Item>
+          </Link>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
         <NavbarLink active>
-          <Link to="dashboard">
+          <Link to="/HR/dashboard">
             <span className="block text-white text-center uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white md:bg-cyan-800 md:hover:bg-cyan-700  transition ease-in-out duration-300">
               <i className="fas fa-home text-lg md:text-white mr-2"></i>
               Home
@@ -69,7 +71,7 @@ function NavigationBar() {
         </NavbarLink>
 
         <NavbarLink>
-          <Link to="reports">
+          <Link to="leaves">
             <span className="block text-center hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
               <i className="	fa fa-calendar text-lg md:text-white mr-2"></i>
               Leaves
@@ -78,7 +80,7 @@ function NavigationBar() {
         </NavbarLink>
 
         <NavbarLink>
-          <Link to="alerts">
+          <Link to="archive">
             <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
               <i className="fas fa-archive text-lg md:text-white mr-2"></i>
               Archive
@@ -86,7 +88,7 @@ function NavigationBar() {
           </Link>
         </NavbarLink>
         <NavbarLink>
-          <Link to="alerts">
+          <Link to="store">
             <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
               <i className="fas fa-store-alt text-lg md:text-white mr-2"></i>
               Store

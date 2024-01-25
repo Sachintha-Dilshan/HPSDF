@@ -3,6 +3,7 @@ import CollapseBar from "../../Components/UI/CollapseBar";
 import DashboardCard from "../../Components/UI/DashboardCard";
 import Tab from "../../Components/UI/Tab";
 import LeaveTracker from "../../Components/LeaveTracker";
+import TimeLine from "../../Components/TimeLine";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
 
 function HRDashboard() {
@@ -12,24 +13,28 @@ function HRDashboard() {
       title: "Total Employees",
       count: 150,
       image: "/Images/totalEmployees.jpg",
+      url: "/HR/allEmployees"
     },
     {
       id: 2,
       title: "On Leave Today",
       count: 12,
       image: "/Images/onLeave.webp",
+      url: ""
     },
     {
       id: 3,
       title: "Leave requests",
       count: 5,
       image: "/Images/pending.jpg",
+      url: ""
     },
     {
       id: 4,
       title: "Birthday Today",
       count: 12,
       image: "/Images/employeeBirthday.jpg",
+      url: ""
     },
   ];
 
@@ -60,12 +65,12 @@ function HRDashboard() {
         active: true,
         title: "Notifications",
         icon: FaBell,
-        content: ""
+        content: <TimeLine/>
       }
    ];
 
   return (
-    <main className="flex justify-between">
+    <main>
       <CollapseBar />
       <div className="flex-grow m-5">
         <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase">
@@ -73,14 +78,18 @@ function HRDashboard() {
         </h3>
         {/* Dashboard cards starts here */}
         <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5 mx-5">
+         
           {cardData.map((data) => (
             <DashboardCard
               key={data.id}
               title={data.title}
               count={data.count}
               image={data.image}
+              url={data.url}
             />
           ))}
+
+        
         </div>
 
         <div className="grid grid-cols-1">

@@ -45,7 +45,7 @@ function HREmployeeProfile() {
   }
  ];
   return (
-    <main className="flex justify-between">
+    <main>
       <CollapseBar />
       <div className="flex-grow m-5">
         <div className="flex items-center  flex-grow">

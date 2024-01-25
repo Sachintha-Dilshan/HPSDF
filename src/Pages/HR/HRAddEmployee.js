@@ -14,7 +14,7 @@ import { FaPhone } from "react-icons/fa";
 
 function HRAddEmployee() {
   return (
-    <main className="flex justify-between">
+    <main>
       <CollapseBar />
       <div className="w-full">
         {/* Personal details starts here */}
