@@ -16,7 +16,10 @@ function HRAddEmployee() {
   return (
     <main>
       <CollapseBar />
-      <div className="w-full">
+      <div className="flex flex-col  gap-2 m-5">
+        <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase">
+          Add New Employee
+        </h3>
         {/* Personal details starts here */}
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
@@ -168,17 +171,23 @@ function HRAddEmployee() {
               </span>
               <Datepicker />
             </div>
-            
 
             <div className="flex items-center md:gap-20 md:justify-center justify-between">
               <div>
                 <Radio id="permanant" name="permanant" value="permanant" />
-                <Label htmlFor="permanant" className="text-slate-500 text-base ml-2">
+                <Label
+                  htmlFor="permanant"
+                  className="text-slate-500 text-base ml-2"
+                >
                   පත්වීම ස්ථීරයි
                 </Label>
               </div>
               <div>
-                <Radio id="notPermanant" name="permanant" value="notPermanant" />
+                <Radio
+                  id="notPermanant"
+                  name="permanant"
+                  value="notPermanant"
+                />
                 <Label
                   htmlFor="notPermanant"
                   className="text-slate-500 text-base ml-2"
@@ -198,7 +207,6 @@ function HRAddEmployee() {
             <FloatingLabel variant="filled" label="වැටුප් වර්ධක දිනය" />
             <FloatingLabel variant="filled" label="වැටුප් කේතය" />
             <FloatingLabel variant="filled" label="වැ.අ.වි.වැ අංකය" />
-
           </fieldset>
         </div>
         {/* Job details ends here */}
