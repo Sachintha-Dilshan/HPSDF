@@ -6,6 +6,7 @@ import LeaveTracker from "../../Components/LeaveTracker";
 import TimeLine from "../../Components/TimeLine";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
 import EmployeeAttendanceSheet from "../../Components/EmployeeAttendanceSheet";
+import LeaveRegister from "../../Components/LeaveRegister";
 
 function HRDashboard() {
   const cardData = [
@@ -59,7 +60,7 @@ function HRDashboard() {
       active: true,
       title: "Employee Leaves",
       icon: FaUmbrellaBeach,
-      content: ""
+      content: <LeaveRegister/>
     },
     {
         id: 4,
