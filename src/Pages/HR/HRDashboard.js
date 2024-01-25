@@ -5,6 +5,7 @@ import Tab from "../../Components/UI/Tab";
 import LeaveTracker from "../../Components/LeaveTracker";
 import TimeLine from "../../Components/TimeLine";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
+import EmployeeAttendanceSheet from "../../Components/EmployeeAttendanceSheet";
 
 function HRDashboard() {
   const cardData = [
@@ -51,7 +52,7 @@ function HRDashboard() {
       active: true,
       title: "Employee Attendance ",
       icon: FaCalendarCheck,
-      content: ""
+      content: <EmployeeAttendanceSheet/>
     },
     {
       id: 3,
@@ -77,7 +78,7 @@ function HRDashboard() {
           Administration Section
         </h3>
         {/* Dashboard cards starts here */}
-        <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5 mx-5">
+        <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5">
          
           {cardData.map((data) => (
             <DashboardCard
