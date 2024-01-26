@@ -13,13 +13,13 @@ function NavigationBar() {
     >
       <Navbar.Brand href="https://hakmana.ps.gov.lk/">
         <img
-          src="Images/governmentLogo.png"
-          className="mr-3 h-6 sm:h-9"
+          src="/Images/governmentLogo.png"
+          className="mr-3 h-10"
           alt="Government Logo"
         />
         <img
-          src="Images/hakmanaSabhaLogo.png"
-          className="mr-3 h-6 sm:h-9"
+          src="/Images/hakmanaSabhaLogo.png"
+          className="mr-3 h-10"
           alt="Sabha Logo"
         />
         <span className="self-center  text-center   flex-wrap text-lg font-semibold text-white uppercase ">

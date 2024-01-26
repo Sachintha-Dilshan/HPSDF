@@ -11,11 +11,13 @@ import HREmployees from "./Pages/HR/HREmployees";
 import HRAddEmployee from "./Pages/HR/HRAddEmployee";
 import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
 import HRDashboard from "./Pages/HR/HRDashboard";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<LoginPage/>}/>
         <Route path="/" element={<Layout />}>
           <Route path="HR">
             <Route path="dashboard" element={<HRDashboard />} />
