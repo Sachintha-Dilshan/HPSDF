@@ -1,15 +1,24 @@
 "use client";
-
+import React from "react";
 import { Footer } from "flowbite-react";
 
 function FooterBar() {
+  const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
+  React.useEffect(() => {
+    // Update the currentYear state when the component mounts
+    // This ensures that the year is updated when the component is first rendered
+    setCurrentYear(new Date().getFullYear());
+  }, []); // Empty dependency array means this effect runs only once, similar to componentDidMount
+
+
+
   return (
     <Footer
       container
       className="fixed bottom-0 w-full z-50 rounded-none h-10"
       style={{ backgroundColor: "rgba(1, 9, 34, 0.80)" }}
     >
-      <Footer.Copyright href="https://www.ruh.ac.lk" by="University of Ruhuna™" year={2022} className="text-white"/>
+      <Footer.Copyright href="https://www.ruh.ac.lk" by="University of Ruhuna™" year={currentYear}  className="text-white"/>
       <Footer.LinkGroup>
         <Footer.Link href="#">
           <span className="text-white">About</span>
