@@ -9,6 +9,7 @@ import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import HREmployees from "./Pages/HR/HREmployees";
 import HRAddEmployee from "./Pages/HR/HRAddEmployee";
+import ARCAddFile from "./Pages/ARC/ARCAddFile";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="logout" element={<Logout />} />
             <Route path="*" element={<NoPage />} />
+            <Route path="arcaddfile" element={<ARCAddFile/>}/>
           </Route>
         </Routes>
       </BrowserRouter>   
