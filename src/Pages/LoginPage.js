@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../Services/AuthService";
 
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import Alerts from "../Components/UI/Alert";
 
 function LoginPage() {
   let navigate = useNavigate();
@@ -12,6 +13,9 @@ function LoginPage() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [usernameError, setUsernameError] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState("");
+
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -25,25 +29,30 @@ function LoginPage() {
     e.preventDefault();
 
     setMessage("");
+    setUsernameError("");
+    setPasswordError("");
 
     //form.current.validateAll();
+    if (!username) setUsernameError("Username is empty");
+    else if (!password) setPasswordError("Password is empty");
+    else {
+      AuthService.login(username, password).then(
+        () => {
+          navigate("/HR/dashboard");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-    AuthService.login(username, password).then(
-      () => {
-        navigate("/HR/dashboard");
-        window.location.reload();
-      },
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        setMessage(resMessage);
-      }
-    );
+          setMessage(resMessage);
+        }
+      );
+    }
   };
 
   return (
@@ -80,11 +89,12 @@ function LoginPage() {
           </div>
           <TextInput
             id="email1"
-            type="email"
-            placeholder="name@flowbite.com"
+            type="text"
+            placeholder="username"
             onChange={onChangeUsername}
-            required
+            
           />
+          {usernameError && <Alerts alert={usernameError} />}
         </div>
         <div>
           <div className="mb-2 block">
@@ -93,9 +103,10 @@ function LoginPage() {
           <TextInput
             id="password1"
             type="password"
-            required
+            placeholder="password"
             onChange={onChangePassword}
           />
+          {passwordError && <Alerts alert={passwordError} />}
         </div>
         <div className="flex items-center gap-2">
           <Checkbox id="remember" />
@@ -106,6 +117,7 @@ function LoginPage() {
           Submit
         </Button>
         {/* </Link> */}
+        {message && <Alerts alert={message} />}
       </form>
     </div>
   );
