@@ -3,6 +3,7 @@ import React from "react";
 import { Avatar, Dropdown, Navbar, NavbarLink } from "flowbite-react";
 import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import AuthService from "../Services/AuthService";
 
 function NavigationBar() {
   return (
@@ -54,8 +55,8 @@ function NavigationBar() {
             <Dropdown.Item icon={HiUserCircle}>Profile</Dropdown.Item>
           </Link>
           <Dropdown.Divider />
-          <Link to="logout">
-            <Dropdown.Item icon={HiLogout}>Sign out</Dropdown.Item>
+          <Link to="/">
+            <Dropdown.Item icon={HiLogout} onClick={()=>AuthService.logout()}>Sign out</Dropdown.Item>
           </Link>
         </Dropdown>
         <Navbar.Toggle />
