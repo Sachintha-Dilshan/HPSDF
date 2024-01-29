@@ -11,14 +11,10 @@ export default function InputField(props){
             <Label htmlFor="email1" value={props.label} />
           </div>
           <hr className="mb-1"></hr>
-          <TextInput id="email1" type={props.type} placeholder={props.placholder} name={props.name} onChange={props.onChange} disabled={props.disabled} required />
+          <TextInput id="email1" type={props.type} placeholder={props.placholder} name={props.name} value={props.value} onChange={props.onChange} disabled={props.disabled} required />
           {/* // "name@flowbite.com" */}
         </div>
-       
-        
-        
-        
-      
+            
         
     )
 }

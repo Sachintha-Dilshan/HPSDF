@@ -1,10 +1,11 @@
 import InputField from "../../Components/ARC/InputField";
 import Button from "../../Components/ARC/button";
+import CollapseBar from "../../Components/ARC/ArcCollapsBar";
 import React,{useState} from "react";
 
 
 
-export default function ARCAddFile(){
+export default function ARCAddFile(props){
     const [file,changeFile]=useState({
         fileNumber:"",
         fileName:"",
@@ -72,17 +73,24 @@ export default function ARCAddFile(){
     </div>
 
     return (
+        <main>
         
+        <CollapseBar/>
         <form className="gap-4 grid grid-cols-1 md:grid-cols-2" onSubmit={handleSubmit}>
+            <div className="col-span-2">
+                <h1 className="text-center text-emerald-600">{props.crud}</h1>
+                <hr className="bg-gray-300 h-0.5 w-full"></hr>
+            </div>
+        
             <div >
            
             
-            <InputField label="File Number" placholder="File Number" type="text" name="fileNumber"  onChange={handleChange} />
-            <InputField label="File Name" placholder="Enter File Name" type="text" name="fileName" onChange={handleChange}/>
+            <InputField label="File Number" placholder="File Number" type="text" name="fileNumber" valuee={file.fileNumber} onChange={handleChange} />
+            <InputField label="File Name" placholder="Enter File Name" type="text" name="fileName" valuee={file.fileName} onChange={handleChange}/>
             <InputField label="Section" value="defaultvalue" type="text"  disabled="disabled"/>
             {subject}
             {/* <InputField label="Subject" placholder="Enter Subject" name="subject" onChange={handleChange}/> */}
-            <InputField label="Year" placholder="Enter Year" type="text"  name="year" onChange={handleChange}/>
+            <InputField label="Year" placholder="Enter Year" type="text"  name="year" valuee={file.year}  onChange={handleChange}/>
             
             </div>
             <div>
@@ -91,13 +99,14 @@ export default function ARCAddFile(){
                 <InputField label="File Index" placeholder="Enter File Index" type="text"  name="fileIndex" onChange={handleChange}/>
                 
                  <div className="flex justify-normal w-3/4 mx-auto">
-                    <Button text="Add File" type="submit" />
+                    <Button text={props.crud} type="submit" />
                     <Button text="Clear"   type="button" onClick={handleClear}/>
                  </div>
                 
                 
             </div>
             </form>
+            </main>
             // flex-col max-w-md
     
     )
