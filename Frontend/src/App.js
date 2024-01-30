@@ -12,20 +12,27 @@ import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
 import HREmployees from "./Pages/HR/HREmployees";
 import LoginPage from "./Pages/LoginPage";
 import NoPage from "./Pages/NoPage";
+import ARCAddFile from "./Pages/ARC/ARCAddFile";
 //import JWTHome from "./Pages/JWTHome";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LoginPage/>}/>
+        {/* <Route path="/" element={<LoginPage/>}/> */}
         <Route path="/" element={<Layout />}>
           <Route path="HR">
             <Route path="dashboard" element={<HRDashboard />} />
             <Route path="allEmployees" element={<HREmployees />} />
-            <Route path="employeeProfile" element={<HREmployeeProfile />} />
-            <Route path="addEmployee" element={<HRAddEmployee />} />
+            <Route path="employeeProfile" element={<HREmployeeProfile />}/>
+            <Route path="addEmployee" element={<HRAddEmployee />} />    
           </Route>
+          <Route path="ARC">
+            <Route path="arcAddFile" element={<ARCAddFile crud="ADD FILE"/>} />
+            <Route path="arcUpdateFile" element={<ARCAddFile crud="UPDATE FILE"/>} />
+            <Route path="arcDeleteFile" element={<ARCAddFile crud="DELETE FILE"/>} />
+          </Route>
+          
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
