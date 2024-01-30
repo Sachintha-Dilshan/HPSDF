@@ -13,6 +13,7 @@ import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
 import HRDashboard from "./Pages/HR/HRDashboard";
 import LoginPage from "./Pages/LoginPage";
 import ARCAddFile from "./Pages/ARC/ARCAddFile";
+//import JWTHome from "./Pages/JWTHome";
 
 function App() {
   return (
