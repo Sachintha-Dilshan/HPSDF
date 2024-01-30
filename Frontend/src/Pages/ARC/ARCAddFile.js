@@ -77,10 +77,13 @@ export default function ARCAddFile(props){
         
         <CollapseBar/>
         <form className="gap-4 grid grid-cols-1 md:grid-cols-2" onSubmit={handleSubmit}>
-            <div className="col-span-2">
-                <h1 className="text-center text-emerald-600">{props.crud}</h1>
-                <hr className="bg-gray-300 h-0.5 w-full"></hr>
+            <div className="grid grid-cols-subgrid gap-4 col-span-1 md:col-span-2">
+                <div className="col-span-2">
+                    <h1 className="text-center text-emerald-600">{props.crud}</h1>
+                    <hr className="bg-gray-300 h-0.5 w-full"></hr>
+                </div>
             </div>
+       
         
             <div >
            

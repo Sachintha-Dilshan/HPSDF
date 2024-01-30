@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LoginPage/>}/>
+        {/* <Route path="/" element={<LoginPage/>}/> */}
         <Route path="/" element={<Layout />}>
           <Route path="HR">
             <Route path="dashboard" element={<HRDashboard />} />
