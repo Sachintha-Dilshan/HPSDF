@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ARhomecard(props) {
+function ARCHomecard(props) {
     return (
         <div className="display flex shadow-lg items-center rounded-lg transform hover:scale-105 transition ease-out duration-500 cursor-pointer border-2">
             <div>
@@ -25,4 +25,4 @@ function ARhomecard(props) {
     )
 }
 
-export default ARhomecard
+export default ARCHomecard

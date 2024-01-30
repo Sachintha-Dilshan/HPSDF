@@ -1,8 +1,8 @@
 import React from 'react';
-import ARhomecard from '../../Components/UI/ARhomecard';
+import ARCHomecard from '../../Components/ARC/ARCHomecard';
 import CollapseBar from '../../Components/UI/CollapseBar';
 
-function ARhome() {
+function ARCHome() {
   const cardData = [
     {
       id: 1,
@@ -64,7 +64,7 @@ function ARhome() {
         {/* Dashboard cards starts here */}
         <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-10 m-8">
           {cardData.map((data) => (
-            <ARhomecard
+            <ARCHomecard
               key={data.id}
               title={data.title}
               count={data.count}
@@ -80,4 +80,4 @@ function ARhome() {
   )
 }
 
-export default ARhome
+export default ARCHome
