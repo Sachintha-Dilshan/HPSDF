@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import AuthService from "../Services/AuthService";
 
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
@@ -8,7 +8,7 @@ import Alerts from "../Components/UI/Alert";
 
 function LoginPage() {
   let navigate = useNavigate();
-  const form = React.useRef();
+  //const form = React.useRef();
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
