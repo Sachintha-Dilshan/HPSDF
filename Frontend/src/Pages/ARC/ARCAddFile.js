@@ -44,6 +44,7 @@ export default function ARCAddFile(props){
             boxNumber:"",
             fileIndex:""
         });
+        console.log("hii");
       };
 
     const subject=
@@ -83,23 +84,20 @@ export default function ARCAddFile(props){
                     <hr className="bg-gray-300 h-0.5 w-full"></hr>
                 </div>
             </div>
-       
         
-            <div >
-           
-            
-            <InputField label="File Number" placholder="File Number" type="text" name="fileNumber" valuee={file.fileNumber} onChange={handleChange} />
-            <InputField label="File Name" placholder="Enter File Name" type="text" name="fileName" valuee={file.fileName} onChange={handleChange}/>
+            <div >  
+            <InputField label="File Number" placholder="File Number" type="text" name="fileNumber" value={file.fileNumber} onChange={handleChange} />
+            <InputField label="File Name" placholder="Enter File Name" type="text" name="fileName" value={file.fileName} onChange={handleChange}/>
             <InputField label="Section" value="defaultvalue" type="text"  disabled="disabled"/>
             {subject}
             {/* <InputField label="Subject" placholder="Enter Subject" name="subject" onChange={handleChange}/> */}
-            <InputField label="Year" placholder="Enter Year" type="text"  name="year" valuee={file.year}  onChange={handleChange}/>
+            <InputField label="Year" placholder="Enter Year" type="text"  name="year" value={file.year}  onChange={handleChange}/>
             
             </div>
             <div>
                 {rackNumber}
-                <InputField label="Box Number" placeholder="Enter Box Number" type="text"  name="boxNumber" onChange={handleChange}/>
-                <InputField label="File Index" placeholder="Enter File Index" type="text"  name="fileIndex" onChange={handleChange}/>
+                <InputField label="Box Number" placeholder="Enter Box Number" type="text"  name="boxNumber" value={file.boxNumber} onChange={handleChange}/>
+                <InputField label="File Index" placeholder="Enter File Index" type="text"  name="fileIndex" value={file.fileIndex} onChange={handleChange}/>
                 
                  <div className="flex justify-normal w-3/4 mx-auto">
                     <Button text={props.crud} type="submit" />

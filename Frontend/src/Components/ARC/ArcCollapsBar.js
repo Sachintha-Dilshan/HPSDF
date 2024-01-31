@@ -11,13 +11,22 @@ function CollapseBar() {
       onMouseEnter={() => setShow((prevShow) => !prevShow)}
       onMouseLeave={() => setShow((prevShow) => !prevShow)}
     >
-      <div>
-        <i className="fas fa-angle-double-right text-white text-2xl"></i>
-      </div>
+    
       <div className="flex flex-col h-full">
         <div style={{ display: show ? "block" : "none" }}>
           <ul className="text-white uppercase">
-           <Link to="/ARC/arcAddFile"><li>Add File</li></Link> 
+          <div>
+            <i className="fas fa-angle-double-right text-white text-2xl"></i>
+          </div>
+           <Link to="/ARC/arcAddFile"><li>Add File</li></Link>
+           <div>
+            <i className="fas fa-angle-double-right text-white text-2xl"></i>
+          </div> 
+           <Link to="/ARC/arcUpdateFile"><li>Update File</li></Link> 
+           <div>
+            <i className="fas fa-angle-double-right text-white text-2xl"></i>
+          </div>
+           <Link to="/ARC/arcDeleteFile"><li>Delete File</li></Link> 
           </ul>
         </div>
       </div>
