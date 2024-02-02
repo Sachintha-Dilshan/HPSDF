@@ -3,7 +3,8 @@ import React from "react";
 import { Avatar, Dropdown, Navbar, NavbarLink } from "flowbite-react";
 import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import AuthService from "../Services/AuthService";
+import AuthService from "../services/auth-service";
+
 
 function NavigationBar() {
   return (

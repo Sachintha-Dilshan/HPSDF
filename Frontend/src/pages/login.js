@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import {useNavigate } from "react-router-dom";
-import AuthService from "../Services/AuthService";
+import AuthService from "../services/auth-service";
 
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import Alerts from "../Components/UI/Alert";
+import Alerts from "../components/alert";
 
-function LoginPage() {
+function Login() {
   let navigate = useNavigate();
   //const form = React.useRef();
 
@@ -123,4 +123,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

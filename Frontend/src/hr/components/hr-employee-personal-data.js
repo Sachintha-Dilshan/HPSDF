@@ -1,7 +1,7 @@
 import React from "react";
 import { FloatingLabel } from "flowbite-react";
 
-function HREmployeeData() {
+function HREmployeePersonalData() {
   const employeeData = [
     "එම්.එස්.හිරිමුතුගොඩ",
     "මැණිකා සංජීවනී හිරිමුතුගොඩ",
@@ -40,4 +40,4 @@ function HREmployeeData() {
   );
 }
 
-export default HREmployeeData;
+export default HREmployeePersonalData;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Card(props) {
+function HREmployeeCard(props) {
   return (
     <Link to="/HR/employeeProfile">
       <div className="flex flex-col items-center justify-between p-5 m-5 rounded-2xl shadow-lg transform hover:scale-105 transition ease-out duration-500 cursor-pointer">
@@ -26,4 +26,4 @@ function Card(props) {
   );
 }
 
-export default Card;
+export default HREmployeeCard;

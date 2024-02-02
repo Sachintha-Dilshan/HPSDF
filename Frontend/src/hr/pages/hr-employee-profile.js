@@ -1,7 +1,10 @@
 import React from "react";
-import CollapseBar from "../../Components/UI/CollapseBar";
-import Tab from "../../Components/UI/Tab";
-import HREmployeeData from "./HREmployeeData";
+import CollapseBar from "../../layouts/collapse-bar";
+import Tab from "../../components/tabs";
+import HREmployeePersonalData from "../components/hr-employee-personal-data";
+
+
+
 import { HiUserCircle } from "react-icons/hi";
 import {
   FaBriefcase,
@@ -17,35 +20,35 @@ function HREmployeeProfile() {
       active: true,
       title: "Personal Data",
       icon: HiUserCircle,
-      content: <HREmployeeData />,
+      content: <HREmployeePersonalData />,
     },
     {
       id: 2,
       active: true,
       title: "Job Data",
       icon: FaBriefcase,
-      content: <HREmployeeData />,
+      content: <HREmployeePersonalData />,
     },
     {
       id: 3,
       active: true,
       title: "Personal File",
       icon: FaFile,
-      content: <HREmployeeData />,
+      content: <HREmployeePersonalData />,
     },
     {
       id: 4,
       active: true,
       title: "Attendance Data",
       icon: FaCalendarCheck,
-      content: <HREmployeeData />,
+      content: <HREmployeePersonalData />,
     },
     {
       id: 5,
       active: true,
       title: "Leave Data",
       icon: FaUmbrellaBeach,
-      content: <HREmployeeData />,
+      content: <HREmployeePersonalData />,
     },
   ];
   return (

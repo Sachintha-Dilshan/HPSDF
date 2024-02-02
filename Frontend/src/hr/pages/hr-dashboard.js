@@ -1,12 +1,13 @@
 import React from "react";
-import CollapseBar from "../../Components/UI/CollapseBar";
-import DashboardCard from "../../Components/UI/DashboardCard";
-import Tab from "../../Components/UI/Tab";
-import LeaveTracker from "../../Components/LeaveTracker";
-import TimeLine from "../../Components/TimeLine";
+import CollapseBar from "../../layouts/collapse-bar";
+import HRDashboardCard from "../components/hr-dashboard-card";
+import Tab from "../../components/tabs";
+import HRLeaveTracker from "../components/hr-employee-leave-tracker";
+import TimeLine from "../../components/time-line";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
-import EmployeeAttendanceSheet from "../../Components/EmployeeAttendanceSheet";
-import LeaveRegister from "../../Components/LeaveRegister";
+import HRAttendanceTracker from "../components/hr-employee-attendance-sheet";
+import HRLeaveRegister from "../components/hr-employee-leave-register";
+
 
 function HRDashboard() {
   const cardData = [
@@ -46,21 +47,21 @@ function HRDashboard() {
       active: true,
       title: "Track Leaves",
       icon: FaCheckDouble,
-      content: <LeaveTracker/> 
+      content: <HRLeaveTracker/> 
     },
     {
       id: 2,
       active: true,
       title: "Employee Attendance ",
       icon: FaCalendarCheck,
-      content: <EmployeeAttendanceSheet/>
+      content: <HRAttendanceTracker/>
     },
     {
       id: 3,
       active: true,
       title: "Employee Leaves",
       icon: FaUmbrellaBeach,
-      content: <LeaveRegister/>
+      content: <HRLeaveRegister/>
     },
     {
         id: 4,
@@ -82,7 +83,7 @@ function HRDashboard() {
         <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5">
          
           {cardData.map((data) => (
-            <DashboardCard
+            <HRDashboardCard
               key={data.id}
               title={data.title}
               count={data.count}

@@ -1,9 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavigationBar from "../Components/NavigationBar";
-import FooterBar from "../Components/FooterBar";
+import NavigationBar from "./navbar";
+import FooterBar from "./footer";
 
-function Layout() {
+
+function PageLayout() {
   return (
     <div>
       <NavigationBar />
@@ -15,4 +16,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default PageLayout;

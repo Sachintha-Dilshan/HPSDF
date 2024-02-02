@@ -5,7 +5,7 @@ import { FaCheck, FaHourglass} from "react-icons/fa";
 
 import { Table } from 'flowbite-react';
 
-function LeaveRegister() {
+function HRLeaveTracker() {
 
     const leaveStatus = [
         {
@@ -37,15 +37,11 @@ function LeaveRegister() {
     <div className="overflow-auto">
       <Table striped hoverable>
         <Table.Head>
-          <Table.HeadCell>Leave ID</Table.HeadCell>
           <Table.HeadCell>Employee Name</Table.HeadCell>
-          <Table.HeadCell>Casual Leave</Table.HeadCell>
-          <Table.HeadCell>Vaccation Leave</Table.HeadCell>
-          <Table.HeadCell>Expired Vaccation Leave</Table.HeadCell>
-          <Table.HeadCell>Commuted Half Pay</Table.HeadCell>
-          <Table.HeadCell>Half Pay</Table.HeadCell>
-          <Table.HeadCell>No Pay</Table.HeadCell>
-          <Table.HeadCell>Duty Leave</Table.HeadCell>
+          <Table.HeadCell>Leave Type</Table.HeadCell>
+          <Table.HeadCell>Officer Acting</Table.HeadCell>
+          <Table.HeadCell>Supervising Officer</Table.HeadCell>
+          <Table.HeadCell>Head of The Department</Table.HeadCell>
 
           <Table.HeadCell>
             <span className="sr-only">View</span>
@@ -78,4 +74,4 @@ function LeaveRegister() {
   );
 }
 
-export default LeaveRegister;
+export default HRLeaveTracker;

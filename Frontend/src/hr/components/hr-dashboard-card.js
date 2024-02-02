@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 
-function DashboardCard(props) {
+function HRDashboardCard(props) {
   return (
     <Link to={props.url}>
 
@@ -27,4 +27,4 @@ function DashboardCard(props) {
   );
 }
 
-export default DashboardCard;
+export default HRDashboardCard;

@@ -1,38 +1,25 @@
-//import "./Styles/App.css";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./Pages/Layout";
-//import HRDashBoard from "./Pages/HR/HRDashBoard";
-//import Report from "./Pages/Report";
-//import Alert from "./Pages/Alert";
-//import Profile from "./Pages/Profile";
-//import Logout from "./Pages/LogOut";
-import NoPage from "./Pages/NoPage";
-import HREmployees from "./Pages/HR/HREmployees";
-import HRAddEmployee from "./Pages/HR/HRAddEmployee";
-import HREmployeeProfile from "./Pages/HR/HREmployeeProfile";
-import HRDashboard from "./Pages/HR/HRDashboard";
-import LoginPage from "./Pages/LoginPage";
-import ARCAddFile from "./Pages/ARC/ARCAddFile";
-//import JWTHome from "./Pages/JWTHome";
+import PageLayout from "./layouts/page-layout";
+import HRSearchEmployees from "./hr/pages/hr-search-employees";
+import HRAddEmployee from "./hr/pages/hr-add-employee";
+import HREmployeeProfile from "./hr/pages/hr-employee-profile";
+import HRDashboard from "./hr/pages/hr-dashboard";
+import Login from "./pages/login";
+import NoPage from "./pages/no-page";
+
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LoginPage/>}/>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/" element={<PageLayout />}>
           <Route path="HR">
             <Route path="dashboard" element={<HRDashboard />} />
-            <Route path="allEmployees" element={<HREmployees />} />
+            <Route path="allEmployees" element={<HRSearchEmployees />} />
             <Route path="employeeProfile" element={<HREmployeeProfile />}/>
             <Route path="addEmployee" element={<HRAddEmployee />} />    
-          </Route>
-          <Route path="ARC">
-            <Route path="arcAddFile" element={<ARCAddFile crud="ADD FILE"/>} />
-            <Route path="arcUpdateFile" element={<ARCAddFile crud="UPDATE FILE"/>} />
-            <Route path="arcDeleteFile" element={<ARCAddFile crud="DELETE FILE"/>} />
-          </Route>
-          
+          </Route>   
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

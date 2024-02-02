@@ -1,5 +1,5 @@
 import React from "react";
-import CollapseBar from "../../Components/UI/CollapseBar";
+import CollapseBar from "../../layouts/collapse-bar";
 
 import {
   FloatingLabel,

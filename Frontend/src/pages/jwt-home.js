@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../Services/UserService";
+import UserService from "../services/UserService";
 
 
 export default function JWTHome() {

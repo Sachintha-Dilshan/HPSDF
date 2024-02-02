@@ -1,7 +1,7 @@
 import { FaCheck, FaHourglass, FaClock } from "react-icons/fa";
 import { Table, Button } from "flowbite-react";
 
-function AttendanceTracker() {
+function HRAttendanceTracker() {
   const attendanceData = [
     {
       id: 1, // Leave ID
@@ -108,4 +108,4 @@ function AttendanceTracker() {
   );
 }
 
-export default AttendanceTracker;
+export default HRAttendanceTracker;

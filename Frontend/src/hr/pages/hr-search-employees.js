@@ -1,10 +1,10 @@
 import React from "react";
-import Card from "../../Components/UI/Card";
-import CollapseBar from "../../Components/UI/CollapseBar";
+import HREmployeeCard from "../components/hr-employee-card";
+import CollapseBar from "../../layouts/collapse-bar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
 import employees from "../../Data";
 
-function HREmployees() {
+function HRSearchEmployees() {
   return (
     <main>
       {/* Collapse bar starts here */}
@@ -38,7 +38,7 @@ function HREmployees() {
         {/* Employees card grid starts here */}
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
           {employees.map((employee) => (
-            <Card
+            <HREmployeeCard
               name={employee.name}
               designation={employee.designation}
               contact={employee.contactNo}
@@ -52,4 +52,4 @@ function HREmployees() {
   );
 }
 
-export default HREmployees;
+export default HRSearchEmployees;
