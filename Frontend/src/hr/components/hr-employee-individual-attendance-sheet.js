@@ -1,7 +1,7 @@
-import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
+import { FaCheck, FaClock, FaTimes } from "react-icons/fa";
 import { Table, Button } from "flowbite-react";
 
-function HRAttendanceTracker() {
+function HREmployeeAttendantSheet() {
   const attendanceData = [
     {
       id: 1, // Leave ID
@@ -34,19 +34,19 @@ function HRAttendanceTracker() {
       <div className="flex justify-center">
         <div className="grid md:grid-cols-6 md:gap-10 grid-cols-2 gap-5 mb-10">
           <span className="flex items-center justify-center text-slate-600">
-            Present Today
+            Total Present
           </span>
           <Button pill className="inline-block">
             <span className="flex justify-center flex-grow">105</span>
           </Button>
           <span className="flex items-center text-slate-600">
-            Absent Today
+            Total Absent
           </span>
           <Button pill className="inline-block">
             <span className="flex justify-center flex-grow">12</span>
           </Button>
           <span className="flex items-center text-slate-600">
-            Late Today
+            Total Late
           </span>
           <Button pill className="inline-block">
             <span className="flex justify-center flex-grow">5</span>
@@ -54,10 +54,8 @@ function HRAttendanceTracker() {
         </div>
       </div>
 
-      <Table striped hoverable>
+      <Table striped hoverable className="text-center">
         <Table.Head>
-          <Table.HeadCell>Leave ID</Table.HeadCell>
-          <Table.HeadCell>Employee Name</Table.HeadCell>
           <Table.HeadCell>Date</Table.HeadCell>
           <Table.HeadCell>Status</Table.HeadCell>
           <Table.HeadCell>Time In</Table.HeadCell>
@@ -71,26 +69,20 @@ function HRAttendanceTracker() {
               key={data.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {data.id}
-              </Table.Cell>
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                {data.name}
-              </Table.Cell>
               <Table.Cell>{data.date}</Table.Cell>
               <Table.Cell>
                 {data.status === "Present" && (
-                  <span className="text-green-500 uppercase flex gap-5 items-center">
+                  <span className="text-green-500 uppercase flex gap-5 items-center justify-center">
                     <FaCheck /> Present
                   </span>
                 )}
                 {data.status === "Absent" && (
-                   <span className="text-red-600 uppercase flex gap-5 items-center">
-                   <FaTimes /> Absent
-                 </span>
+                  <span className="text-red-600 uppercase flex gap-5 items-center justify-center">
+                    <FaTimes /> Absent
+                  </span>
                 )}
                 {data.status === "Late" && (
-                  <span className="text-orange-400 uppercase flex gap-5 items-center">
+                  <span className="text-orange-400 uppercase flex gap-5 items-center justify-center">
                     <FaClock /> Late
                   </span>
                 )}
@@ -106,4 +98,4 @@ function HRAttendanceTracker() {
   );
 }
 
-export default HRAttendanceTracker;
+export default HREmployeeAttendantSheet;

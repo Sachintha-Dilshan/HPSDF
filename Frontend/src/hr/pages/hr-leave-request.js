@@ -4,8 +4,8 @@ import Tab from "../../components/tabs";
 import HREmployeeLeaveChit from "../components/hr-employee-leave-chit";
 import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
 import HREmployeeCard from "../components/hr-employee-card";
-import HRAttendanceTracker from "../components/hr-employee-attendance-sheet";
 import HRLeaveStatusTimeLine from "../components/hr-leave-status-timeline";
+import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import {Button } from "flowbite-react";
 
 import {
@@ -42,7 +42,7 @@ function HREmployeeLeaveRequest() {
       active: true,
       title: "Employee Attendance ",
       icon: FaCalendarCheck,
-      content: <HRAttendanceTracker />,
+      content: <HREmployeeAttendantSheet />,
     },
   ];
   return (
@@ -63,7 +63,7 @@ function HREmployeeLeaveRequest() {
           </div>
           <div>
             {/* Leave tracking status goes here */}
-            <HRLeaveStatusTimeLine />
+            <HRLeaveStatusTimeLine/>
           </div>
           <div>
             <fieldset className="border rounded-lg p-5 flex gap-20">

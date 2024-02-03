@@ -1,8 +1,11 @@
 "use client";
 import { Button, Table } from "flowbite-react";
 import PopUp from "./hr-pop-up";
+import HRLeaveStatusTimeLine from "./hr-leave-status-timeline";
+
 
 function HRIndividualLeaveRegister() {
+
   const leaveStatus = [
     {
       id: 1,
@@ -187,7 +190,7 @@ function HRIndividualLeaveRegister() {
               <Table.Cell>{status.type}</Table.Cell>
               <Table.Cell>{status.reason}</Table.Cell>
               <Table.Cell>
-               <PopUp/>
+               <PopUp content={<HRLeaveStatusTimeLine/>}/>
               </Table.Cell>
             </Table.Row>
           ))}

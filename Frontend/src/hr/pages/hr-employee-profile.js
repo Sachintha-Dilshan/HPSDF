@@ -2,7 +2,11 @@ import React from "react";
 import CollapseBar from "../../layouts/collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeePersonalData from "../components/hr-employee-personal-data";
-
+import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
+import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
+import HREmployeeCard from "../components/hr-employee-card";
+import { FloatingLabel } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { HiUserCircle } from "react-icons/hi";
 import {
   FaBriefcase,
@@ -11,9 +15,14 @@ import {
   FaFile,
 } from "react-icons/fa";
 
-
 function HREmployeeProfile() {
-  
+  const employee = {
+    name: "ඒ.එම්.කේ. නාලිකා අබේකෝන් මිය",
+    address: "මහවත්ත, මොටාගෙදර, කැකනදුර",
+    designation: "ලේකම්",
+    contactNo: "0714412472",
+  };
+
   const data = [
     {
       id: 1,
@@ -41,14 +50,14 @@ function HREmployeeProfile() {
       active: true,
       title: "Attendance Data",
       icon: FaCalendarCheck,
-      content: <HREmployeePersonalData />,
+      content: <HREmployeeAttendantSheet />,
     },
     {
       id: 5,
       active: true,
       title: "Leave Data",
       icon: FaUmbrellaBeach,
-      content: <HREmployeePersonalData />,
+      content: <HRIndividualLeaveRegister />,
     },
   ];
   return (
@@ -58,15 +67,40 @@ function HREmployeeProfile() {
         <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase mx-5">
           Employee Profile
         </h3>
-        <div className="flex items-center  flex-grow">
+        <div className="grid md:grid-cols-3  gap-10 items-center">
           <div>
-            <img
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt="profile pic"
-              className="rounded-full w-40 mb-5"
+            <HREmployeeCard
+              name={employee.name}
+              designation={employee.designation}
+              contact={employee.contactNo}
+              key={employee.contactNo}
             />
           </div>
-          <div>Employee Data</div>
+          <div>
+            <fieldset className="border rounded-lg p-5 flex gap-20">
+              <legend>Edit</legend>
+              <Button color="success" pill className="uppercase">
+                Edit Profile
+              </Button>
+              <Button color="failure" pill className="uppercase">
+                Reset Password
+              </Button>
+            </fieldset>
+          </div>
+          <div>
+            <fieldset className="border rounded-lg p-5 flex gap-20 ">
+              <legend>Change User Credentials</legend>
+              <FloatingLabel
+                variant="filled"
+                label={"Username"}
+                value={"Chani/hak/123"}
+                disabled={true}
+              />
+              <Button color="failure" pill className="uppercase h-11">
+                Reset Password
+              </Button>
+            </fieldset>
+          </div>
         </div>
 
         <div className="grid grid-cols-1">

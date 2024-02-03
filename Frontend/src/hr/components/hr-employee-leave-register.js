@@ -1,41 +1,53 @@
 
 'use client';
-import { FaCheck, FaHourglass} from "react-icons/fa";
 
 
 import { Table } from 'flowbite-react';
 
 function HRLeaveRegister() {
 
-    const leaveStatus = [
-        {
-            id: 1,
-            name: "Mr.Sachintha Dilshan",
-            type: "Sick leave",
-            acting: true,
-            supervisor: true,
-            hod: false
-        },
-        {
-            id: 2,
-            name: "Ms.Chani Ekanayake",
-            type: "Casual Leave",
-            acting: true,
-            supervisor: false,
-            hod: false
-        },
-        {
-            id: 3,
-            name: "Ms.Praveen Sathsara",
-            type: "Casual Leave",
-            acting: false,
-            supervisor: false,
-            hod: false
-        }
-    ];
+  const leaveStatus = [
+    {
+      id: 1,
+      name: "Mr.Sachintha Dilshan",
+      casual: 10,
+      vacation: 20,
+      exVacation: 5,
+      chp: 0,
+      hp: 0,
+      np: 0,
+      dl: 2,
+      total: 37
+    },
+    {
+      id: 2,
+      name: "Ms.Alice Johnson",
+      casual: 5,
+      vacation: 15,
+      exVacation: 8,
+      chp: 1,
+      hp: 0,
+      np: 0,
+      dl: 1,
+      total: 30
+    },
+    {
+      id: 3,
+      name: "Mr.John Doe",
+      casual: 8,
+      vacation: 18,
+      exVacation: 3,
+      chp: 0,
+      hp: 1,
+      np: 0,
+      dl: 4,
+      total: 34
+    },
+    // Add more objects as needed
+  ];
   return (
     <div className="overflow-auto">
-      <Table striped hoverable>
+      <Table striped hoverable className="text-center">
         <Table.Head>
           <Table.HeadCell>Leave ID</Table.HeadCell>
           <Table.HeadCell>Employee Name</Table.HeadCell>
@@ -46,10 +58,7 @@ function HRLeaveRegister() {
           <Table.HeadCell>Half Pay</Table.HeadCell>
           <Table.HeadCell>No Pay</Table.HeadCell>
           <Table.HeadCell>Duty Leave</Table.HeadCell>
-
-          <Table.HeadCell>
-            <span className="sr-only">View</span>
-          </Table.HeadCell>
+          <Table.HeadCell>Total</Table.HeadCell>
         </Table.Head>
 
 
@@ -57,18 +66,17 @@ function HRLeaveRegister() {
 
         {leaveStatus.map((status) => (
         <Table.Row key={status.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            {status.name}
-          </Table.Cell>
-          <Table.Cell>{status.type}</Table.Cell>
-          <Table.Cell >{status.acting ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
-          <Table.Cell >{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
-          <Table.Cell >{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
-          <Table.Cell>
-              <a href="https://noPage.com" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 uppercase">
-                view
-              </a>
-            </Table.Cell>
+         
+          <Table.Cell>{status.id}</Table.Cell>
+          <Table.Cell>{status.name}</Table.Cell>
+          <Table.Cell>{status.casual}</Table.Cell>
+          <Table.Cell>{status.vacation}</Table.Cell>
+          <Table.Cell>{status.exVacation}</Table.Cell>
+          <Table.Cell>{status.chp}</Table.Cell>
+          <Table.Cell>{status.hp}</Table.Cell>
+          <Table.Cell>{status.np}</Table.Cell>
+          <Table.Cell>{status.dl}</Table.Cell>
+          <Table.Cell>{status.total}</Table.Cell>
         </Table.Row>
       ))}
 

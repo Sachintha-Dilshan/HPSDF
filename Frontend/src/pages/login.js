@@ -70,12 +70,12 @@ function Login() {
           </h2>
           <div className="flex text-center justify-center">
             <img
-              src="Images/governmentLogo.png"
+              src={process.env.PUBLIC_URL + "/Images/government-logo.png"}
               className="mr-2 h-14 "
               alt="Government Logo"
             />
             <img
-              src="Images/hakmanaSabhaLogo.png"
+              src={process.env.PUBLIC_URL + "/Images/sabha-logo.png"}
               className="h-14"
               alt="Sabha Logo"
             />
