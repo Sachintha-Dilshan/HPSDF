@@ -1,9 +1,9 @@
 
 'use client';
 import { FaCheck, FaHourglass} from "react-icons/fa";
-
-
 import { Table } from 'flowbite-react';
+import { Button } from "flowbite-react";
+import { Link } from "react-router-dom";
 
 function HRLeaveTracker() {
 
@@ -61,10 +61,8 @@ function HRLeaveTracker() {
           <Table.Cell >{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
           <Table.Cell >{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
           <Table.Cell>
-              <a href="https://noPage.com" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 uppercase">
-                view
-              </a>
-            </Table.Cell>
+          <Link to="/HR/leaveRequest"><Button>View</Button></Link>
+          </Table.Cell>
         </Table.Row>
       ))}
 

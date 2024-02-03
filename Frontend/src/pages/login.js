@@ -58,7 +58,7 @@ function Login() {
   return (
     <div
       className="flex items-center justify-center h-screen "
-      style={{ backgroundImage: "url('/Images/background.png')" }}
+      style={{ backgroundImage: process.env.PUBLIC_URL+"url('/Images/background.png')" }}
     >
       <form
         className="flex flex-col gap-4 md:w-1/4 bg-slate-300 w-full mx-10 px-10 py-28 rounded-3xl opacity-85"

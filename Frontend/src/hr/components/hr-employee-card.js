@@ -6,7 +6,7 @@ function HREmployeeCard(props) {
     <Link to="/HR/employeeProfile">
       <div className="flex flex-col items-center justify-between p-5 m-5 rounded-2xl shadow-lg transform hover:scale-105 transition ease-out duration-500 cursor-pointer">
         <img
-          src={process.env.PUBLIC_URL + "/Images/profilePhoto.png"}
+          src={process.env.PUBLIC_URL + "/Images/profile-photo.png"}
           alt="profile"
           className="h-20 w-20 rounded-full mb-2"
         />

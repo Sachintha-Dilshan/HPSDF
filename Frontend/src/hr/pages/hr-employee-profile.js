@@ -3,8 +3,6 @@ import CollapseBar from "../../layouts/collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeePersonalData from "../components/hr-employee-personal-data";
 
-
-
 import { HiUserCircle } from "react-icons/hi";
 import {
   FaBriefcase,
@@ -13,7 +11,9 @@ import {
   FaFile,
 } from "react-icons/fa";
 
+
 function HREmployeeProfile() {
+  
   const data = [
     {
       id: 1,

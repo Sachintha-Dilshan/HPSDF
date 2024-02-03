@@ -15,28 +15,28 @@ function HRDashboard() {
       id: 1,
       title: "Total Employees",
       count: 150,
-      image: "/Images/totalEmployees.jpg",
+      image: "/Images/total-employees.jpg",
       url: "/HR/allEmployees"
     },
     {
       id: 2,
       title: "On Leave Today",
       count: 12,
-      image: "/Images/onLeave.webp",
-      url: ""
+      image: "/Images/on-leave.webp",
+      url: "/HR/onLeaveToday"
     },
     {
       id: 3,
       title: "Leave requests",
       count: 5,
-      image: "/Images/pending.jpg",
-      url: ""
+      image: "/Images/leave-request.jpg",
+      url: "/HR/leaveRequest"
     },
     {
       id: 4,
       title: "Birthday Today",
       count: 12,
-      image: "/Images/employeeBirthday.jpg",
+      image: "/Images/employee-birthday.jpg",
       url: ""
     },
   ];
