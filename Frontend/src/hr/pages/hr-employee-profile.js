@@ -64,7 +64,7 @@ function HREmployeeProfile() {
     <main>
       <CollapseBar />
       <div className="flex flex-col gap-2 m-5">
-        <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase mx-5">
+        <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase mx-5">
           Employee Profile
         </h3>
         <div className="grid md:grid-cols-3  gap-10 items-center">

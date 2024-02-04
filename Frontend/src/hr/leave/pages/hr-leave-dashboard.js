@@ -1,22 +1,22 @@
 import React from "react";
-import CollapseBar from "../../layouts/collapse-bar";
-import HRDashboardCard from "../components/hr-dashboard-card";
-import Tab from "../../components/tabs";
-import HRLeaveTracker from "../components/hr-employee-leave-tracker";
-import TimeLine from "../../components/time-line";
+import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
+import HRDashboardCard from "../../components/hr-dashboard-card";
+import Tab from "../../../components/tabs";
+import HRLeaveTracker from "../../components/hr-employee-leave-tracker";
+import TimeLine from "../../../components/time-line";
+import HRAttendanceTracker from "../../components/hr-employee-attendance-sheet";
+import HRLeaveRegister from "../../components/hr-employee-leave-register";
+
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
-import HRAttendanceTracker from "../components/hr-employee-attendance-sheet";
-import HRLeaveRegister from "../components/hr-employee-leave-register";
 
-
-function HRDashboard() {
+function HRLeaveDashboard() {
   const cardData = [
     {
       id: 1,
-      title: "Total Employees",
-      count: 150,
+      title: "Employees Today",
+      count: 100,
       image: "/Images/total-employees.jpg",
-      url: "/HR/allEmployees"
+      url: "/HR/employeesAttendance"
     },
     {
       id: 2,
@@ -74,10 +74,10 @@ function HRDashboard() {
 
   return (
     <main>
-      <CollapseBar />
+      <LeaveCollapseBar />
       <div className="flex flex-col gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
-          Administration Section
+          Leave Section
         </h3>
         {/* Dashboard cards starts here */}
         <div className="grid  lg:grid-cols-4 md:grid-cols-2 gap-10 my-5">
@@ -103,4 +103,4 @@ function HRDashboard() {
   );
 }
 
-export default HRDashboard;
+export default HRLeaveDashboard;

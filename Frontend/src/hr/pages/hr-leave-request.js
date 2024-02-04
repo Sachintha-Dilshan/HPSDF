@@ -49,7 +49,7 @@ function HREmployeeLeaveRequest() {
     <main>
       <CollapseBar />
       <div className="flex flex-col gap-2 m-5">
-        <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase mx-5">
+        <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase mx-5">
           Leave Request
         </h3>
         <div className="flex md:flex-row flex-col items-center  flex-grow gap-10">

@@ -17,7 +17,7 @@ function HRAddEmployee() {
     <main>
       <CollapseBar />
       <div className="flex flex-col  gap-2 m-5">
-        <h3 className="text-center text-lg text-red-400 border-b-2 border-b-slate-200 uppercase">
+        <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Add New Employee
         </h3>
         {/* Personal details starts here */}

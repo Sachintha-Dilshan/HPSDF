@@ -178,7 +178,6 @@ function HRIndividualLeaveRegister() {
         </Table.Head>
 
         <Table.Body className="divide-y">
-          s
           {leaveStatus.map((status) => (
             <Table.Row
               key={status.id}
