@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.models;
+package lk.gov.ps.HPSDF.system_security.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

@@ -1,5 +1,6 @@
 import React from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
+import LeaveTypeService from "../services/leave-type-service";
 
 import { FloatingLabel, Table, Button } from "flowbite-react";
 
@@ -8,6 +9,26 @@ import { FaSyncAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 function HRLeaveAddLeaves() {
+  const [leaveName, setLeaveName] = React.useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+
+    var data = {
+      "leaveName" : leaveName
+    };
+    alert(data.leaveName);
+    LeaveTypeService.createLeaveType(data)
+    .then(response => {
+      setLeaveName(response.data.leaveName);
+      alert(response.data.leaveName);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
   return (
     <main>
       <LeaveCollapseBar />
@@ -17,14 +38,17 @@ function HRLeaveAddLeaves() {
         </h3>
         {/* Personal details starts here */}
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
+          <form onSubmit={handleSubmit}>
           <fieldset className="border rounded-lg flex items-center justify-center md:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
             <legend className="text-slate-600">නිවාඩු තොරතුරු</legend>
             <FloatingLabel
               variant="filled"
               label="නිවාඩු වර්ගය"
               className="w-96"
+              value={leaveName}
+              onChange={e => setLeaveName(e.target.value)}
             />
-            <Button className="uppercase w-52">
+            <Button className="uppercase w-52" type="submit">
               {" "}
               <HiOutlineSave className="mr-2 h-5 w-5" />
               Add Leave
@@ -39,6 +63,7 @@ function HRLeaveAddLeaves() {
               <MdDelete className="mr-2 h-5 w-5" /> Delete Leave
             </Button>
           </fieldset>
+          </form>
         </div>
         <div className="overflow-auto flex justify-center">
           <Table striped hoverable>

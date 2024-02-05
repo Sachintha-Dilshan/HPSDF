@@ -1,7 +1,7 @@
-package lk.gov.ps.HPSDF.security.services;
+package lk.gov.ps.HPSDF.system_security.security.services;
 
-import lk.gov.ps.HPSDF.models.User;
-import lk.gov.ps.HPSDF.repository.UserRepository;
+import lk.gov.ps.HPSDF.system_security.repositories.UserRepository;
+import lk.gov.ps.HPSDF.system_security.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

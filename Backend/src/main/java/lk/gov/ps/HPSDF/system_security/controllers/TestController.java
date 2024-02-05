@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.controllers;
+package lk.gov.ps.HPSDF.system_security.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @GetMapping("/all")
     public String allAccess() {
-        return "Public Content Sachintha.";
+        return "Public Content.";
     }
 
     @GetMapping("/user")

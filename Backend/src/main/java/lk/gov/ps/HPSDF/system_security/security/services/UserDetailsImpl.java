@@ -1,7 +1,7 @@
-package lk.gov.ps.HPSDF.security.services;
+package lk.gov.ps.HPSDF.system_security.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lk.gov.ps.HPSDF.models.User;
+import lk.gov.ps.HPSDF.system_security.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

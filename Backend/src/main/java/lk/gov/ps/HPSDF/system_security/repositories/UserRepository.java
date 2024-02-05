@@ -1,6 +1,6 @@
-package lk.gov.ps.HPSDF.repository;
+package lk.gov.ps.HPSDF.system_security.repositories;
 
-import lk.gov.ps.HPSDF.models.User;
+import lk.gov.ps.HPSDF.system_security.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

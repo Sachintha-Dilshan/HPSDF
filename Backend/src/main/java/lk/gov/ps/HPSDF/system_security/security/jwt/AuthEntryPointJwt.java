@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.security.jwt;
+package lk.gov.ps.HPSDF.system_security.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

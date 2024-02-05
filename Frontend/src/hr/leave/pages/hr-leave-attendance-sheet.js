@@ -2,6 +2,8 @@ import React from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 
 import { Table, Button, TextInput, Select } from "flowbite-react";
+import { FaEdit } from "react-icons/fa";
+import { HiOutlineSave } from "react-icons/hi";
 
 function HREmployeesAttendanceSheet() {
   const attendanceData = [
@@ -67,9 +69,9 @@ function HREmployeesAttendanceSheet() {
             </Button>
           </fieldset>
 
-          <fieldset className="grid grid-cols-2 md:gap-10  gap-5 mb-10 border rounded-lg p-5">
-            <Button pill className="inline-block" color="blue" onClick={handleClick}><span className="flex justify-center flex-grow uppercase">edit</span></Button>
-            <Button pill className="inline-block" color="success" onClick={handleClick}><span className="flex justify-center flex-grow uppercase">save</span></Button>
+          <fieldset className="grid grid-cols-1 mb-10  p-5">
+           {edit && <Button  className="inline-block" color="blue" onClick={handleClick}><span className="flex justify-center flex-grow uppercase"><FaEdit className="mr-5" />edit</span></Button>} 
+            {!edit && <Button  className="inline-block" color="success" onClick={handleClick}><span className="flex justify-center flex-grow uppercase"><HiOutlineSave className="mr-5"/>save</span></Button>}
           </fieldset>
         </div>
 
@@ -136,6 +138,7 @@ function HREmployeesAttendanceSheet() {
                       style={{ textAlign: "center" }}
                     />
                   </Table.Cell>
+                  
                 </Table.Row>
               ))}
             </Table.Body>

@@ -1,9 +1,9 @@
-package lk.gov.ps.HPSDF.security.jwt;
+package lk.gov.ps.HPSDF.system_security.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lk.gov.ps.HPSDF.security.services.UserDetailsImpl;
+import lk.gov.ps.HPSDF.system_security.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

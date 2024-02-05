@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.payload.response;
+package lk.gov.ps.HPSDF.system_security.payload.response;
 
 import java.util.List;
 

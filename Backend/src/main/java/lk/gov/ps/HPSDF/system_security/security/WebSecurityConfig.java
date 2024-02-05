@@ -1,8 +1,8 @@
-package lk.gov.ps.HPSDF.security;
+package lk.gov.ps.HPSDF.system_security.security;
 
-import lk.gov.ps.HPSDF.security.jwt.AuthEntryPointJwt;
-import lk.gov.ps.HPSDF.security.jwt.AuthTokenFilter;
-import lk.gov.ps.HPSDF.security.services.UserDetailsServiceImpl;
+import lk.gov.ps.HPSDF.system_security.security.jwt.AuthEntryPointJwt;
+import lk.gov.ps.HPSDF.system_security.security.jwt.AuthTokenFilter;
+import lk.gov.ps.HPSDF.system_security.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

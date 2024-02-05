@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.payload.request;
+package lk.gov.ps.HPSDF.system_security.payload.request;
 
 import jakarta.validation.constraints.NotBlank;
 

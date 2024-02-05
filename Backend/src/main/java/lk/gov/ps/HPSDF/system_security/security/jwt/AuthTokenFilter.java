@@ -1,10 +1,10 @@
-package lk.gov.ps.HPSDF.security.jwt;
+package lk.gov.ps.HPSDF.system_security.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.gov.ps.HPSDF.security.services.UserDetailsServiceImpl;
+import lk.gov.ps.HPSDF.system_security.security.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
