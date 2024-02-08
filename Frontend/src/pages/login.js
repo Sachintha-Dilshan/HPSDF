@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth-service";
 
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
@@ -15,7 +15,6 @@ function Login() {
   const [message, setMessage] = React.useState("");
   const [usernameError, setUsernameError] = React.useState("");
   const [passwordError, setPasswordError] = React.useState("");
-
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -58,7 +57,10 @@ function Login() {
   return (
     <div
       className="flex items-center justify-center h-screen "
-      style={{ backgroundImage: process.env.PUBLIC_URL+"url('/Images/background.png')" }}
+      style={{
+        backgroundImage:
+          process.env.PUBLIC_URL + "url('/Images/background.png')",
+      }}
     >
       <form
         className="flex flex-col gap-4 md:w-1/4 bg-slate-300 w-full mx-10 px-10 py-28 rounded-3xl opacity-85"
@@ -92,7 +94,6 @@ function Login() {
             type="text"
             placeholder="username"
             onChange={onChangeUsername}
-            
           />
           {usernameError && <Alerts alert={usernameError} />}
         </div>
