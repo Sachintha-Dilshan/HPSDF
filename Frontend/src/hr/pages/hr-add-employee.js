@@ -210,6 +210,54 @@ function HRAddEmployee() {
           </fieldset>
         </div>
         {/* Job details ends here */}
+
+        <div style={{ fontFamily: "Noto Sans Sinhala" }}>
+          <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
+            <legend className="text-slate-600">
+              රැකියා විෂය පථය පිළිබ‌ඳ තොරතුරු
+            </legend>
+            <div>
+              <Label
+                htmlFor="section"
+                value="අංශය"
+                className="m-1 mb-2 text-slate-500 text-center text-base" 
+              />
+              <Select id="section" required>
+                <option>-----Select-----</option>
+                <option>ආයතන හා පාලන අංශය</option>
+                <option>ආදායම් අංශය</option>
+                <option>ගිණුම් අංශය</option>
+                <option>කර්මාන්ත අංශය අංශය</option>
+                <option>පරිසර අංශය</option>
+              </Select>
+            </div>
+
+            <div>
+              <Label
+                htmlFor="subjectId"
+                value="විෂය අංකය"
+                className="m-1 mb-2 text-slate-500 text-center text-base"
+              />
+              <Select id="subjectId" required>
+                <option>-----Select-----</option>
+                <option>02/01</option>
+                <option>02/02</option>
+              </Select>
+            </div>
+
+            <div>
+              <Label
+                htmlFor="assignedDate"
+                value="අදාල අංශයෙහි වැඩ භාරගත් දිනය"
+                className="m-1 mb-2 text-slate-500 text-center text-base"
+              />
+              <Datepicker id="assignedData" />
+            </div>
+
+          
+            <FloatingLabel variant="filled" label="නිවාඩු අංකය"/>
+          </fieldset>
+        </div>
       </div>
     </main>
   );
