@@ -15,7 +15,7 @@ import NoPage from "./pages/no-page";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ fontFamily: "Noto Sans Sinhala" }}>
       <Routes>
         <Route path="/" element={<Login/>}/>
         <Route path="/" element={<PageLayout />}>
