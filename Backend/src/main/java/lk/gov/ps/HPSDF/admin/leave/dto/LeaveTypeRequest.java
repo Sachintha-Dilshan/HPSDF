@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.hr.leave.dto;
+package lk.gov.ps.HPSDF.admin.leave.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

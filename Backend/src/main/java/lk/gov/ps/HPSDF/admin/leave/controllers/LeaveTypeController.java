@@ -1,16 +1,13 @@
-package lk.gov.ps.HPSDF.hr.leave.controllers;
+package lk.gov.ps.HPSDF.admin.leave.controllers;
 
 import jakarta.validation.Valid;
-import lk.gov.ps.HPSDF.hr.leave.dto.LeaveTypeRequest;
-import lk.gov.ps.HPSDF.hr.leave.models.Leave;
-import lk.gov.ps.HPSDF.hr.leave.models.LeaveType;
-import lk.gov.ps.HPSDF.hr.leave.repositories.LeaveTypeRepository;
-import lk.gov.ps.HPSDF.hr.leave.services.LeaveTypeService;
+import lk.gov.ps.HPSDF.admin.leave.dto.LeaveTypeRequest;
+import lk.gov.ps.HPSDF.admin.leave.models.LeaveType;
+import lk.gov.ps.HPSDF.admin.leave.services.LeaveTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -63,7 +60,6 @@ public class LeaveTypeController {
     @GetMapping("leaveTypeContaining/{leaveType}")
     public ResponseEntity<List<LeaveType>> getByLeaveTypeContaining(@PathVariable String leaveType){
         return ResponseEntity.ok(leaveTypeService.getByLeaveTypeContaining(leaveType));
-
     }
     @DeleteMapping("/leaveType/{id}")
     public String deleteLeaveType(@PathVariable int id){

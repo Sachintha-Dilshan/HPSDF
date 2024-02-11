@@ -1,4 +1,4 @@
-package lk.gov.ps.HPSDF.hr.leave.models;
+package lk.gov.ps.HPSDF.admin.leave.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

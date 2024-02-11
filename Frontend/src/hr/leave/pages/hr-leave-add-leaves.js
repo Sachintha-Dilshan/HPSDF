@@ -74,7 +74,7 @@ function HRLeaveAddLeaves() {
           LeaveTypeService.createLeaveType(data)
             .then(() => {
               setMessage(
-                leaveName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී"
+                leaveName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී" 
               );
               setTitle("Success");
               setOpenModal(true);

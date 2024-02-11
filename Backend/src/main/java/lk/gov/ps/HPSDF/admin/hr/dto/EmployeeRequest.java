@@ -1,0 +1,91 @@
+package lk.gov.ps.HPSDF.admin.hr.dto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class EmployeeRequest {
+    @Id
+    @NotNull(message = "NIC No is required")
+    private String nicNo;
+
+    @NotBlank(message = "Name with initials is required")
+    private String nameWithInitials;
+
+    @NotBlank(message = "Full name is required")
+    private String fullName;
+
+    @NotBlank(message = "Address is required")
+    private String address;
+
+    @NotNull(message = "Gender is required")
+    private char gender;
+
+    @NotBlank(message = "Marital status is required")
+    private String maritalStatus;
+
+    @NotNull(message = "Date of birth is required")
+    @Past(message = "Date must be in the past")
+    private Date dob;
+
+    @NotNull(message = "Mobile no is required")
+    private long mobileNo;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please provide a valid email address")
+    private String email;
+
+    @NotNull(message = "Office official appointment date is required")
+    @Past(message = "Date must be in the past")
+    private Date officeOfficialAppointmentDate;
+
+    @NotBlank(message = "Designation is required")
+    private String designation;
+
+    @NotBlank(message = "Service sector is required")
+    private String serviceSector;
+
+    @NotNull(message = "Designation class is required")
+    private int designationClass;
+
+    @NotNull(message = "Designation grade is required")
+    private int designationGrade;
+
+    @NotNull(message = "First appointment date is required")
+    @Past(message = "Date must be in the past")
+    private Date firstAppointmentDate;
+
+    @NotNull(message = "Duty assigned date is required")
+    @Past(message = "Date must be in the past")
+    private Date dutyAssignedDate;
+
+    @NotNull(message = "Permanent details is required")
+    private boolean permanent;
+
+    @NotBlank(message = "Nature of appointment is required")
+    private String natureOfAppointment;
+
+    @NotNull(message = "Duty permanent date is required")
+    @Past(message = "Date must be in the past")
+    private Date dutyPermanentDate;
+
+    @NotNull(message = "Salary increment date is required")
+    @Past(message = "Date must be in the past")
+    private Date salaryIncrementDate;
+
+    @NotBlank(message = "Salary code is required")
+    private String salaryCode;
+
+    @NotBlank(message = "WOP no is required")
+    private String wopNo;
+
+    @NotNull(message = "Section is required")
+    private int section;
+
+    @NotBlank(message = "Subject no is required")
+    private String subjectNo;
+}
