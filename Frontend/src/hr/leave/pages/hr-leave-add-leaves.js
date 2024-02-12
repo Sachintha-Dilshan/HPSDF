@@ -267,7 +267,7 @@ function HRLeaveAddLeaves() {
                   // alert(response.data);
                   setShow(false);
                   setMessage(
-                    leaveName + " පද්ධතියෙන් ඉවත් සාර්ථකව ඉවත් කරන ලදී "
+                    leaveName + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
                   );
                   setTitle("Success");
                   setOpenModal(true);

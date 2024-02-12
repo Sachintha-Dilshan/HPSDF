@@ -88,4 +88,12 @@ public class EmployeeRequest {
 
     @NotBlank(message = "Subject no is required")
     private String subjectNo;
+
+    @NotNull(message = "Section assigned date is required")
+    @Column(name = "section_assigned_date")
+    private Date sectionAssignedDate;
+
+    @NotNull(message = "Leave id is required")
+    @Column(name = "leave_id")
+    private int leaveId;
 }

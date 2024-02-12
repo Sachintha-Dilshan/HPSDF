@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -36,7 +37,9 @@ public class Employee {
     @Column(name = "marital_status")
     private String maritalStatus;
 
-    @Column(name = "dob")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "dob",columnDefinition = "date")
     private Date dob;
 
     @Column(name = "mobile_no")
@@ -45,7 +48,9 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "office_official_appointment_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "office_official_appointment_date", columnDefinition = "date")
     private Date officeOfficialAppointmentDate;
 
     @Column(name = "designation")
@@ -60,22 +65,27 @@ public class Employee {
     @Column(name = "designation_grade")
     private int designationGrade;
 
-    @Column(name = "first_appointment_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "first_appointment_date",columnDefinition = "date")
     private Date firstAppointmentDate;
 
-    @Column(name = "duty_assigned_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "duty_assigned_date",columnDefinition = "date")
     private Date dutyAssignedDate;
 
     @Column(name = "permanent")
     private boolean permanent;
 
-    @Column(name = "nature_of_appointment")
-    private String natureOfAppointment;
-
-    @Column(name = "duty_permanent_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "duty_permanent_date",columnDefinition = "date")
     private Date dutyPermanentDate;
 
-    @Column(name = "salary_increment_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "salary_increment_date",columnDefinition = "date")
     private Date salaryIncrementDate;
 
     @Column(name = "salary_code")
@@ -89,4 +99,15 @@ public class Employee {
 
     @Column(name = "subject_no")
     private String subjectNo;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "section_assigned_date",columnDefinition = "date")
+    private Date sectionAssignedDate;
+
+    @Column(name = "nature_of_appointment")
+    private String natureOfAppointment;
+
+    @Column(name = "leave_id")
+    private int leaveId;
 }

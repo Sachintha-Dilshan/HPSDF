@@ -50,7 +50,8 @@ public class EmployeeService {
             existingEmployee.setWopNo(employee.getWopNo());
             existingEmployee.setSection(employee.getSection());
             existingEmployee.setSubjectNo(employee.getSubjectNo());
-
+            existingEmployee.setSectionAssignedDate(employee.getSectionAssignedDate());
+            existingEmployee.setLeaveId(employee.getLeaveId());
             return employeeRepository.save(existingEmployee);
         }
         else

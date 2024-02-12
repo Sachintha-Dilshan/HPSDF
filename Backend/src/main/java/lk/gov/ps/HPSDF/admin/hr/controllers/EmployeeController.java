@@ -53,13 +53,15 @@ public class EmployeeController {
                   employeeRequest.getFirstAppointmentDate(),
                   employeeRequest.getDutyAssignedDate(),
                   employeeRequest.isPermanent(),
-                  employeeRequest.getNatureOfAppointment(),
                   employeeRequest.getDutyPermanentDate(),
                   employeeRequest.getSalaryIncrementDate(),
                   employeeRequest.getSalaryCode(),
                   employeeRequest.getWopNo(),
                   employeeRequest.getSection(),
-                  employeeRequest.getSubjectNo()
+                  employeeRequest.getSubjectNo(),
+                  employeeRequest.getSectionAssignedDate(),
+                  employeeRequest.getNatureOfAppointment(),
+                  employeeRequest.getLeaveId()
           )
         );
 
@@ -70,7 +72,7 @@ public class EmployeeController {
         }
     }
 
-    @PutMapping("employee/{nicNo}")
+    @PutMapping("/employee")
     public ResponseEntity<Employee> updateEmployee(@RequestBody @Valid EmployeeRequest employeeRequest){
         Employee employee = employeeService.updateEmployee(
                 Employee.build(
@@ -91,13 +93,15 @@ public class EmployeeController {
                         employeeRequest.getFirstAppointmentDate(),
                         employeeRequest.getDutyAssignedDate(),
                         employeeRequest.isPermanent(),
-                        employeeRequest.getNatureOfAppointment(),
                         employeeRequest.getDutyPermanentDate(),
                         employeeRequest.getSalaryIncrementDate(),
                         employeeRequest.getSalaryCode(),
                         employeeRequest.getWopNo(),
                         employeeRequest.getSection(),
-                        employeeRequest.getSubjectNo()
+                        employeeRequest.getSubjectNo(),
+                        employeeRequest.getSectionAssignedDate(),
+                        employeeRequest.getNatureOfAppointment(),
+                        employeeRequest.getLeaveId()
                 )
         );
 
