@@ -23,12 +23,25 @@ const removeEmployee = (nicNo) => {
   return axios.delete(API_URL + `employee/${nicNo}`, { headers: AuthHeader() });
 };
 
+const uploadImage = (nicNo, imageFile) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  return axios.post(API_URL + `uploadImage/${nicNo}`, formData, {headers: AuthHeader()});
+};
+
+const getImage = (nicNo) => {
+  return axios.get(API_URL + `getImage/${nicNo}`, {headers: AuthHeader(), responseType: "blob"});
+};
+
 const EmployeeService = {
   getAllEmployees,
   getEmployee,
   addEmployee,
   updateEmployee,
   removeEmployee,
+  uploadImage,
+  getImage,
 };
 
 export default EmployeeService;

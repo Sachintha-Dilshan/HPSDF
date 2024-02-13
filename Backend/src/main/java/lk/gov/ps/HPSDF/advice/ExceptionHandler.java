@@ -28,4 +28,6 @@ public class ExceptionHandler {
         errorResponse.put("error", ex.getMessage());
         return errorResponse;
     }
+
+
 }

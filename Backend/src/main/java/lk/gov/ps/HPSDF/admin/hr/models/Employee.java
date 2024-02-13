@@ -83,10 +83,9 @@ public class Employee {
     @Column(name = "duty_permanent_date",columnDefinition = "date")
     private Date dutyPermanentDate;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "salary_increment_date",columnDefinition = "date")
-    private Date salaryIncrementDate;
+
+    @Column(name = "salary_increment_date")
+    private String salaryIncrementDate;
 
     @Column(name = "salary_code")
     private String salaryCode;

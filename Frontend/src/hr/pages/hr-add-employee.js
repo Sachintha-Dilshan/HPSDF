@@ -10,6 +10,8 @@ import {
   TextInput,
   Modal,
   Button,
+  FileInput,
+  Avatar,
 } from "flowbite-react";
 import { HiMail, HiOutlineSave } from "react-icons/hi";
 import {
@@ -34,6 +36,10 @@ function HRAddEmployee() {
   const [title, setTitle] = React.useState("");
   const [show, setShow] = React.useState(false);
   const [serachId, setSearchId] = React.useState("");
+  const [image, setImage] = React.useState("");
+  const [imageUrl, setImageUrl] = React.useState("");
+  const [imageError, setImageError] = React.useState("");
+
   const [employeeData, setEmployeeData] = React.useState({
     nicNo: "",
     address: "",
@@ -62,6 +68,28 @@ function HRAddEmployee() {
     sectionAssignedDate: "",
     leaveId: "",
   });
+
+  const handleImageChange = (event) => {
+    const uploadedImage = event.target.files[0];
+    setImage(uploadedImage);
+    // const reader = new FileReader();
+
+    const isImage = uploadedImage && uploadedImage.type.startsWith("image/");
+
+    if (!isImage) {
+       // Handle invalid file type
+       setImageError("Please select a valid image file.");
+       return;
+     }
+
+    // reader.onload = () => {
+    //   // Set the image data URL to the state
+    //   setImageUrl(reader.result);
+    // };
+
+    // reader.readAsDataURL(uploadedImage);
+    setImageUrl(URL.createObjectURL(event.target.files[0]));
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -105,6 +133,9 @@ function HRAddEmployee() {
       leaveId: "",
     });
     setSearchId("");
+    setImage("");
+    setImageUrl("");
+    setImageError("");
   };
 
   const addEmployee = () => {
@@ -218,26 +249,54 @@ function HRAddEmployee() {
       setMessage("නිවාඩු අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
+    } else if (image === "") {
+      setMessage("ඡායාරූපය ඇතුලත් කිරීම අනිවාර්යයයි.");
+      setTitle("Empty");
+      setOpenModal(true);
     } else {
       EmployeeService.getEmployee(employeeData.nicNo)
         .then((response) => {
           setMessage(response.data.nicNo + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත");
-          resetEmployeeData();
           setTitle("Error");
           setOpenModal(true);
+          // resetEmployeeData();
         })
         .catch(() => {
-          EmployeeService.addEmployee(employeeData)
+          EmployeeService.uploadImage(employeeData.nicNo, image)
             .then(() => {
-              setMessage(
-                employeeData.nicNo + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී"
-              );
-              resetEmployeeData();
-              setTitle("Success");
-              setOpenModal(true);
+              EmployeeService.addEmployee(employeeData)
+                .then(() => {
+                  setMessage(
+                    employeeData.nicNo + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී"
+                  );
+                  setTitle("Success");
+                  setOpenModal(true);
+                  resetEmployeeData();
+                })
+                .catch((error) => {
+                  if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.error
+                  ) {
+                    setMessage(error.response.data.error);
+                  } else {
+                    setMessage("දත්ත ඇතුලත් කිරීමේදී දෝෂයක් සිදු වී ඇත !");
+                  }
+                  setTitle("Error");
+                  setOpenModal(true);
+                });
             })
             .catch((error) => {
-              setMessage(error.response.data.error);
+              if (
+                error.response &&
+                error.response.data &&
+                error.response.data.error
+              ) {
+                setMessage(error.response.data.error);
+              } else {
+                setMessage("ජායාරූපය ඇතුලත් කිරීමේදී දෝෂයක් සිදු වී ඇත !");
+              }
               setTitle("Error");
               setOpenModal(true);
             });
@@ -356,6 +415,10 @@ function HRAddEmployee() {
       setMessage("නිවාඩු අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
+    } else if (image === "") {
+      setMessage("ඡායාරූපය ඇතුලත් කිරීම අනිවාර්යයයි.");
+      setTitle("Empty");
+      setOpenModal(true);
     } else {
       EmployeeService.getEmployee(employeeData.nicNo)
         .then(() => {
@@ -396,13 +459,31 @@ function HRAddEmployee() {
     }
   };
 
-
   const searchEmployee = () => {
     if (serachId === "") {
       setMessage("සෙවීම සඳහා කරුණාකර ජාතික හැදුනුම්පත් අංකය ඇතුලත් කරන්න");
       setTitle("Empty");
       setOpenModal(true);
     } else {
+      EmployeeService.getImage(serachId)
+        .then((response) => {
+          const imageUrl = URL.createObjectURL(response.data);
+          setImageUrl(imageUrl);
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error
+          ) {
+            setMessage(error.response.data.error);
+          } else {
+            setMessage("Error fetching image");
+          }
+          setTitle("Error");
+          setOpenModal(true);
+        });
+
       EmployeeService.getEmployee(serachId)
         .then((response) => {
           setEmployeeData(response.data);
@@ -422,7 +503,8 @@ function HRAddEmployee() {
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Add New Employee
         </h3>
-        <fieldset className="border rounded-lg flex items-center justify-center md:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
+
+        <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
           <FloatingLabel
             variant="filled"
             label="ජාතික හැදුනුම්පත් අංකය"
@@ -470,6 +552,29 @@ function HRAddEmployee() {
             <FaEraser className="mr-2 h-5 w-5" /> Clear Employee
           </Button>
         </fieldset>
+
+        {/* Image upload section starts here */}
+        <fieldset className="flex items-center justify-center md:flex-row  flex-col md:gap-32 gap-5 ">
+          <Avatar
+            img={process.env.PUBLIC_URL + imageUrl}
+            alt="Profile Image"
+            size="xl"
+            rounded
+          />
+          <div id="fileUpload" className="max-w-md">
+            <div className="mb-2 block">
+              <Label htmlFor="image" value="Upload Image" />
+            </div>
+            <FileInput
+              id="image"
+              helperText={imageError}
+              accept="image/*"
+              name="image"
+              onChange={handleImageChange}
+            />
+          </div>
+        </fieldset>
+
         {/* Personal details starts here */}
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
@@ -754,8 +859,11 @@ function HRAddEmployee() {
                 <Radio
                   id="permanent"
                   name="permanent"
-                  value={true}
-                  checked={employeeData.permanent}
+                  value="true"
+                  checked={
+                    employeeData.permanent === "true" ||
+                    employeeData.permanent === true
+                  }
                   onChange={handleChange}
                 />
                 <Label
@@ -769,8 +877,11 @@ function HRAddEmployee() {
                 <Radio
                   id="notPermanent"
                   name="permanent"
-                  value={false}
-                  checked={employeeData.permanent}
+                  value="false"
+                  checked={
+                    employeeData.permanent === "false" ||
+                    employeeData.permanent === false
+                  }
                   onChange={handleChange}
                 />
                 <Label
@@ -960,10 +1071,7 @@ function HRAddEmployee() {
                 .then((response) => {
                   resetEmployeeData();
                   setShow(false);
-                  setMessage(
-                    serachId +
-                      " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
-                  );
+                  setMessage(serachId + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී ");
                   setTitle("Success");
                   setOpenModal(true);
                 })

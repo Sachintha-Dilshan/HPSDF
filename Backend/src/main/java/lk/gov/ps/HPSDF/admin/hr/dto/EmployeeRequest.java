@@ -73,9 +73,8 @@ public class EmployeeRequest {
     @Past(message = "Date must be in the past")
     private Date dutyPermanentDate;
 
-    @NotNull(message = "Salary increment date is required")
-    @Past(message = "Date must be in the past")
-    private Date salaryIncrementDate;
+    @NotBlank(message = "Salary increment date is required")
+    private String salaryIncrementDate;
 
     @NotBlank(message = "Salary code is required")
     private String salaryCode;

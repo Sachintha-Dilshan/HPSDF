@@ -2,9 +2,39 @@ import React from "react";
 import HREmployeeCard from "../components/hr-employee-card";
 import CollapseBar from "../../layouts/collapse-bar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
-import employees from "../../Data";
+//import employees from "../../Data";
+import EmployeeService from "../services/add-new-employee-service";
 
 function HRSearchEmployees() {
+  const [employeeData, setEmployeeData] = React.useState([]);
+  const fetchAllEmployees = () => {
+    EmployeeService.getAllEmployees()
+      .then((response) => {
+        response.data.forEach((employee) => {
+          EmployeeService.getImage(employee.nicNo).then((response) => {
+            const imageUrl = URL.createObjectURL(response.data);
+            employee.image = imageUrl;
+            setEmployeeData(prev => [...prev, employee]);
+            });
+          })
+        }).catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error
+          ) {
+            console.log(error.response.data.error);
+          }
+        })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchAllEmployees();
+  }, []);
+
   return (
     <main>
       {/* Collapse bar starts here */}
@@ -37,12 +67,13 @@ function HRSearchEmployees() {
 
         {/* Employees card grid starts here */}
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
-          {employees.map((employee) => (
+          {employeeData.map((employee) => (
             <HREmployeeCard
-              name={employee.name}
+              imageUrl = {employee.image}
+              name={employee.nameWithInitials}
               designation={employee.designation}
-              contact={employee.contactNo}
-              key={employee.contactNo}
+              contact={employee.mobileNo}
+              key={employee.nicNo}
             />
           ))}
         </div>
