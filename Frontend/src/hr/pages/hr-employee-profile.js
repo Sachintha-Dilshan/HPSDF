@@ -5,6 +5,7 @@ import HREmployeePersonalData from "../components/hr-employee-personal-data";
 import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
 import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import HREmployeeCard from "../components/hr-employee-card";
+import { useLocation } from "react-router-dom";
 import { FloatingLabel } from "flowbite-react";
 import { Button } from "flowbite-react";
 import { HiUserCircle } from "react-icons/hi";
@@ -16,12 +17,9 @@ import {
 } from "react-icons/fa";
 
 function HREmployeeProfile() {
-  const employee = {
-    name: "ඒ.එම්.කේ. නාලිකා අබේකෝන් මිය",
-    address: "මහවත්ත, මොටාගෙදර, කැකනදුර",
-    designation: "ලේකම්",
-    contactNo: "0714412472",
-  };
+  const location = useLocation();
+  const employee = location.state;
+
 
   const data = [
     {
@@ -29,21 +27,21 @@ function HREmployeeProfile() {
       active: true,
       title: "Personal Data",
       icon: HiUserCircle,
-      content: <HREmployeePersonalData />,
+      content: <HREmployeePersonalData personalData={employee} />,
     },
     {
       id: 2,
       active: true,
       title: "Job Data",
       icon: FaBriefcase,
-      content: <HREmployeePersonalData />,
+      content: <HREmployeeAttendantSheet />,
     },
     {
       id: 3,
       active: true,
       title: "Personal File",
       icon: FaFile,
-      content: <HREmployeePersonalData />,
+      content: <HREmployeeAttendantSheet />,
     },
     {
       id: 4,
@@ -70,10 +68,11 @@ function HREmployeeProfile() {
         <div className="grid md:grid-cols-3  gap-10 items-center">
           <div>
             <HREmployeeCard
-              name={employee.name}
+              imageUrl={employee.image}
+              name={employee.nameWithInitials}
               designation={employee.designation}
-              contact={employee.contactNo}
-              key={employee.contactNo}
+              contact={employee.mobileNo}
+              key={employee.nicNo}
             />
           </div>
           <div>
