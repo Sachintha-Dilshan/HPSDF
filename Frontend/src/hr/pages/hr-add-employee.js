@@ -411,6 +411,7 @@ function HRAddEmployee() {
           setMessage(serachId + " පද්ධතියට ඇතුලත් කර නොමැත");
           setTitle("Error");
           setOpenModal(true);
+          setSearchId("");
         });
     }
   };
