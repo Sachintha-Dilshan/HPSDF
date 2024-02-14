@@ -3,17 +3,17 @@ import { FloatingLabel } from "flowbite-react";
 
 function HREmployeePersonalData(props) {
   const employeeData = Object.values(props.personalData);
-  const labels = [
-    "මුලකුරු සම‌ඟ නම",
-    "සම්පූර්ණ නම",
-    "ස්ථිර ලිපිනය",
-    "ජාතික හැදුනුම්පත් අංකය",
-    "උපන් දිනය",
-    "ස්ත්‍රී / පුරුෂ භාවය",
-    "සිවිල් තත්වය",
-    "ජංගම දුරකථන අංකය",
-    "පෞද්ගලික විද්‍යුත් තැපෑල",
-  ];
+  // const labels = [
+  //   "මුලකුරු සම‌ඟ නම",
+  //   "සම්පූර්ණ නම",
+  //   "ස්ථිර ලිපිනය",
+  //   "ජාතික හැදුනුම්පත් අංකය",
+  //   "උපන් දිනය",
+  //   "ස්ත්‍රී / පුරුෂ භාවය",
+  //   "සිවිල් තත්වය",
+  //   "ජංගම දුරකථන අංකය",
+  //   "පෞද්ගලික විද්‍යුත් තැපෑල",
+  // ];
   return(
     <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
     <legend className="text-slate-600">පුද්ගලික තොරතුරු</legend>

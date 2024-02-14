@@ -1,5 +1,5 @@
 import React from "react";
-import CollapseBar from "../../layouts/collapse-bar";
+import HRCollapseBar from "../components/hr-collapse-bar";
 import HRDashboardCard from "../components/hr-dashboard-card";
 import Tab from "../../components/tabs";
 import HRLeaveTracker from "../components/hr-employee-leave-tracker";
@@ -74,7 +74,7 @@ function HRDashboard() {
 
   return (
     <main>
-      <CollapseBar />
+      <HRCollapseBar />
       <div className="flex flex-col gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Administration Section

@@ -1,6 +1,6 @@
 import React from "react";
 import HREmployeeCard from "../components/hr-employee-card";
-import CollapseBar from "../../layouts/collapse-bar";
+import HRCollapseBar from "../components/hr-collapse-bar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
 //import employees from "../../Data";
 import EmployeeService from "../services/add-new-employee-service";
@@ -41,7 +41,7 @@ function HRSearchEmployees() {
   return (
     <main>
       {/* Collapse bar starts here */}
-      <CollapseBar />
+      <HRCollapseBar />
       {/* Collapse bae ends here */}
 
       <div className="flex flex-col gap-2 m-5">

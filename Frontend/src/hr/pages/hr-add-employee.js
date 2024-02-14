@@ -1,5 +1,5 @@
 import React from "react";
-import CollapseBar from "../../layouts/collapse-bar";
+import HRCollapseBar from "../components/hr-collapse-bar";
 import EmployeeService from "../services/add-new-employee-service";
 
 import {
@@ -12,14 +12,16 @@ import {
   Button,
   FileInput,
   Avatar,
+  Spinner,
 } from "flowbite-react";
-import { HiMail, HiOutlineSave } from "react-icons/hi";
+import { HiMail, HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
 import {
   FaPhone,
   FaCalendar,
   FaSearch,
   FaSyncAlt,
   FaEraser,
+  FaSearchMinus,
 } from "react-icons/fa";
 
 import {
@@ -77,10 +79,10 @@ function HRAddEmployee() {
     const isImage = uploadedImage && uploadedImage.type.startsWith("image/");
 
     if (!isImage) {
-       // Handle invalid file type
-       setImageError("Please select a valid image file.");
-       return;
-     }
+      // Handle invalid file type
+      setImageError("Please select a valid image file.");
+      return;
+    }
 
     // reader.onload = () => {
     //   // Set the image data URL to the state
@@ -257,11 +259,14 @@ function HRAddEmployee() {
       EmployeeService.getEmployee(employeeData.nicNo)
         .then((response) => {
           setMessage(response.data.nicNo + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත");
-          setTitle("Error");
+          setTitle("Duplicate");
           setOpenModal(true);
           // resetEmployeeData();
         })
         .catch(() => {
+          setMessage("සැකසෙමින් පවතී..");
+          setTitle("Processing");
+          setOpenModal(true);
           EmployeeService.uploadImage(employeeData.nicNo, image)
             .then(() => {
               EmployeeService.addEmployee(employeeData)
@@ -440,7 +445,7 @@ function HRAddEmployee() {
         .catch(() => {
           setMessage(employeeData.nicNo + " \n  පද්ධතියට ඇතුලත් කර නොමැත");
           resetEmployeeData();
-          setTitle("Error");
+          setTitle("Not Found");
           setOpenModal(true);
         });
     }
@@ -478,9 +483,9 @@ function HRAddEmployee() {
           ) {
             setMessage(error.response.data.error);
           } else {
-            setMessage("Error fetching image");
+            setMessage(serachId + " පද්ධතියට ඇතුලත් කර නොමැත");
           }
-          setTitle("Error");
+          setTitle("Not Found");
           setOpenModal(true);
         });
 
@@ -490,7 +495,7 @@ function HRAddEmployee() {
         })
         .catch(() => {
           setMessage(serachId + " පද්ධතියට ඇතුලත් කර නොමැත");
-          setTitle("Error");
+          setTitle("Not Found");
           setOpenModal(true);
           setSearchId("");
         });
@@ -498,7 +503,7 @@ function HRAddEmployee() {
   };
   return (
     <main>
-      <CollapseBar />
+      <HRCollapseBar />
       <div className="flex flex-col  gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Add New Employee
@@ -1045,19 +1050,29 @@ function HRAddEmployee() {
       </div>
 
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        
         <Modal.Header>
+          {title === "Processing" && (
+            <Spinner size="xl" />
+          )}
           {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}
           {title === "Empty" && (
             <MdRadioButtonUnchecked className="inline-block text-red-500 text-4xl mr-5" />
           )}
+          {title === "Duplicate" && (
+            <HiDocumentDuplicate className="inline-block text-yellow-400 text-4xl mr-5" />
+          )}
           {title === "Warning" && (
             <IoIosWarning className="inline-block text-amber-500 text-4xl mr-5" />
           )}
+          {title === "Not Found" && (
+            <FaSearchMinus className="inline-block text-yellow-500 text-4xl mr-5" />
+          )}
           {title === "Success" && (
             <MdDoneOutline className="inline-block text-lime-600 text-4xl mr-5" />
-          )}{" "}
+          )}
           {title}
         </Modal.Header>
         <Modal.Body>

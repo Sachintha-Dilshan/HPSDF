@@ -5,6 +5,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,5 +30,12 @@ public class ExceptionHandler {
         return errorResponse;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @org.springframework.web.bind.annotation.ExceptionHandler(MaxUploadSizeExceededException.class)
+    public Map<String, String> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", "Maximum upload size exceeded.");
+        return errorResponse;
+    }
 
 }
