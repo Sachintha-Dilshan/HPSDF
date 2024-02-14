@@ -10,6 +10,9 @@ import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import FileCrud from "./ar/pages/ar-crud";
+import HRAddSections from "./hr/pages/hr-add-section";
+import HRAddDesignations from "./hr/pages/hr-add-designation";
+import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
 import Login from "./pages/login";
 import NoPage from "./pages/no-page";
 
@@ -29,12 +32,16 @@ function App() {
             <Route path="onLeaveToday" element={<HROnLeaveToday />} />
             <Route path="employeesAttendance" element={<HREmployeesAttendanceSheet />} />
             <Route path="addLeaves" element={<HRLeaveAddLeaves />} /> 
+            <Route path="addSections" element={<HRAddSections />} />
+            <Route path="addDesignations" element={<HRAddDesignations />} /> 
+            <Route path="addServiceSectors" element={<HRAddServiceSectors />} /> 
           </Route>
           <Route path="AR">
             <Route path="fileCrud" element={<FileCrud />}/>
           </Route>   
           <Route path="*" element={<NoPage />} />
         </Route>
+        <Route path="*" element={<NoPage />} />
       </Routes>
     </div>
   );

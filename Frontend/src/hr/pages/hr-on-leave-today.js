@@ -1,5 +1,5 @@
 import React from "react";
-import CollapseBar from "../../layouts/collapse-bar";
+import HRCollapseBar from "../components/hr-collapse-bar";
 import HRLeaveStatusTimeLine from "../components/hr-leave-status-timeline";
 
 import { Table } from "flowbite-react";
@@ -119,7 +119,7 @@ function HROnLeaveToday() {
   return (
     <main>
       {/* Collapse bar starts here */}
-      <CollapseBar />
+      <HRCollapseBar />
       {/* Collapse bae ends here */}
 
       <div className="flex flex-col gap-2 m-5">
