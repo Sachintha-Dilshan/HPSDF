@@ -1,27 +1,32 @@
 import React from "react";
-import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
-import LeaveTypeService from "../services/leave-type-service";
+import HRCollapseBar from "../components/hr-collapse-bar";
+import sectionService from "../services/add-section-service";
 
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
-import { HiOutlineSave } from "react-icons/hi";
+import { HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
 import { FaSyncAlt } from "react-icons/fa";
-import { MdDelete, MdError, MdDoneOutline } from "react-icons/md";
+import {
+  MdDelete,
+  MdError,
+  MdDoneOutline,
+  MdRadioButtonUnchecked,
+} from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
 
-
-function HRLeaveAddLeaves() {
-  const [leaveName, setLeaveName] = React.useState("");
-  const [leaveData, setLeaveData] = React.useState([]);
-  const [leaveId, setLeaveId] = React.useState("");
+function HRAddSections() {
+  const [sectionName, setSectionName] = React.useState("");
+  const [sectionData, setSectionData] = React.useState([]);
+  const [sectionId, setSectionId] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [openModal, setOpenModal] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [show, setShow] = React.useState(false);
   const fetchAllData = () => {
-    LeaveTypeService.getAllLeaveTypes()
+    sectionService
+      .getAllSections()
       .then((response) => {
-        setLeaveData(response.data);
+        setSectionData(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -42,7 +47,6 @@ function HRLeaveAddLeaves() {
   //     });
   // };
 
-
   // const fetchLeaveTypeByName = () => {
   //   LeaveTypeService.findByLeaveName(leaveName)
   //     .then((response) => {
@@ -55,145 +59,144 @@ function HRLeaveAddLeaves() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (leaveName) {
+    if (sectionName) {
       var data = {
-        leaveType: leaveName,
+        sectionName: sectionName,
       };
-      LeaveTypeService.findByLeaveName(leaveName)
+      sectionService
+        .findBySectionName(sectionName)
         .then((response) => {
           setMessage(
-            response.data.leaveType + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
+            response.data.sectionName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
           );
-          setTitle("Error");
+          setTitle("Duplicate");
           setOpenModal(true);
-          setLeaveName("");
-          setLeaveId("");
+          setSectionName("");
+          setSectionId("");
           return;
         })
         .catch(() => {
-          LeaveTypeService.createLeaveType(data)
-            .then(() => {
+          sectionService
+            .addSection(data)
+            .then((response) => {
               setMessage(
-                leaveName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී" 
+                response.data.sectionName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී"
               );
               setTitle("Success");
               setOpenModal(true);
 
               fetchAllData();
-              setLeaveName("");
-              setLeaveId("");
+              setSectionName("");
+              setSectionId("");
             })
             .catch((error) => {
               console.log(error.response.data);
             });
         });
     } else {
-      setMessage("නිවාඩු වර්ගය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Error");
+      setMessage("අංශයේ නම ඇතුලත් කිරීම අනිවාර්යයයි.");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
   const updateData = () => {
-    if (leaveName && leaveId) {
-      LeaveTypeService.findByLeaveName(leaveName)
+    if (sectionName && sectionId) {
+      sectionService
+        .findBySectionName(sectionName)
         .then((response) => {
           setMessage(
-            response.data.leaveType + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
+            response.data.sectionName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
           );
-          setTitle("Error");
+          setTitle("Duplicate");
           setOpenModal(true);
-          setLeaveName("");
-          setLeaveId("");
+          setSectionName("");
+          setSectionId("");
           return;
         })
         .catch(() => {
           var data = {
-            id: leaveId,
-            leaveType: leaveName,
+            id: sectionId,
+            sectionName: sectionName,
           };
-          LeaveTypeService.updateLeaveType(data, leaveId)
-            .then(() => {
+          sectionService
+            .updateSection(data, sectionId)
+            .then((response) => {
               setMessage(
-                leaveName + " සාර්ථකව යාවත්කාලීන කරන ලදී"
+                response.data.sectionName + " සාර්ථකව යාවත්කාලීන කරන ලදී"
               );
               setTitle("Success");
               setOpenModal(true);
               fetchAllData();
-              setLeaveName("");
-              setLeaveId("");
+              setSectionName("");
+              setSectionId("");
             })
             .catch((error) => {
-              alert(error.response.data.leaveType);
+              alert(error.response.data.sectionName);
             });
         });
     } else {
-      setMessage("කරුණාකර පළමුව නිවාඩු වර්ගයක් තෝරන්න");
-      setTitle("Error");
+      setMessage("කරුණාකර පළමුව අදාල අංශය තෝරන්න");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
   const deleteData = () => {
-    if (leaveId && leaveName) {
-      setMessage("ඔබට " + leaveName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?");
+    if (sectionId && sectionName) {
+      setMessage("ඔබට " + sectionName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?");
       setTitle("Warning");
       setShow(true);
       setOpenModal(true);
     } else {
-      setMessage("කරුණාකර පළමුව නිවාඩු වර්ගයක් තෝරන්න");
-      setTitle("Error");
+      setMessage("කරුණාකර පළමුව අදාල අංශය තෝරන්න");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
-  const handleClick = (leaveType, leaveId) => {
-    setLeaveName(leaveType);
-    setLeaveId(leaveId);
+  const handleClick = (sectionName, sectionId) => {
+    setSectionName(sectionName);
+    setSectionId(sectionId);
   };
 
   return (
     <main>
-      <LeaveCollapseBar />
+      <HRCollapseBar />
       <div className="flex flex-col  gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
-          Change Leave Types
+          Change Sections
         </h3>
-        {/* Personal details starts here */}
+
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
             <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
-              <legend className="text-slate-600">නිවාඩු තොරතුරු</legend>
               <FloatingLabel
                 variant="filled"
                 label="අනු අංකය"
-                value={leaveId}
+                value={sectionId}
                 disabled
                 className="w-24 cursor-not-allowed"
               />
               <FloatingLabel
                 variant="filled"
-                label="නිවාඩු වර්ගය"
+                label="අංශයේ නම"
                 className="w-96"
-                value={leaveName}
+                value={sectionName}
                 onChange={(event) => {
-                  setLeaveName(event.target.value);
+                  setSectionName(event.target.value);
                 }}
               />
 
               <Button className="uppercase" type="submit">
                 {" "}
                 <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add Leave
+                Add Section
               </Button>
-              <Button
-                className="uppercase"
-                color="purple"
-                onClick={updateData}
-              >
+              <Button className="uppercase" color="purple" onClick={updateData}>
                 {" "}
                 <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update Leave
+                Update Section
               </Button>
               <Button
                 className="uppercase"
@@ -201,7 +204,8 @@ function HRLeaveAddLeaves() {
                 onClick={deleteData}
               >
                 {" "}
-                <MdDelete className="mr-2 h-5 w-5" /> Delete Leave
+                <MdDelete className="mr-2 h-5 w-5" />
+                Delete Section
               </Button>
             </fieldset>
           </form>
@@ -210,26 +214,28 @@ function HRLeaveAddLeaves() {
           <Table striped hoverable>
             <Table.Head className="text-center">
               <Table.HeadCell>අනු අංකය</Table.HeadCell>
-              <Table.HeadCell>නිවාඩු වර්ග</Table.HeadCell>
+              <Table.HeadCell>අංශයේ නම</Table.HeadCell>
             </Table.Head>
 
             <Table.Body className="divide-y">
-              {leaveData &&
-                leaveData.map((leave) => {
+              {sectionData &&
+                sectionData.map((section) => {
                   return (
                     <Table.Row
                       className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
-                      key={leave.id}
-                      onClick={() => handleClick(leave.leaveType, leave.id)}
+                      key={section.sectionId}
+                      onClick={() =>
+                        handleClick(section.sectionName, section.sectionId)
+                      }
                     >
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        {leave.id}
+                        {section.sectionId}
                       </Table.Cell>
                       <Table.Cell
                         className="whitespace-nowrap font-medium text-gray-900 dark:text-white"
-                        key={leave.id}
+                        key={section.sectionId}
                       >
-                        {leave.leaveType}
+                        {section.sectionName}
                       </Table.Cell>
                     </Table.Row>
                   );
@@ -243,12 +249,18 @@ function HRLeaveAddLeaves() {
           {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}
+          {title === "Empty" && (
+            <MdRadioButtonUnchecked className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Duplicate" && (
+            <HiDocumentDuplicate className="inline-block text-yellow-400 text-4xl mr-5" />
+          )}
           {title === "Warning" && (
             <IoIosWarning className="inline-block text-amber-500 text-4xl mr-5" />
           )}
           {title === "Success" && (
             <MdDoneOutline className="inline-block text-lime-600 text-4xl mr-5" />
-          )}{" "}
+          )}
           {title}
         </Modal.Header>
         <Modal.Body>
@@ -258,19 +270,16 @@ function HRLeaveAddLeaves() {
           <Button onClick={() => setOpenModal(false)}>Close</Button>
           <Button
             onClick={() => {
-              LeaveTypeService.removeLeaveType(leaveId)
+              sectionService
+                .removeSection(sectionId)
                 .then((response) => {
-                  fetchAllData();
-                  setLeaveName("");
-                  setLeaveId("");
-                  // setMessage(response.data);
-                  // alert(response.data);
                   setShow(false);
-                  setMessage(
-                    leaveName + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
-                  );
+                  setMessage(sectionName + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී ");
                   setTitle("Success");
+                  fetchAllData();
                   setOpenModal(true);
+                  setSectionName("");
+                  setSectionId("");
                 })
                 .catch((e) => {
                   console.log(e);
@@ -288,4 +297,4 @@ function HRLeaveAddLeaves() {
   );
 }
 
-export default HRLeaveAddLeaves;
+export default HRAddSections;

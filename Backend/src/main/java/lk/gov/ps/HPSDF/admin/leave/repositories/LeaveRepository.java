@@ -1,6 +1,6 @@
-package lk.gov.ps.HPSDF.hr.leave.repositories;
+package lk.gov.ps.HPSDF.admin.leave.repositories;
 
-import lk.gov.ps.HPSDF.hr.leave.models.Leave;
+import lk.gov.ps.HPSDF.admin.leave.models.Leave;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

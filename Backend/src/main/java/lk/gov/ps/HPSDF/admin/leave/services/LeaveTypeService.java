@@ -1,8 +1,7 @@
-package lk.gov.ps.HPSDF.hr.leave.services;
+package lk.gov.ps.HPSDF.admin.leave.services;
 
-import lk.gov.ps.HPSDF.hr.leave.models.Leave;
-import lk.gov.ps.HPSDF.hr.leave.models.LeaveType;
-import lk.gov.ps.HPSDF.hr.leave.repositories.LeaveTypeRepository;
+import lk.gov.ps.HPSDF.admin.leave.models.LeaveType;
+import lk.gov.ps.HPSDF.admin.leave.repositories.LeaveTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

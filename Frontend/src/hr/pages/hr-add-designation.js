@@ -1,27 +1,27 @@
 import React from "react";
-import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
-import LeaveTypeService from "../services/leave-type-service";
+import HRCollapseBar from "../components/hr-collapse-bar"; 
+import designationService from "../services/add-designation-service";
 
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
-import { HiOutlineSave } from "react-icons/hi";
+import { HiOutlineSave, HiDocumentDuplicate} from "react-icons/hi";
 import { FaSyncAlt } from "react-icons/fa";
-import { MdDelete, MdError, MdDoneOutline } from "react-icons/md";
+import { MdDelete, MdError, MdDoneOutline,MdRadioButtonUnchecked } from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
 
 
-function HRLeaveAddLeaves() {
-  const [leaveName, setLeaveName] = React.useState("");
-  const [leaveData, setLeaveData] = React.useState([]);
-  const [leaveId, setLeaveId] = React.useState("");
+function HRAddDesignations() {
+  const [designationName, setDesignationName] = React.useState("");
+  const [designationData, setDesignationData] = React.useState([]);
+  const [designationId, setDesignationId] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [openModal, setOpenModal] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [show, setShow] = React.useState(false);
   const fetchAllData = () => {
-    LeaveTypeService.getAllLeaveTypes()
+    designationService.getAllDesignations()
       .then((response) => {
-        setLeaveData(response.data);
+        setDesignationData(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -55,136 +55,135 @@ function HRLeaveAddLeaves() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (leaveName) {
+    if (designationName) {
       var data = {
-        leaveType: leaveName,
+        "designationName": designationName,
       };
-      LeaveTypeService.findByLeaveName(leaveName)
+      designationService.findByDesignationName(designationName)
         .then((response) => {
           setMessage(
-            response.data.leaveType + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
+            response.data.designationName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
           );
-          setTitle("Error");
+          setTitle("Duplicate");
           setOpenModal(true);
-          setLeaveName("");
-          setLeaveId("");
+          setDesignationName("");
+          setDesignationId("");
           return;
         })
         .catch(() => {
-          LeaveTypeService.createLeaveType(data)
-            .then(() => {
+          designationService.addDesignation(data)
+            .then((response) => {
               setMessage(
-                leaveName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී" 
+                response.data.designationName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී" 
               );
               setTitle("Success");
               setOpenModal(true);
 
               fetchAllData();
-              setLeaveName("");
-              setLeaveId("");
+              setDesignationName("");
+              setDesignationId("");
             })
             .catch((error) => {
               console.log(error.response.data);
             });
         });
     } else {
-      setMessage("නිවාඩු වර්ගය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Error");
+      setMessage("තනතුර ඇතුලත් කිරීම අනිවාර්යයයි.");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
   const updateData = () => {
-    if (leaveName && leaveId) {
-      LeaveTypeService.findByLeaveName(leaveName)
+    if (designationName && designationId) {
+      designationService.findByDesignationName(designationName)
         .then((response) => {
           setMessage(
-            response.data.leaveType + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
+            response.data.designationName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
           );
-          setTitle("Error");
+          setTitle("Duplicate");
           setOpenModal(true);
-          setLeaveName("");
-          setLeaveId("");
+          setDesignationName("");
+          setDesignationId("");
           return;
         })
         .catch(() => {
           var data = {
-            id: leaveId,
-            leaveType: leaveName,
+            id: designationId,
+            "designationName": designationName,
           };
-          LeaveTypeService.updateLeaveType(data, leaveId)
-            .then(() => {
+          designationService.updateDesignation(data, designationId)
+            .then((response) => {
               setMessage(
-                leaveName + " සාර්ථකව යාවත්කාලීන කරන ලදී"
+                response.data.designationName + " සාර්ථකව යාවත්කාලීන කරන ලදී"
               );
               setTitle("Success");
               setOpenModal(true);
               fetchAllData();
-              setLeaveName("");
-              setLeaveId("");
+              setDesignationName("");
+              setDesignationId("");
             })
             .catch((error) => {
-              alert(error.response.data.leaveType);
+              alert(error.response.data.designationName);
             });
         });
     } else {
-      setMessage("කරුණාකර පළමුව නිවාඩු වර්ගයක් තෝරන්න");
-      setTitle("Error");
+      setMessage("කරුණාකර පළමුව අදාල තනතුර තෝරන්න");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
   const deleteData = () => {
-    if (leaveId && leaveName) {
-      setMessage("ඔබට " + leaveName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?");
+    if (designationId && designationName) {
+      setMessage("ඔබට " + designationName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?");
       setTitle("Warning");
       setShow(true);
       setOpenModal(true);
     } else {
-      setMessage("කරුණාකර පළමුව නිවාඩු වර්ගයක් තෝරන්න");
-      setTitle("Error");
+      setMessage("කරුණාකර පළමුව අදාල තනතුර තෝරන්න");
+      setTitle("Empty");
       setOpenModal(true);
     }
   };
 
-  const handleClick = (leaveType, leaveId) => {
-    setLeaveName(leaveType);
-    setLeaveId(leaveId);
+  const handleClick = (designationName, designationId) => {
+    setDesignationName(designationName);
+    setDesignationId(designationId);
   };
 
   return (
     <main>
-      <LeaveCollapseBar />
+      <HRCollapseBar />
       <div className="flex flex-col  gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
-          Change Leave Types
+          Change Designations
         </h3>
-        {/* Personal details starts here */}
+        
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
             <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
-              <legend className="text-slate-600">නිවාඩු තොරතුරු</legend>
               <FloatingLabel
                 variant="filled"
                 label="අනු අංකය"
-                value={leaveId}
+                value={designationId}
                 disabled
                 className="w-24 cursor-not-allowed"
               />
               <FloatingLabel
                 variant="filled"
-                label="නිවාඩු වර්ගය"
+                label="තනතුර"
                 className="w-96"
-                value={leaveName}
+                value={designationName}
                 onChange={(event) => {
-                  setLeaveName(event.target.value);
+                  setDesignationName(event.target.value);
                 }}
               />
 
               <Button className="uppercase" type="submit">
                 {" "}
                 <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add Leave
+                Add Designation
               </Button>
               <Button
                 className="uppercase"
@@ -193,7 +192,7 @@ function HRLeaveAddLeaves() {
               >
                 {" "}
                 <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update Leave
+                Update Designation
               </Button>
               <Button
                 className="uppercase"
@@ -201,7 +200,8 @@ function HRLeaveAddLeaves() {
                 onClick={deleteData}
               >
                 {" "}
-                <MdDelete className="mr-2 h-5 w-5" /> Delete Leave
+                <MdDelete className="mr-2 h-5 w-5" /> 
+                  Delete Designation
               </Button>
             </fieldset>
           </form>
@@ -210,26 +210,26 @@ function HRLeaveAddLeaves() {
           <Table striped hoverable>
             <Table.Head className="text-center">
               <Table.HeadCell>අනු අංකය</Table.HeadCell>
-              <Table.HeadCell>නිවාඩු වර්ග</Table.HeadCell>
+              <Table.HeadCell>තනතුර</Table.HeadCell>
             </Table.Head>
 
             <Table.Body className="divide-y">
-              {leaveData &&
-                leaveData.map((leave) => {
+              {designationData &&
+                designationData.map((designation) => {
                   return (
                     <Table.Row
                       className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
-                      key={leave.id}
-                      onClick={() => handleClick(leave.leaveType, leave.id)}
+                      key={designation.designationId}
+                      onClick={() => handleClick(designation.designationName, designation.designationId)}
                     >
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        {leave.id}
+                        {designation.designationId}
                       </Table.Cell>
                       <Table.Cell
                         className="whitespace-nowrap font-medium text-gray-900 dark:text-white"
-                        key={leave.id}
+                        key={designation.designationId}
                       >
-                        {leave.leaveType}
+                        {designation.designationName}
                       </Table.Cell>
                     </Table.Row>
                   );
@@ -240,15 +240,21 @@ function HRLeaveAddLeaves() {
       </div>
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>
-          {title === "Error" && (
+        {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Empty" && (
+            <MdRadioButtonUnchecked className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Duplicate" && (
+            <HiDocumentDuplicate className="inline-block text-yellow-400 text-4xl mr-5" />
           )}
           {title === "Warning" && (
             <IoIosWarning className="inline-block text-amber-500 text-4xl mr-5" />
           )}
           {title === "Success" && (
             <MdDoneOutline className="inline-block text-lime-600 text-4xl mr-5" />
-          )}{" "}
+          )}
           {title}
         </Modal.Header>
         <Modal.Body>
@@ -258,19 +264,17 @@ function HRLeaveAddLeaves() {
           <Button onClick={() => setOpenModal(false)}>Close</Button>
           <Button
             onClick={() => {
-              LeaveTypeService.removeLeaveType(leaveId)
+              designationService.removeDesignation(designationId)
                 .then((response) => {
-                  fetchAllData();
-                  setLeaveName("");
-                  setLeaveId("");
-                  // setMessage(response.data);
-                  // alert(response.data);
                   setShow(false);
                   setMessage(
-                    leaveName + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
+                    designationName + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
                   );
                   setTitle("Success");
+                  fetchAllData();
                   setOpenModal(true);
+                  setDesignationName("");
+                  setDesignationId("");
                 })
                 .catch((e) => {
                   console.log(e);
@@ -288,4 +292,4 @@ function HRLeaveAddLeaves() {
   );
 }
 
-export default HRLeaveAddLeaves;
+export default HRAddDesignations;

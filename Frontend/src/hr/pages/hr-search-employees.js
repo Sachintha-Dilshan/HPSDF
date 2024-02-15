@@ -1,14 +1,47 @@
 import React from "react";
 import HREmployeeCard from "../components/hr-employee-card";
-import CollapseBar from "../../layouts/collapse-bar";
+import HRCollapseBar from "../components/hr-collapse-bar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
-import employees from "../../Data";
+//import employees from "../../Data";
+import EmployeeService from "../services/add-new-employee-service";
+import { useNavigate } from "react-router-dom";
 
 function HRSearchEmployees() {
+  const navigate = useNavigate();
+  const [employeeData, setEmployeeData] = React.useState([]);
+  const fetchAllEmployees = () => {
+    EmployeeService.getAllEmployees()
+      .then((response) => {
+        response.data.forEach((employee) => {
+          EmployeeService.getImage(employee.nicNo).then((response) => {
+            const imageUrl = URL.createObjectURL(response.data);
+            employee.image = imageUrl;
+            setEmployeeData((prev) => [...prev, employee]);
+          });
+        });
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          console.log(error.response.data.error);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchAllEmployees();
+  }, []);
+
   return (
     <main>
       {/* Collapse bar starts here */}
-      <CollapseBar />
+      <HRCollapseBar />
       {/* Collapse bae ends here */}
 
       <div className="flex flex-col gap-2 m-5">
@@ -37,13 +70,16 @@ function HRSearchEmployees() {
 
         {/* Employees card grid starts here */}
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
-          {employees.map((employee) => (
-            <HREmployeeCard
-              name={employee.name}
-              designation={employee.designation}
-              contact={employee.contactNo}
-              key={employee.contactNo}
-            />
+          {employeeData.map((employee) => (
+            <div onClick={() => {navigate("/HR/employeeProfile",{state: employee})}}>
+              <HREmployeeCard
+                imageUrl={employee.image}
+                name={employee.nameWithInitials}
+                designation={employee.designation}
+                contact={employee.mobileNo}
+                key={employee.nicNo}
+              />
+            </div>
           ))}
         </div>
         {/* Employees card grid ends here */}

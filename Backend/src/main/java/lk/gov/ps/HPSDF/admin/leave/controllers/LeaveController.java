@@ -1,7 +1,7 @@
-package lk.gov.ps.HPSDF.hr.leave.controllers;
+package lk.gov.ps.HPSDF.admin.leave.controllers;
 
-import lk.gov.ps.HPSDF.hr.leave.models.Leave;
-import lk.gov.ps.HPSDF.hr.leave.repositories.LeaveRepository;
+import lk.gov.ps.HPSDF.admin.leave.models.Leave;
+import lk.gov.ps.HPSDF.admin.leave.repositories.LeaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
