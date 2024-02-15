@@ -21,6 +21,7 @@ function HRCollapseBar() {
            <Link to="/HR/addSections"><li>Add New Section</li></Link>
            <Link to="/HR/addDesignations"><li>Add New Designation</li></Link>
            <Link to="/HR/addServiceSectors"><li>Add New Service Sector</li></Link> 
+           <Link to="/HR/addSubjects"><li>Add New Subject</li></Link> 
           </ul>
         </div>
       </div>

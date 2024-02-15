@@ -12,6 +12,7 @@ import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
+import HRAddSubjects from "./hr/pages/hr-add-subject";
 import Login from "./pages/login";
 import NoPage from "./pages/no-page";
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="addSections" element={<HRAddSections />} />
             <Route path="addDesignations" element={<HRAddDesignations />} /> 
             <Route path="addServiceSectors" element={<HRAddServiceSectors />} /> 
+            <Route path="addSubjects" element={<HRAddSubjects />} /> 
           </Route>   
           <Route path="*" element={<NoPage />} />
         </Route>
