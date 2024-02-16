@@ -1,7 +1,7 @@
 import React from 'react';
 import ARhomecard from '../component/ARhomecard';
 import CollapseBar from '../../layouts/collapse-bar';
-import { IoIosPeople } from "react-icons/io";
+
 
 
 function ARhome() {
