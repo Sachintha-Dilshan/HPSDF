@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
 import HRAddEmployee from "./hr/pages/hr-add-employee";
-import HRDashboard from "./hr/pages/hr-dashboard";
 import HREmployeeProfile from "./hr/pages/hr-employee-profile";
 import HREmployeeLeaveRequest from "./hr/pages/hr-leave-request";
 import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
@@ -10,6 +9,9 @@ import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
+import HRDashboard from "./hr/pages/hr-dashboard";
+import HRSearchEmployees from "./hr/pages/hr-search-employees";
+import PageLayout from "./layouts/page-layout";
 import NoPage from "./pages/no-page";
 
 function App() {
