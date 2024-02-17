@@ -15,16 +15,17 @@ function ARCheckedOutFiles() {
       </h3>
       </div>
 
-      <fieldset className="border rounded-lg grid lg:grid-cols-6 p-5 gap-5 m-5">
-            <legend className="text-slate-600">Checked Out Files</legend>
+      <fieldset className="border rounded-lg grid lg:grid-cols-7 p-5 gap-5 m-5">
+            <legend className="text-slate-600">Checkout Files</legend>
             <FloatingLabel variant="filled" label="File Number" />
             <FloatingLabel variant="filled" label="File Name" />
-            <FloatingLabel variant="filled" label="Employee NIC" />
+            <FloatingLabel variant="filled" label="Year" />
 
-<div className="flex justify-center mt-3">
+{/*select section */}
+            <div className="flex justify-center mt-3">
             <Label
                 htmlFor="segment"
-                value="Subject"
+                value="Section"
                 className="m-1 mb-2 text-slate-500 text-center text-base -mr-12 -mt-7"
                 style={{ fontFamily: 'Arial, sans-serif',fontSize: '14px' }}
               />
@@ -37,9 +38,23 @@ function ARCheckedOutFiles() {
                 <option>ENVIRONMENTAL/COMMUNITY DEVELOPMENT SECTION</option>
               </Select>
               </div>
+
+{/*Select Subject */}
+              <div className="flex mt-3">
+            <Label
+                htmlFor="segment"
+                value="Subject"
+                className="m-1 mb-2 text-slate-500 text-center text-base -mr-12 -mt-7"
+                style={{ fontFamily: 'Arial, sans-serif',fontSize: '14px' }}
+              />
+              <Select id="segment" required>
+                <option>-----Select-----</option>
+                
+              </Select>
+  </div>
               {/*Search files button*/}
               <Button
-                className="uppercase w-52 h-10 lg:mt-3"
+                className="uppercase w-44 h-10 lg:mt-3"
                 color="blue"
                 //onClick={updateData}
               >
@@ -49,7 +64,7 @@ function ARCheckedOutFiles() {
 
                {/*Clear files button*/}
              <Button
-                className="uppercase w-52 h-10 lg:mt-3"
+                className="uppercase w-44 h-10 lg:mt-3"
                 color="red"
                 //onClick={updateData}
               >
