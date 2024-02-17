@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function HRCollapseBar() {
+function ARFileCollapseBar() {
   const [show, setShow] = React.useState(false);
 
   return (
@@ -17,11 +16,7 @@ function HRCollapseBar() {
       <div className="flex flex-col h-full">
         <div style={{ display: show ? "block" : "none" }}>
           <ul className="text-white uppercase">
-           <Link to="/HR/addEmployee"><li>Add New Employee</li></Link>
-           <Link to="/HR/addSections"><li>Add New Section</li></Link>
-           <Link to="/HR/addDesignations"><li>Add New Designation</li></Link>
-           <Link to="/HR/addServiceSectors"><li>Add New Service Sector</li></Link> 
-           <Link to="/HR/addSubjects"><li>Add New Subject</li></Link> 
+          {/* <Link to="/HR/addLeaves"><li>Add Leave Details</li></Link> */}
           </ul>
         </div>
       </div>
@@ -29,4 +24,4 @@ function HRCollapseBar() {
   );
 }
 
-export default HRCollapseBar;
+export default ARFileCollapseBar;

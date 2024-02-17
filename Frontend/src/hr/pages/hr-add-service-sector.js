@@ -5,7 +5,7 @@ import serviceSectorService from "../services/add-service-sector-service";
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
 import { HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaSyncAlt, FaEraser } from "react-icons/fa";
 import {
   MdDelete,
   MdError,
@@ -192,26 +192,38 @@ function HRAddServiceSectors() {
                   setServiceSectorName(event.target.value);
                 }}
               />
-
-              <Button className="uppercase" type="submit">
-                {" "}
-                <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add ServiceSector
-              </Button>
-              <Button className="uppercase" color="purple" onClick={updateData}>
-                {" "}
-                <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update ServiceSector
-              </Button>
-              <Button
-                className="uppercase"
-                color="failure"
-                onClick={deleteData}
-              >
-                {" "}
-                <MdDelete className="mr-2 h-5 w-5" />
-                Delete ServiceSector
-              </Button>
+              <div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Service Sector
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="purple"
+                  onClick={updateData}
+                >
+                  {" "}
+                  <FaSyncAlt className="mr-2 h-5 w-5" />
+                  Update Service Sector
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
+                  Delete Service Sector
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {setServiceSectorId(""); setServiceSectorName("")}}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" /> Clear Service Sector
+                </Button>
+              </div>
             </fieldset>
           </form>
         </div>

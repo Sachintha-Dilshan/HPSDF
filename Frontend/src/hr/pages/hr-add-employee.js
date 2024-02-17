@@ -1,6 +1,9 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import EmployeeService from "../services/add-new-employee-service";
+import designationService from "../services/add-designation-service";
+import serviceSectorService from "../services/add-service-sector-service";
+import sectionService from "../services/add-section-service";
 
 import {
   FloatingLabel,
@@ -33,16 +36,19 @@ import {
 import { IoIosWarning } from "react-icons/io";
 
 function HRAddEmployee() {
-  const [message, setMessage] = React.useState("");
-  const [openModal, setOpenModal] = React.useState(false);
-  const [title, setTitle] = React.useState("");
-  const [show, setShow] = React.useState(false);
-  const [serachId, setSearchId] = React.useState("");
-  const [image, setImage] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState("");
-  const [imageError, setImageError] = React.useState("");
+  const [message, setMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [show, setShow] = useState(false);
+  const [serachId, setSearchId] = useState("");
+  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageError, setImageError] = useState("");
+  const [designations, setDesignations] = useState([]);
+  const [serviceSectors, setServiceSectors] = useState([]);
+  const [sections, setSections] = useState([]);
 
-  const [employeeData, setEmployeeData] = React.useState({
+  const [employeeData, setEmployeeData] = useState({
     nicNo: "",
     address: "",
     designation: "",
@@ -70,6 +76,39 @@ function HRAddEmployee() {
     sectionAssignedDate: "",
     leaveId: "",
   });
+
+  const fetchData = () => {
+    designationService
+      .getAllDesignations()
+      .then((response) => {
+        setDesignations(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    serviceSectorService
+      .getAllServiceSectors()
+      .then((response) => {
+        setServiceSectors(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    sectionService
+      .getAllSections()
+      .then((response) => {
+        setSections(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleImageChange = (event) => {
     const uploadedImage = event.target.files[0];
@@ -760,11 +799,16 @@ function HRAddEmployee() {
                 onChange={handleChange}
               >
                 <option value="">-----Select-----</option>
-                <option value="සභාපති">සභාපති</option>
-                <option value="ලේකම්">ලේකම්</option>
-                <option value="කළමණාකරණ සේවා නිලධාරී">
-                  කළමණාකරණ සේවා නිලධාරී
-                </option>
+                {designations.map((designation) => {
+                  return (
+                    <option
+                      value={designation.designationId}
+                      key={designation.designationId}
+                    >
+                      {designation.designationName}
+                    </option>
+                  );
+                })}
               </Select>
             </div>
 
@@ -782,7 +826,16 @@ function HRAddEmployee() {
                 onChange={handleChange}
               >
                 <option value="">-----Select-----</option>
-                <option value="පළාත් රාජ්‍ය සේවය">පළාත් රාජ්‍ය සේවය</option>
+                {serviceSectors.map((serviceSector) => {
+                  return (
+                    <option
+                      value={serviceSector.serviceSectorId}
+                      key={serviceSector.serviceSectorId}
+                    >
+                      {serviceSector.serviceSectorName}
+                    </option>
+                  );
+                })}
               </Select>
             </div>
 
@@ -959,11 +1012,16 @@ function HRAddEmployee() {
                 onChange={handleChange}
               >
                 <option value="">-----Select-----</option>
-                <option value={1}>ආයතන හා පාලන අංශය</option>
-                <option value={2}>ආදායම් අංශය</option>
-                <option value={3}>ගිණුම් අංශය</option>
-                <option value={4}>කර්මාන්ත අංශය අංශය</option>
-                <option value={5}>පරිසර අංශය</option>
+                {sections.map((section) => {
+                  return (
+                    <option
+                      value={section.sectionId}
+                      key={section.sectionId}
+                    >
+                      {section.sectionName}
+                    </option>
+                  );
+                })}
               </Select>
             </div>
 
@@ -1050,11 +1108,8 @@ function HRAddEmployee() {
       </div>
 
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
-        
         <Modal.Header>
-          {title === "Processing" && (
-            <Spinner size="xl" />
-          )}
+          {title === "Processing" && <Spinner size="xl" />}
           {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}

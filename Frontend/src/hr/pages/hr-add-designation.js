@@ -1,14 +1,18 @@
 import React from "react";
-import HRCollapseBar from "../components/hr-collapse-bar"; 
+import HRCollapseBar from "../components/hr-collapse-bar";
 import designationService from "../services/add-designation-service";
 
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
-import { HiOutlineSave, HiDocumentDuplicate} from "react-icons/hi";
-import { FaSyncAlt } from "react-icons/fa";
-import { MdDelete, MdError, MdDoneOutline,MdRadioButtonUnchecked } from "react-icons/md";
+import { HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
+import { FaSyncAlt, FaEraser } from "react-icons/fa";
+import {
+  MdDelete,
+  MdError,
+  MdDoneOutline,
+  MdRadioButtonUnchecked,
+} from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
-
 
 function HRAddDesignations() {
   const [designationName, setDesignationName] = React.useState("");
@@ -19,7 +23,8 @@ function HRAddDesignations() {
   const [title, setTitle] = React.useState("");
   const [show, setShow] = React.useState(false);
   const fetchAllData = () => {
-    designationService.getAllDesignations()
+    designationService
+      .getAllDesignations()
       .then((response) => {
         setDesignationData(response.data);
       })
@@ -42,7 +47,6 @@ function HRAddDesignations() {
   //     });
   // };
 
-
   // const fetchLeaveTypeByName = () => {
   //   LeaveTypeService.findByLeaveName(leaveName)
   //     .then((response) => {
@@ -57,9 +61,10 @@ function HRAddDesignations() {
     event.preventDefault();
     if (designationName) {
       var data = {
-        "designationName": designationName,
+        designationName: designationName,
       };
-      designationService.findByDesignationName(designationName)
+      designationService
+        .findByDesignationName(designationName)
         .then((response) => {
           setMessage(
             response.data.designationName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
@@ -71,10 +76,12 @@ function HRAddDesignations() {
           return;
         })
         .catch(() => {
-          designationService.addDesignation(data)
+          designationService
+            .addDesignation(data)
             .then((response) => {
               setMessage(
-                response.data.designationName + " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී" 
+                response.data.designationName +
+                  " පද්ධතියට සාර්ථකව ඇතුලත් කරන ලදී"
               );
               setTitle("Success");
               setOpenModal(true);
@@ -96,7 +103,8 @@ function HRAddDesignations() {
 
   const updateData = () => {
     if (designationName && designationId) {
-      designationService.findByDesignationName(designationName)
+      designationService
+        .findByDesignationName(designationName)
         .then((response) => {
           setMessage(
             response.data.designationName + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත"
@@ -110,9 +118,10 @@ function HRAddDesignations() {
         .catch(() => {
           var data = {
             id: designationId,
-            "designationName": designationName,
+            designationName: designationName,
           };
-          designationService.updateDesignation(data, designationId)
+          designationService
+            .updateDesignation(data, designationId)
             .then((response) => {
               setMessage(
                 response.data.designationName + " සාර්ථකව යාවත්කාලීන කරන ලදී"
@@ -136,7 +145,9 @@ function HRAddDesignations() {
 
   const deleteData = () => {
     if (designationId && designationName) {
-      setMessage("ඔබට " + designationName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?");
+      setMessage(
+        "ඔබට " + designationName + " පද්ධතියෙන් ඉවත් කිරීමට අවශ්‍යද ?"
+      );
       setTitle("Warning");
       setShow(true);
       setOpenModal(true);
@@ -159,7 +170,7 @@ function HRAddDesignations() {
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Change Designations
         </h3>
-        
+
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
             <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
@@ -179,30 +190,42 @@ function HRAddDesignations() {
                   setDesignationName(event.target.value);
                 }}
               />
-
-              <Button className="uppercase" type="submit">
-                {" "}
-                <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add Designation
-              </Button>
-              <Button
-                className="uppercase"
-                color="purple"
-                onClick={updateData}
-              >
-                {" "}
-                <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update Designation
-              </Button>
-              <Button
-                className="uppercase"
-                color="failure"
-                onClick={deleteData}
-              >
-                {" "}
-                <MdDelete className="mr-2 h-5 w-5" /> 
+              <div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Designation
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="purple"
+                  onClick={updateData}
+                >
+                  {" "}
+                  <FaSyncAlt className="mr-2 h-5 w-5" />
+                  Update Designation
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
                   Delete Designation
-              </Button>
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {
+                    setDesignationId("");
+                    setDesignationName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Designaton
+                </Button>
+              </div>{" "}
             </fieldset>
           </form>
         </div>
@@ -220,7 +243,12 @@ function HRAddDesignations() {
                     <Table.Row
                       className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
                       key={designation.designationId}
-                      onClick={() => handleClick(designation.designationName, designation.designationId)}
+                      onClick={() =>
+                        handleClick(
+                          designation.designationName,
+                          designation.designationId
+                        )
+                      }
                     >
                       <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                         {designation.designationId}
@@ -240,7 +268,7 @@ function HRAddDesignations() {
       </div>
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>
-        {title === "Error" && (
+          {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}
           {title === "Empty" && (
@@ -264,7 +292,8 @@ function HRAddDesignations() {
           <Button onClick={() => setOpenModal(false)}>Close</Button>
           <Button
             onClick={() => {
-              designationService.removeDesignation(designationId)
+              designationService
+                .removeDesignation(designationId)
                 .then((response) => {
                   setShow(false);
                   setMessage(

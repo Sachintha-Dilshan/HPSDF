@@ -12,6 +12,8 @@ import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
 import HRDashboard from "./hr/pages/hr-dashboard";
 import HRSearchEmployees from "./hr/pages/hr-search-employees";
 import PageLayout from "./layouts/page-layout";
+import HRAddSubjects from "./hr/pages/hr-add-subject";
+import Login from "./pages/login";
 import NoPage from "./pages/no-page";
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
             <Route path="addSections" element={<HRAddSections />} />
             <Route path="addDesignations" element={<HRAddDesignations />} /> 
             <Route path="addServiceSectors" element={<HRAddServiceSectors />} /> 
+            <Route path="addSubjects" element={<HRAddSubjects />} /> 
           </Route>   
           <Route path="*" element={<NoPage />} />
         </Route>

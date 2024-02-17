@@ -5,7 +5,7 @@ import sectionService from "../services/add-section-service";
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
 import { HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaSyncAlt, FaEraser } from "react-icons/fa";
 import {
   MdDelete,
   MdError,
@@ -188,25 +188,42 @@ function HRAddSections() {
                 }}
               />
 
-              <Button className="uppercase" type="submit">
-                {" "}
-                <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add Section
-              </Button>
-              <Button className="uppercase" color="purple" onClick={updateData}>
-                {" "}
-                <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update Section
-              </Button>
-              <Button
-                className="uppercase"
-                color="failure"
-                onClick={deleteData}
-              >
-                {" "}
-                <MdDelete className="mr-2 h-5 w-5" />
-                Delete Section
-              </Button>
+              <div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Section
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="purple"
+                  onClick={updateData}
+                >
+                  {" "}
+                  <FaSyncAlt className="mr-2 h-5 w-5" />
+                  Update Section
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
+                  Delete Section
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {
+                    setSectionId("");
+                    setSectionName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Section
+                </Button>
+              </div>
             </fieldset>
           </form>
         </div>
