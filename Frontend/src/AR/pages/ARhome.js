@@ -1,6 +1,13 @@
 import React from 'react';
 import ARhomecard from '../component/ARhomecard';
 import CollapseBar from '../../layouts/collapse-bar';
+import { IoIosPeople  } from "react-icons/io";
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
+import { BsGraphUpArrow } from "react-icons/bs";
+import { GrUserSettings } from "react-icons/gr";
+import { FaHandsHolding } from "react-icons/fa6";
+import { BsFillCartCheckFill } from "react-icons/bs";
+
 
 
 
@@ -10,7 +17,7 @@ function ARhome() {
       id: 1,
       title: "Administration Section",
       count: 150,
-      image: "/Images/Administration.png",
+      icon: <IoIosPeople style={{ fontSize:'120px', margin:'10px'}} />,
       title2: "Total Files",
       colr: 'bg-[#EC4899]',
     },
@@ -18,7 +25,7 @@ function ARhome() {
       id: 2,
       title: "Accounts Section",
       count: 12,
-      image: "/Images/Accounts.png",
+      icon: <LiaFileInvoiceDollarSolid style={{ fontSize:'120px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#FFEC3E]',
     },
@@ -26,7 +33,7 @@ function ARhome() {
       id: 3,
       title: "Revenue Section",
       count: 5,
-      image: "/Images/Revenue.png",
+      icon: <BsGraphUpArrow style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#F87171]',
     },
@@ -34,7 +41,7 @@ function ARhome() {
       id: 4,
       title: "Development Section",
       count: 12,
-      image: "/Images/Development.png",
+      icon: <GrUserSettings style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#5957E9]',
     },
@@ -42,7 +49,7 @@ function ARhome() {
       id: 5,
       title: "Community Development Section",
       count: 5,
-      image: "/Images/Environmental.png",
+      icon: <FaHandsHolding style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#5AB85D]',
     },
@@ -50,7 +57,7 @@ function ARhome() {
       id: 6,
       title: "Checked Out ",
       count: 12,
-      image: "/Images/Checked.png",
+      icon: <BsFillCartCheckFill style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#FFFFFF]',
     },
@@ -64,13 +71,13 @@ function ARhome() {
           Archive
         </h3>
         {/* Dashboard cards starts here */}
-        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-10  mt-8">
+        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-10  mt-8 ">
           {cardData.map((data) => (
             <ARhomecard
               key={data.id}
               title={data.title}
               count={data.count}
-              image={data.image}
+              icon={data.icon}
               title2={data.title2}
               colr1={data.colr}
             />
