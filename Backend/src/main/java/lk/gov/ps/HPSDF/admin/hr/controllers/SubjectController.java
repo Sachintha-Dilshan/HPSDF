@@ -1,6 +1,7 @@
 package lk.gov.ps.HPSDF.admin.hr.controllers;
 
 import jakarta.validation.Valid;
+import lk.gov.ps.HPSDF.admin.hr.models.Section;
 import lk.gov.ps.HPSDF.admin.hr.models.Subject;
 import lk.gov.ps.HPSDF.admin.hr.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class SubjectController {
             return new ResponseEntity<>(subject,HttpStatus.NOT_FOUND);
         else
             return new ResponseEntity<>(subject,HttpStatus.OK);
+    }
+
+    @GetMapping("/subjectBySectionId/{sectionId}")
+    public ResponseEntity<List<Subject>> getSubjectBySectionId(@PathVariable int sectionId){
+        return ResponseEntity.ok(subjectService.getSubjectBySectionId(sectionId));
     }
 
 

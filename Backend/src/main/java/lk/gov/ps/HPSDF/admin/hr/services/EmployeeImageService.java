@@ -28,4 +28,27 @@ public class EmployeeImageService {
     public EmployeeImage getImage(String nicNo) {
         return employeeImageRepository.findById(nicNo).orElse(null);
     }
+
+    public EmployeeImage updateImage(String nicNo, MultipartFile file) throws IOException {
+        if (file == null) {
+            throw new IllegalArgumentException("File cannot be null");
+        }
+        EmployeeImage existingImage = employeeImageRepository.findById(nicNo).orElse(null);
+        if (existingImage == null) {
+            throw new IllegalArgumentException("No image found for nicNo: " + nicNo);
+        }
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        existingImage.setImageName(fileName);
+        existingImage.setImage(file.getBytes());
+        return employeeImageRepository.save(existingImage);
+    }
+
+    public boolean deleteImage(String nicNo) {
+        if (employeeImageRepository.existsById(nicNo)) {
+            employeeImageRepository.deleteById(nicNo);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

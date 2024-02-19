@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ResourceBundle;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -23,6 +22,35 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployees());
     }
 
+    @GetMapping("/employeesCount")
+    public ResponseEntity<Long> getCount(){
+        return ResponseEntity.ok(employeeService.getCount());
+    }
+
+
+    @GetMapping("/allEmployeesData")
+    public ResponseEntity<List<Object[]>> getAllEmployeesData(){
+        return ResponseEntity.ok(employeeService.getAllEmployeesData());
+    }
+    @GetMapping("/allEmployees")
+    public ResponseEntity<List<Object[]>> getAllEmployees(){
+        return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+
+    @GetMapping("/sortEmployeesBySection/{sectionId}")
+    public ResponseEntity<List<Object[]>> sortEmployeesBySection(@PathVariable int sectionId){
+        return ResponseEntity.ok(employeeService.sortEmployeesBySection(sectionId));
+    }
+
+    @GetMapping("/sortEmployeesByNicNo/{nicNo}")
+    public ResponseEntity<Object[]> sortEmployeesByNicNo(@PathVariable String nicNo){
+        return ResponseEntity.ok(employeeService.sortEmployeesByNicNo(nicNo));
+    }
+
+    @GetMapping("/sortEmployeesByLeaveId/{leaveId}")
+    public ResponseEntity<Object[]> sortEmployeesByLeaveId(@PathVariable int leaveId){
+        return ResponseEntity.ok(employeeService.sortEmployeesByLeaveId(leaveId));
+    }
     @GetMapping("/employee/{nicNo}")
     public ResponseEntity<Employee> getEmployee(@PathVariable String nicNo){
         Employee employee = employeeService.getEmployee(nicNo);
@@ -30,6 +58,15 @@ public class EmployeeController {
             return new ResponseEntity<>(employee, HttpStatus.NOT_FOUND);
         else
             return  new ResponseEntity<>(employee,HttpStatus.OK);
+    }
+
+    @GetMapping("/employeeAllDataByNic/{nicNo}")
+    public ResponseEntity<Object[]> getEmployeeAllData(@PathVariable String nicNo){
+        Object[] employeeDTO = employeeService.getEmployeeAllDataByNic(nicNo);
+        if(employeeDTO == null)
+            return new ResponseEntity<>(employeeDTO, HttpStatus.NOT_FOUND);
+        else
+            return  new ResponseEntity<>(employeeDTO,HttpStatus.OK);
     }
 
     @PostMapping("/employee")

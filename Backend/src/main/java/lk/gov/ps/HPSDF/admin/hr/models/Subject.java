@@ -18,11 +18,11 @@ import org.springframework.jdbc.support.incrementer.AbstractColumnMaxValueIncrem
 @AllArgsConstructor(staticName = "build")
 public class Subject {
     @Id
-    @Column(name = "subject_no")
+    @Column(name = "subject_id")
     @NotBlank(message = "Subject No is required")
     private String subjectId;
 
-    @Column(name = "section_no")
+    @Column(name = "section_id")
     @NotNull(message = "Section No is required")
     private int sectionId;
 

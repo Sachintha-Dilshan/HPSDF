@@ -2,8 +2,8 @@ import React from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeePersonalData from "../components/hr-employee-personal-data";
-import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
-import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
+//import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
+//import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import HREmployeeCard from "../components/hr-employee-card";
 import { useLocation } from "react-router-dom";
 import { FloatingLabel } from "flowbite-react";
@@ -27,35 +27,35 @@ function HREmployeeProfile() {
       active: true,
       title: "Personal Data",
       icon: HiUserCircle,
-      content: <HREmployeePersonalData personalData={employee} />,
+      content: <HREmployeePersonalData nicNo={employee[0]} data={"personal"} />
     },
     {
       id: 2,
       active: true,
       title: "Job Data",
       icon: FaBriefcase,
-      content: <HREmployeeAttendantSheet />,
+      content: <HREmployeePersonalData nicNo={employee[0]} data={"job"} />
     },
     {
       id: 3,
       active: true,
       title: "Personal File",
       icon: FaFile,
-      content: <HREmployeeAttendantSheet />,
+      //content: <HREmployeeAttendantSheet />,
     },
     {
       id: 4,
       active: true,
       title: "Attendance Data",
       icon: FaCalendarCheck,
-      content: <HREmployeeAttendantSheet />,
+      //content: <HREmployeeAttendantSheet />,
     },
     {
       id: 5,
       active: true,
       title: "Leave Data",
       icon: FaUmbrellaBeach,
-      content: <HRIndividualLeaveRegister />,
+      //content: <HRIndividualLeaveRegister />,
     },
   ];
   return (
@@ -68,11 +68,10 @@ function HREmployeeProfile() {
         <div className="grid md:grid-cols-3  gap-10 items-center">
           <div>
             <HREmployeeCard
-              imageUrl={employee.image}
-              name={employee.nameWithInitials}
-              designation={employee.designation}
-              contact={employee.mobileNo}
-              key={employee.nicNo}
+              nicNo={employee[0]}
+              name={employee[1]}
+              designation={employee[3]}
+              contact={employee[2]}
             />
           </div>
           <div>
