@@ -43,11 +43,11 @@ public class EmployeeRequest {
     @Past(message = "Date must be in the past")
     private Date officeOfficialAppointmentDate;
 
-    @NotBlank(message = "Designation is required")
-    private String designation;
+    @NotNull(message = "Designation is required")
+    private int designation;
 
-    @NotBlank(message = "Service sector is required")
-    private String serviceSector;
+    @NotNull(message = "Service sector is required")
+    private int serviceSector;
 
     @NotNull(message = "Designation class is required")
     private int designationClass;

@@ -37,11 +37,52 @@ public class EmployeeImageController {
 
 
     @GetMapping("/getImage/{nicNo}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String nicNo) {
+    public ResponseEntity<?> getImage(@PathVariable String nicNo) {
         EmployeeImage image = employeeImageService.getImage(nicNo);
+        if (image == null) {
+            String message = "Image not found for NIC No: " + nicNo;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getImageName() + "\"")
                 .body(image.getImage());
+    }
+
+    @PutMapping("/updateImage/{nicNo}")
+    public ResponseEntity<String> updateImage(@RequestParam("image") MultipartFile file, @PathVariable String nicNo) {
+        String message = "";
+        try {
+            if (file == null || file.isEmpty()) {
+                message = "Please select a file to update.";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+            }
+
+            EmployeeImage updatedImage = employeeImageService.updateImage(nicNo, file);
+
+            message = "Updated the file successfully: " + file.getOriginalFilename();
+            return ResponseEntity.ok().body(message);
+        } catch (Exception e) {
+            message = "Could not update the file: " + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+        }
+    }
+
+    @DeleteMapping("/deleteImage/{nicNo}")
+    public ResponseEntity<String> deleteImage(@PathVariable String nicNo) {
+        String message = "";
+        try {
+            boolean isDeleted = employeeImageService.deleteImage(nicNo);
+            if (isDeleted) {
+                message = "Deleted image for NIC No: " + nicNo;
+                return ResponseEntity.ok().body(message);
+            } else {
+                message = "Image not found for NIC No: " + nicNo;
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+            }
+        } catch (Exception e) {
+            message = "Could not delete image for NIC No: " + nicNo;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(message);
+        }
     }
 }

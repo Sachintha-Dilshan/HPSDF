@@ -54,10 +54,10 @@ public class Employee {
     private Date officeOfficialAppointmentDate;
 
     @Column(name = "designation")
-    private String designation;
+    private int designation;
 
     @Column(name = "service_sector")
-    private String serviceSector;
+    private int serviceSector;
 
     @Column(name = "designation_class")
     private int designationClass;

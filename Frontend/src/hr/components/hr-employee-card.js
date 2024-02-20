@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "flowbite-react";
-
+import EmployeeService from "../services/add-new-employee-service";
  
 
 function HREmployeeCard(props) {
 
-  
+  const [imageUrl, setImageUrl] = useState("");
+
+
+  useEffect(() => {
+    EmployeeService.getImage(props.nicNo)
+    .then((response) => {
+      const imageUrl = URL.createObjectURL(response.data);
+      setImageUrl(imageUrl)
+    })
+    .catch((error) => {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.error
+      ) {
+        console.log(error.response.data.error);
+      }
+    });
+  }, [props.nicNo]);
+
   return (
 
       <div className="flex flex-col items-center justify-between p-5 m-5 rounded-2xl shadow-lg transform hover:scale-105 transition ease-out duration-500 cursor-pointer" > 
        
           <Avatar
-            img={process.env.PUBLIC_URL + props.imageUrl}
+            img={process.env.PUBLIC_URL + imageUrl}
             alt="Profile Image"
             size="lg"
             rounded
