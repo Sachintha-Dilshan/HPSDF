@@ -6,8 +6,8 @@ import HREmployeePersonalData from "../components/hr-employee-personal-data";
 //import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import HREmployeeCard from "../components/hr-employee-card";
 import { useLocation } from "react-router-dom";
-import { FloatingLabel } from "flowbite-react";
-import { Button } from "flowbite-react";
+//import { FloatingLabel } from "flowbite-react";
+//import { Button } from "flowbite-react";
 import { HiUserCircle } from "react-icons/hi";
 import {
   FaBriefcase,
@@ -74,7 +74,7 @@ function HREmployeeProfile() {
               contact={employee[2]}
             />
           </div>
-          <div>
+          {/* <div>
             <fieldset className="border rounded-lg p-5 flex gap-20">
               <legend>Edit</legend>
               <Button color="success" pill className="uppercase">
@@ -84,8 +84,8 @@ function HREmployeeProfile() {
                 Reset Password
               </Button>
             </fieldset>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <fieldset className="border rounded-lg p-5 flex gap-20 ">
               <legend>Change User Credentials</legend>
               <FloatingLabel
@@ -98,7 +98,7 @@ function HREmployeeProfile() {
                 Reset Password
               </Button>
             </fieldset>
-          </div>
+          </div> */}
         </div>
 
         <div className="grid grid-cols-1">

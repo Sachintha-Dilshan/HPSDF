@@ -123,13 +123,13 @@ function HRSearchEmployees() {
           <fieldset className="grid grid-col-1 lg:grid-cols-4 gap-10 border rounded-lg p-5">
             <FloatingLabel
               variant="filled"
-              label="National ID"
+              label="ජාතික හැදුනුම්පත් අංකය"
               value={nicNo}
               onChange={(event) => setNicNo(event.target.value)}
             />
             <FloatingLabel
               variant="filled"
-              label="Leave Id"
+              label="නිවාඩු අංකය"
               value={leaveId}
               onChange={(event) => setLeaveId(event.target.value)}
             />
@@ -139,7 +139,7 @@ function HRSearchEmployees() {
               value={sectionId}
               onChange={(event) => setSectionId(event.target.value)}
             >
-              <option value="">-----Select-----</option>
+              <option value="">-----අංශය-----</option>
               {sections.map((section) => {
                 return (
                   <option value={section.sectionId} key={section.sectionId}>

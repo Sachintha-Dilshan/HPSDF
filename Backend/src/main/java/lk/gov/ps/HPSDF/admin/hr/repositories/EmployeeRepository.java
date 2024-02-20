@@ -24,12 +24,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
 
     @Query(
-            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id",
+            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id  order by e.designation",
             nativeQuery = true
     )
     List<Object[]> findAllEmployees();
     @Query(
-            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id and e.section = ?1 order by e.designation asc",
+            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id and e.section = ?1",
             nativeQuery = true
     )
     List<Object[]> sortEmployeesBySection(int sectionId);

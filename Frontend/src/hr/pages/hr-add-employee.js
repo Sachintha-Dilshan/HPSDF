@@ -1078,7 +1078,7 @@ function HRAddEmployee() {
                 htmlFor="subjectId"
                 className="m-1 mb-2 text-slate-500 text-center text-base"
               >
-                විෂය අංකය
+                විෂය රාජකාරි
               </Label>
               <Select
                 id="subjectId"
@@ -1120,8 +1120,9 @@ function HRAddEmployee() {
                 onChange={handleChange}
               >
                 <option value="">---පත්වීමේ ස්වභාවය---</option>
-                <option value="ස්ථීර / වැටුප් සහිත">ස්ථීර / වැටුප් සහිත</option>
+                <option value="ස්ථීර / විශ්‍රාම වැටුප් සහිත">ස්ථීර / වැටුප් සහිත</option>
                 <option value="දෛනික">දෛනික</option>
+                <option value="අනියම්">අනියම්</option>
               </Select>
             </div>
 
@@ -1135,7 +1136,7 @@ function HRAddEmployee() {
           </fieldset>
         </div>
 
-        <div style={{ fontFamily: "Noto Sans Sinhala" }}>
+        {/* <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
             <legend className="text-slate-600">
               පද්ධති පරිශීලක ගිණුම සම්බන්ධ තොරතුරු
@@ -1157,7 +1158,7 @@ function HRAddEmployee() {
               </Select>
             </div>
           </fieldset>
-        </div>
+        </div> */}
       </div>
 
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
