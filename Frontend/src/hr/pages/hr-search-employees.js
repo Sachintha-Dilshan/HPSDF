@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HREmployeeCard from "../components/hr-employee-card";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import { FloatingLabel, Select, Button } from "flowbite-react";
 //import employees from "../../Data";
 import EmployeeService from "../services/add-new-employee-service";
+import sectionService from "../services/add-section-service";
 import { useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 function HRSearchEmployees() {
   const navigate = useNavigate();
-  const [employeeData, setEmployeeData] = React.useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [nicNo, setNicNo] = useState("");
+  const [leaveId, setLeaveId] = useState("");
+  const [sectionId, setSectionId] = useState("");
+
   const fetchAllEmployees = () => {
-    EmployeeService.getAllEmployees()
+    setEmployeeData([]);
+    EmployeeService.getEmployees()
       .then((response) => {
-        response.data.forEach((employee) => {
-          EmployeeService.getImage(employee.nicNo).then((response) => {
-            const imageUrl = URL.createObjectURL(response.data);
-            employee.image = imageUrl;
-            setEmployeeData((prev) => [...prev, employee]);
-          });
-        });
+        setEmployeeData(response.data);
       })
       .catch((error) => {
         if (
@@ -28,15 +30,82 @@ function HRSearchEmployees() {
         ) {
           console.log(error.response.data.error);
         }
+      });
+  };
+
+  const sortEmployeesByNicNo = (nicNo) => {
+    EmployeeService.sortEmployeesByNicNo(nicNo)
+      .then((response) => {
+        setEmployeeData(response.data);
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          console.log(error.response.data.error);
+        }
+      });
+  };
+
+  const sortEmployeesByLeaveId = (leaveId) => {
+    EmployeeService.sortEmployeesByLeaveId(leaveId)
+      .then((response) => {
+        setEmployeeData(response.data);
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          console.log(error.response.data.error);
+        }
+      });
+  };
+
+  const fetchAllSections = () => {
+    sectionService
+      .getAllSections()
+      .then((response) => {
+        setSections(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchAllEmployees();
+    fetchAllSections();
   }, []);
+
+  useEffect(() => {
+    if (sectionId) {
+      EmployeeService.sortEmployeesBySection(sectionId)
+        .then((response) => {
+          setEmployeeData(response.data);
+        })
+        .catch((error) => {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.error
+          ) {
+            console.log(error.response.data.error);
+          }
+        });
+    }
+  }, [sectionId]);
+
+  useEffect(() => {
+    if (nicNo) sortEmployeesByNicNo(nicNo);
+  }, [nicNo]);
+
+  useEffect(() => {
+    if (leaveId) sortEmployeesByLeaveId(leaveId);
+  }, [leaveId]);
 
   return (
     <main>
@@ -51,17 +120,41 @@ function HRSearchEmployees() {
 
         {/* Search option starts here */}
         <div className="flex items-center justify-center">
-          <fieldset className="grid grid-col-1 lg:grid-cols-5 gap-10 border rounded-lg p-5">
-            <FloatingLabel variant="filled" label="National ID" />
-            <FloatingLabel variant="filled" label="File Number" />
-            <FloatingLabel variant="filled" label="Leave ID" />
-            <Select id="sections">
-              <option className="text-center">-----Section-----</option>
-              <option>Administration</option>
-              <option>Development</option>
-              <option>Account</option>
+          <fieldset className="grid grid-col-1 lg:grid-cols-4 gap-10 border rounded-lg p-5">
+            <FloatingLabel
+              variant="filled"
+              label="ජාතික හැදුනුම්පත් අංකය"
+              value={nicNo}
+              onChange={(event) => setNicNo(event.target.value)}
+            />
+            <FloatingLabel
+              variant="filled"
+              label="නිවාඩු අංකය"
+              value={leaveId}
+              onChange={(event) => setLeaveId(event.target.value)}
+            />
+
+            <Select
+              id="sections"
+              value={sectionId}
+              onChange={(event) => setSectionId(event.target.value)}
+            >
+              <option value="">-----අංශය-----</option>
+              {sections.map((section) => {
+                return (
+                  <option value={section.sectionId} key={section.sectionId}>
+                    {section.sectionName}
+                  </option>
+                );
+              })}
             </Select>
-            <Button pill className="mx-10 h-12 uppercase">
+            <Button
+              className="uppercase w-52 h-12"
+              color="blue"
+              onClick={fetchAllEmployees}
+            >
+              {" "}
+              <FaSearch className="mr-2 h-5 w-5" />
               Search
             </Button>
           </fieldset>
@@ -70,17 +163,25 @@ function HRSearchEmployees() {
 
         {/* Employees card grid starts here */}
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 ">
-          {employeeData.map((employee) => (
-            <div onClick={() => {navigate("/HR/employeeProfile",{state: employee})}}>
-              <HREmployeeCard
-                imageUrl={employee.image}
-                name={employee.nameWithInitials}
-                designation={employee.designation}
-                contact={employee.mobileNo}
-                key={employee.nicNo}
-              />
-            </div>
-          ))}
+          {employeeData &&
+            employeeData.map((employee) => {
+              return (
+                <div
+                  onClick={() => {
+                    navigate("/HR/employeeProfile", { state: employee });
+                  }}
+                  key={employee[0]}
+                >
+                  <HREmployeeCard
+                    nicNo={employee[0]}
+                    name={employee[1]}
+                    designation={employee[3]}
+                    contact={employee[2]}
+                    // key={employee.nicNo}
+                  />
+                </div>
+              );
+            })}
         </div>
         {/* Employees card grid ends here */}
       </div>

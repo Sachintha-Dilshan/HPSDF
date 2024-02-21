@@ -6,7 +6,7 @@ import sectionService from "../services/add-section-service";
 import { FloatingLabel, Table, Button, Modal, Select } from "flowbite-react";
 
 import { HiOutlineSave, HiDocumentDuplicate } from "react-icons/hi";
-import { FaSyncAlt, FaSearchMinus } from "react-icons/fa";
+import { FaSyncAlt, FaSearchMinus, FaEraser } from "react-icons/fa";
 import {
   MdDelete,
   MdError,
@@ -69,6 +69,19 @@ function HRAddSubjects() {
   //       alert(error.message);
   //     });
   // };
+
+  useEffect(() => {
+    if (sectionId) {
+      subjectService
+        .getSubjectBySectionId(sectionId)
+        .then((response) => {
+          setSubjectData(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [sectionId]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -196,7 +209,7 @@ function HRAddSubjects() {
 
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
-            <fieldset className="border rounded-lg grid lg:grid-cols-6 p-5 md:gap-10 gap-5 m-5">
+            <fieldset className="border rounded-lg grid lg:grid-cols-7 p-5 md:gap-10 gap-5 m-5">
            
               {/* <FloatingLabel
                 variant="filled"
@@ -216,7 +229,7 @@ function HRAddSubjects() {
               />
               <FloatingLabel
                 variant="filled"
-                label="විෂය නම"
+                label="විෂය රාජකාරි"
                 value={subjectName}
                 onChange={(event) => {
                   setSubjectName(event.target.value);
@@ -258,6 +271,19 @@ function HRAddSubjects() {
                 <MdDelete className="mr-2 h-5 w-5" />
                 Delete Subject
               </Button>
+              <Button
+                  className="uppercase bg-slate-600 h-12"
+                  
+                  onClick={() => {
+                    setSectionId("");
+                    setSubjectId("");
+                    setSubjectName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Designaton
+                </Button>
             </fieldset>
           </form>
         </div>
@@ -265,7 +291,7 @@ function HRAddSubjects() {
           <Table striped hoverable>
             <Table.Head className="text-center">
               <Table.HeadCell>විෂය අංකය</Table.HeadCell>
-              <Table.HeadCell>විෂය</Table.HeadCell>
+              <Table.HeadCell>විෂය රාජකාරි</Table.HeadCell>
             </Table.Head>
 
             <Table.Body className="divide-y">

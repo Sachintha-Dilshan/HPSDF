@@ -1,6 +1,5 @@
 package lk.gov.ps.HPSDF.admin.hr.services;
 
-import lk.gov.ps.HPSDF.admin.hr.models.Section;
 import lk.gov.ps.HPSDF.admin.hr.models.Subject;
 import lk.gov.ps.HPSDF.admin.hr.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,10 @@ public class SubjectService {
     }
     public Subject getSubjectById(String id){
         return subjectRepository.findById(id).orElse(null);
+    }
+
+    public List<Subject> getSubjectBySectionId(int id){
+        return subjectRepository.findBySectionId(id);
     }
 
     public Subject updateSubject(Subject subject, String id){

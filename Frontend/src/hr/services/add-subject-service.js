@@ -12,6 +12,12 @@ const getAllSubjects = () => {
 
     
   };
+
+  const getSubjectBySectionId = id => {
+    return axios.get(API_URL + `subjectBySectionId/${id}`, { headers: AuthHeader() });
+
+    
+  };
   
   const addSubject = data => {
     return axios.post(API_URL + "subject", data, { headers: AuthHeader() } );
@@ -31,6 +37,7 @@ const getAllSubjects = () => {
   const subjectService = {
     getAllSubjects,
     getSubject,
+    getSubjectBySectionId,
     addSubject,
     updateSubject,
     removeSubject
