@@ -157,7 +157,9 @@ function HRAddSections() {
 
   const handleClick = (sectionName, sectionId) => {
     setSectionName(sectionName);
-    setSectionId(sectionId);
+    setSectionId(sectionId)
+    //setRackName(rackName);
+    //setRackId(rackId);
   };
 
   return (
@@ -194,15 +196,7 @@ function HRAddSections() {
                   <HiOutlineSave className="mr-2 h-5 w-5" />
                   Add Section
                 </Button>
-                <Button
-                  className="uppercase"
-                  color="purple"
-                  onClick={updateData}
-                >
-                  {" "}
-                  <FaSyncAlt className="mr-2 h-5 w-5" />
-                  Update Section
-                </Button>
+
                 <Button
                   className="uppercase"
                   color="failure"
@@ -212,6 +206,7 @@ function HRAddSections() {
                   <MdDelete className="mr-2 h-5 w-5" />
                   Delete Section
                 </Button>
+
                 <Button
                   className="uppercase bg-slate-600"
                   onClick={() => {
@@ -227,40 +222,123 @@ function HRAddSections() {
             </fieldset>
           </form>
         </div>
-        <div className="overflow-auto flex justify-center">
-          <Table striped hoverable>
-            <Table.Head className="text-center">
-              <Table.HeadCell>අනු අංකය</Table.HeadCell>
-              <Table.HeadCell>අංශයේ නම</Table.HeadCell>
-            </Table.Head>
+      </div>
+      <div className="flex flex-col  gap-2 m-5">
+        <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
+          Change Rack
+        </h3>
 
-            <Table.Body className="divide-y">
-              {sectionData &&
-                sectionData.map((section) => {
-                  return (
-                    <Table.Row
-                      className="bg-white dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
-                      key={section.sectionId}
-                      onClick={() =>
-                        handleClick(section.sectionName, section.sectionId)
-                      }
-                    >
-                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        {section.sectionId}
-                      </Table.Cell>
-                      <Table.Cell
-                        className="whitespace-nowrap font-medium text-gray-900 dark:text-white"
-                        key={section.sectionId}
-                      >
-                        {section.sectionName}
-                      </Table.Cell>
-                    </Table.Row>
-                  );
-                })}
-            </Table.Body>
-          </Table>
+        <div style={{ fontFamily: "Noto Sans Sinhala" }}>
+          <form onSubmit={handleSubmit}>
+            <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
+              <FloatingLabel
+                variant="filled"
+                label="අනු අංකය"
+                value={sectionId}
+                disabled
+                className="w-24 cursor-not-allowed"
+              />
+              <FloatingLabel
+                variant="filled"
+                label="රාක්කයේ නම"
+                className="w-96"
+                value={sectionName}
+                onChange={(event) => {
+                  setSectionName(event.target.value);
+                }}
+              />
+
+              <div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Rack
+                </Button>
+
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
+                  Delete Rack
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {
+                    setSectionId("");
+                    setSectionName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Rack
+                </Button>
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
+
+      <div className="flex flex-col  gap-2 m-5">
+        <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
+          Change Subject
+        </h3>
+
+        <div style={{ fontFamily: "Noto Sans Sinhala" }}>
+          <form onSubmit={handleSubmit}>
+            <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
+              <FloatingLabel
+                variant="filled"
+                label="අනු අංකය"
+                value={sectionId}
+                disabled
+                className="w-24 cursor-not-allowed"
+              />
+              <FloatingLabel
+                variant="filled"
+                label="විෂයේ නම"
+                className="w-96"
+                value={sectionName}
+                onChange={(event) => {
+                  setSectionName(event.target.value);
+                }}
+              />
+
+              <div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Subject
+                </Button>
+
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
+                  Delete Subject
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {
+                    setSectionId("");
+                    setSectionName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Subject 
+                </Button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>
           {title === "Error" && (

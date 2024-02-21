@@ -26,7 +26,7 @@ function App() {
         {/*<Route path="/" element={<Login/>}/>*/}
         <Route path="/" element={<PageLayout />}>
           <Route path="HR">
-            <Route path="dashboard" element={<ARhome />} />
+            <Route path="dashboard" element={<Araddsection />} />
             <Route path="allEmployees" element={<HRSearchEmployees />} />
             <Route path="employeeProfile" element={<HREmployeeProfile />}/>
             <Route path="addEmployee" element={<HRAddEmployee />} />    
