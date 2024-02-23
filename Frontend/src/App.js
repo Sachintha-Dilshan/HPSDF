@@ -15,8 +15,8 @@ import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
 import HRAddSubjects from "./hr/pages/hr-add-subject";
 import Login from "./pages/login";
 import NoPage from "./pages/no-page";
-import Araddsection from "./AR/pages/Araddsection";
-import ARhome from "./AR/pages/ARhome";
+import Araddsection from "./ar/pages/ar-add-section";
+import ARhome from "./ar/pages/ar-home";
 
 
 function App() {

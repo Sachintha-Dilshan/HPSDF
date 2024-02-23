@@ -1,5 +1,5 @@
 import React from 'react';
-import ARhomecard from '../component/ARhomecard';
+import ARhomecard from '../component/ar-home-card';
 import CollapseBar from '../../layouts/collapse-bar';
 import { IoIosPeople  } from "react-icons/io";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
