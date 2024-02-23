@@ -20,7 +20,7 @@ function ARhome() {
       icon: <IoIosPeople style={{ fontSize:'120px', margin:'10px'}} />,
       title2: "Total Files",
       colr: 'bg-[#EC4899]',
-      url: "/HR/allEmployees"
+      url: ""
 
     },
     {
@@ -30,7 +30,7 @@ function ARhome() {
       icon: <LiaFileInvoiceDollarSolid style={{ fontSize:'120px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#FFEC3E]',
-      url: "/HR/allEmployees"
+      url: ""
     },
     {
       id: 3,
@@ -39,7 +39,7 @@ function ARhome() {
       icon: <BsGraphUpArrow style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#F87171]',
-      url: "/HR/allEmployees"
+      url: ""
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ function ARhome() {
       icon: <GrUserSettings style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#5957E9]',
-      url: "/HR/allEmployees"
+      url: ""
     },
     {
       id: 5,
@@ -57,7 +57,7 @@ function ARhome() {
       icon: <FaHandsHolding style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#5AB85D]',
-      url: "/HR/allEmployees"
+      url: ""
     },
     {
       id: 6,
@@ -66,7 +66,7 @@ function ARhome() {
       icon: <BsFillCartCheckFill style={{ fontSize:'100px', margin:'10px' }} />,
       title2: "Total Files",
       colr: 'bg-[#FFFFFF]',
-      url: "/HR/allEmployees"
+      url: ""
     },
   ];
   return (
