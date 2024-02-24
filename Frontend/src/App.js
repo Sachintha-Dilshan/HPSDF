@@ -6,7 +6,7 @@ import HREmployeeProfile from "./hr/pages/hr-employee-profile";
 import HRDashboard from "./hr/pages/hr-dashboard";
 import HREmployeeLeaveRequest from "./hr/pages/hr-leave-request";
 import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
-import HRLeaveDashboard from "./hr/leave/pages/hr-leave-dashboard";
+//import HRLeaveDashboard from "./hr/leave/pages/hr-leave-dashboard";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import HRAddSections from "./hr/pages/hr-add-section";
@@ -15,8 +15,7 @@ import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
 import HRAddSubjects from "./hr/pages/hr-add-subject";
 import Login from "./pages/login";
 import NoPage from "./pages/no-page";
-import Araddsection from "./ar/pages/ar-add-section";
-import ARhome from "./ar/pages/ar-home";
+
 
 
 function App() {
