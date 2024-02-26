@@ -11,6 +11,8 @@ import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-she
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import FileCrud from "./ar/pages/ar-add-files";
 import ARHome from "./ar/pages/ar-home";
+import HRLeaveAddPastRecords from "./hr/leave/pages/hr-leave-add-past-records";
+import HRLeaveApplyLeave from "./hr/leave/pages/hr-leave-apply-leave";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
@@ -37,6 +39,13 @@ function App() {
               element={<HREmployeesAttendanceSheet />}
             />
             <Route path="addLeaves" element={<HRLeaveAddLeaves />} />
+            <Route
+              path="employeesAttendance"
+              element={<HREmployeesAttendanceSheet />}
+            />
+            <Route path="addLeaves" element={<HRLeaveAddLeaves />} />
+            <Route path="addPastRecords" element={<HRLeaveAddPastRecords />} />
+            <Route path="applyLeave" element={<HRLeaveApplyLeave />} />
             <Route path="addSections" element={<HRAddSections />} />
             <Route path="addDesignations" element={<HRAddDesignations />} />
             <Route path="addServiceSectors" element={<HRAddServiceSectors />} />

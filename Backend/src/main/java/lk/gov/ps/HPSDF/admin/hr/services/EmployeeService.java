@@ -19,6 +19,10 @@ public class EmployeeService {
     public long getCount(){
         return employeeRepository.count();
     }
+
+    public String getEmployeeName(int leaveId){
+        return employeeRepository.findEmployeeName(leaveId);
+    }
     public List<Object[]> getAllEmployeesData(){
         return employeeRepository.findAllEmployeesData();
     }
@@ -29,6 +33,11 @@ public class EmployeeService {
     public List<Object[]> sortEmployeesBySection(int sectionId){
         return employeeRepository.sortEmployeesBySection(sectionId);
     }
+
+    public Object[] getEmployeeLeavePersonalData(int  leaveId){
+        return employeeRepository.findEmployeeLeavePersonalData(leaveId);
+    }
+
 
     public Object[] sortEmployeesByNicNo(String  nicNo){
         return employeeRepository.sortEmployeesByNicNo(nicNo);

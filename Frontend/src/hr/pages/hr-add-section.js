@@ -170,32 +170,31 @@ function HRAddSections() {
 
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
-            <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
+
+            <fieldset className="border rounded-lg grid lg:grid-cols-6 p-5 md:gap-10 gap-5 m-5">
               <FloatingLabel
                 variant="filled"
                 label="අනු අංකය"
                 value={sectionId}
                 disabled
-                className="w-24 cursor-not-allowed"
+                className="cursor-not-allowed bg-slate-200"
               />
               <FloatingLabel
                 variant="filled"
                 label="අංශයේ නම"
-                className="w-96"
                 value={sectionName}
                 onChange={(event) => {
                   setSectionName(event.target.value);
                 }}
               />
 
-              <div className="grid lg:grid-cols-4 gap-5">
-                <Button className="uppercase" type="submit">
+                <Button className="uppercase h-12" type="submit">
                   {" "}
                   <HiOutlineSave className="mr-2 h-5 w-5" />
                   Add Section
                 </Button>
                 <Button
-                  className="uppercase"
+                  className="uppercase h-12"
                   color="purple"
                   onClick={updateData}
                 >
@@ -204,7 +203,7 @@ function HRAddSections() {
                   Update Section
                 </Button>
                 <Button
-                  className="uppercase"
+                  className="uppercase h-12"
                   color="failure"
                   onClick={deleteData}
                 >
@@ -213,7 +212,7 @@ function HRAddSections() {
                   Delete Section
                 </Button>
                 <Button
-                  className="uppercase bg-slate-600"
+                  className="uppercase bg-slate-600 h-12"
                   onClick={() => {
                     setSectionId("");
                     setSectionName("");
@@ -223,7 +222,6 @@ function HRAddSections() {
                   <FaEraser className="mr-2 h-5 w-5" />
                   Clear Section
                 </Button>
-              </div>
             </fieldset>
           </form>
         </div>
