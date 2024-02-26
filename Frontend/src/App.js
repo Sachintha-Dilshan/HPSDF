@@ -9,10 +9,10 @@ import PageLayout from "./layouts/page-layout";
 //import HRLeaveDashboard from "./hr/leave/pages/hr-leave-dashboard";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
-import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
+
 import FileCrud from "./ar/pages/ar-add-files";
 import ArHome from "./ar/pages/ar-home-test";
-import HRAddSections from "./hr/pages/hr-add-section";
+
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
