@@ -9,7 +9,8 @@ import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
 //import HRLeaveDashboard from "./hr/leave/pages/hr-leave-dashboard";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
-import FileCrud from "./ar/pages/ar-crud";
+import FileCrud from "./ar/pages/ar-add-files";
+import ArHome from "./ar/pages/ar-home-test";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
@@ -20,8 +21,9 @@ import NoPage from "./pages/no-page";
 function App() {
   return (
     <div className="App" style={{ fontFamily: "Noto Sans Sinhala" }}>
+      
       <Routes>
-        {/* <Route path="/" element={<Login/>}/> */}
+         <Route path="/" element={<Login/>}/> 
         <Route path="/" element={<PageLayout />}>
           <Route path="HR">
             <Route path="dashboard" element={<HRDashboard />} />
@@ -37,12 +39,14 @@ function App() {
             <Route path="addServiceSectors" element={<HRAddServiceSectors />} /> 
           </Route>
           <Route path="AR">
-            <Route path="fileCrud" element={<FileCrud />}/>
+            <Route path="fileCrud/:id" element={<FileCrud />}/>
+            <Route path="test" element={<ArHome/>}/>
           </Route>   
           <Route path="*" element={<NoPage />} />
         </Route>
         <Route path="*" element={<NoPage />} />
       </Routes>
+      
     </div>
   );
 }

@@ -102,7 +102,7 @@ function NavigationBar() {
         </NavbarLink>
 
         <NavbarLink
-          onClick={() => navigate("archive")}
+          onClick={() => navigate("AR/test")}
           className="cursor-pointer"
         >
           <span className="block text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300">
