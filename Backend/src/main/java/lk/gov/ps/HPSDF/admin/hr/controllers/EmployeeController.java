@@ -27,6 +27,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getCount());
     }
 
+    @GetMapping("/employeeName/{leaveId}")
+    public ResponseEntity<String> getEmployeeName(@PathVariable int leaveId){
+        return ResponseEntity.ok(employeeService.getEmployeeName(leaveId));
+    }
+
 
     @GetMapping("/allEmployeesData")
     public ResponseEntity<List<Object[]>> getAllEmployeesData(){
@@ -42,6 +47,10 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.sortEmployeesBySection(sectionId));
     }
 
+    @GetMapping("/getEmployeeLeavePersonalData/{leaveId}")
+    public ResponseEntity<Object[]> getEmployeeLeavePersonalData(@PathVariable int leaveId){
+        return ResponseEntity.ok(employeeService.getEmployeeLeavePersonalData(leaveId));
+    }
     @GetMapping("/sortEmployeesByNicNo/{nicNo}")
     public ResponseEntity<Object[]> sortEmployeesByNicNo(@PathVariable String nicNo){
         return ResponseEntity.ok(employeeService.sortEmployeesByNicNo(nicNo));
