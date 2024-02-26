@@ -149,7 +149,7 @@ function HRSearchEmployees() {
               })}
             </Select>
             <Button
-              className="uppercase w-52 h-12"
+              className="uppercase h-12"
               color="blue"
               onClick={fetchAllEmployees}
             >

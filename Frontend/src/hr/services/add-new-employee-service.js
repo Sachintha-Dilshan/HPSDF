@@ -11,6 +11,14 @@ const getCount = () => {
   return axios.get(API_URL + "employeesCount", { headers: AuthHeader() });
 };
 
+const getEmployeeName = (leaveId) => {
+  return axios.get(API_URL + `employeeName/${leaveId}`, { headers: AuthHeader() });
+};
+
+const getEmployeeLeavePersonalData = (leaveId) => {
+  return axios.get(API_URL + `getEmployeeLeavePersonalData/${leaveId}`, { headers: AuthHeader() });
+};
+
 const getAllEmployeesData = () => {
   return axios.get(API_URL + "allEmployeesData", { headers: AuthHeader() });
 };
@@ -76,6 +84,8 @@ const deleteImage = (nicNo) => {
 const EmployeeService = {
   getAllEmployees,
   getCount,
+  getEmployeeName,
+  getEmployeeLeavePersonalData,
   getAllEmployeesData,
   getEmployees,
   sortEmployeesBySection,

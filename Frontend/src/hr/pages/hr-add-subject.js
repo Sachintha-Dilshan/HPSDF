@@ -282,7 +282,7 @@ function HRAddSubjects() {
                 >
                   {" "}
                   <FaEraser className="mr-2 h-5 w-5" />
-                  Clear Designaton
+                  Clear Subject
                 </Button>
             </fieldset>
           </form>

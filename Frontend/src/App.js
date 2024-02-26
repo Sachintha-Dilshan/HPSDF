@@ -9,6 +9,8 @@ import HROnLeaveToday from "./hr/pages/hr-on-leave-today";
 //import HRLeaveDashboard from "./hr/leave/pages/hr-leave-dashboard";
 import HREmployeesAttendanceSheet from "./hr/leave/pages/hr-leave-attendance-sheet";
 import HRLeaveAddLeaves from "./hr/leave/pages/hr-leave-add-leaves";
+import HRLeaveAddPastRecords from "./hr/leave/pages/hr-leave-add-past-records";
+import HRLeaveApplyLeave from "./hr/leave/pages/hr-leave-apply-leave";
 import HRAddSections from "./hr/pages/hr-add-section";
 import HRAddDesignations from "./hr/pages/hr-add-designation";
 import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
@@ -32,6 +34,8 @@ function App() {
             <Route path="onLeaveToday" element={<HROnLeaveToday />} />
             <Route path="employeesAttendance" element={<HREmployeesAttendanceSheet />} />
             <Route path="addLeaves" element={<HRLeaveAddLeaves />} /> 
+            <Route path="addPastRecords" element={<HRLeaveAddPastRecords />} /> 
+            <Route path="applyLeave" element={<HRLeaveApplyLeave/>} />
             <Route path="addSections" element={<HRAddSections />} />
             <Route path="addDesignations" element={<HRAddDesignations />} /> 
             <Route path="addServiceSectors" element={<HRAddServiceSectors />} /> 

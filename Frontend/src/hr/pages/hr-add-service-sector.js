@@ -175,31 +175,30 @@ function HRAddServiceSectors() {
 
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
           <form onSubmit={handleSubmit}>
-            <fieldset className="border rounded-lg flex items-center justify-center lg:flex-row  flex-col p-5 md:gap-10 gap-5 m-5">
+          <fieldset className="border rounded-lg grid lg:grid-cols-6 p-5 md:gap-10 gap-5 m-5">
+
               <FloatingLabel
                 variant="filled"
                 label="අනු අංකය"
                 value={serviceSectorId}
                 disabled
-                className="w-24 cursor-not-allowed"
+                className="cursor-not-allowed bg-slate-200"
               />
               <FloatingLabel
                 variant="filled"
                 label="තනතුර අයත් වන සේවා කාණ්ඩය"
-                className="w-96"
                 value={serviceSectorName}
                 onChange={(event) => {
                   setServiceSectorName(event.target.value);
                 }}
               />
-              <div className="grid lg:grid-cols-4 gap-5">
-                <Button className="uppercase" type="submit">
+                <Button className="uppercase h-12" type="submit">
                   {" "}
                   <HiOutlineSave className="mr-2 h-5 w-5" />
                   Add Service Sector
                 </Button>
                 <Button
-                  className="uppercase"
+                  className="uppercase h-12"
                   color="purple"
                   onClick={updateData}
                 >
@@ -208,7 +207,7 @@ function HRAddServiceSectors() {
                   Update Service Sector
                 </Button>
                 <Button
-                  className="uppercase"
+                  className="uppercase h-12"
                   color="failure"
                   onClick={deleteData}
                 >
@@ -217,13 +216,12 @@ function HRAddServiceSectors() {
                   Delete Service Sector
                 </Button>
                 <Button
-                  className="uppercase bg-slate-600"
+                  className="uppercase bg-slate-600 h-12"
                   onClick={() => {setServiceSectorId(""); setServiceSectorName("")}}
                 >
                   {" "}
                   <FaEraser className="mr-2 h-5 w-5" /> Clear Service Sector
                 </Button>
-              </div>
             </fieldset>
           </form>
         </div>

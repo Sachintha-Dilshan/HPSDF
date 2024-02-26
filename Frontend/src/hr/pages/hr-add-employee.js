@@ -447,7 +447,7 @@ function HRAddEmployee() {
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.salaryIncrementDate === "") {
-      setMessage("වටුප් වර්ධක දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
+      setMessage("වැටුප් වර්ධක දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.salaryCode === "") {
