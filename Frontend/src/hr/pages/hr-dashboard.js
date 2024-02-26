@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import HRDashboardCard from "../components/hr-dashboard-card";
 import Tab from "../../components/tabs";
@@ -7,14 +7,32 @@ import TimeLine from "../../components/time-line";
 import { FaCalendarCheck, FaUmbrellaBeach, FaCheckDouble,FaBell} from "react-icons/fa";
 import HRAttendanceTracker from "../components/hr-employee-attendance-sheet";
 import HRLeaveRegister from "../components/hr-employee-leave-register";
+import EmployeeService from "../services/add-new-employee-service";
+
 
 
 function HRDashboard() {
+  const [employeeCount, setEmployeeCount] = useState(0);
+  useEffect(() => {
+      EmployeeService.getCount()
+      .then((response) => {
+        setEmployeeCount(response.data);
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          console.log(error.response.data.error);
+        }
+      });
+    }, []);
   const cardData = [
     {
       id: 1,
       title: "Total Employees",
-      count: 150,
+      count: employeeCount,
       image: "/Images/total-employees.jpg",
       url: "/HR/allEmployees"
     },

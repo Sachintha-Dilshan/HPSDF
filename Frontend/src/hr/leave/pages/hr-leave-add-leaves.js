@@ -5,7 +5,7 @@ import LeaveTypeService from "../services/leave-type-service";
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 
 import { HiOutlineSave } from "react-icons/hi";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaSyncAlt, FaEraser } from "react-icons/fa";
 import { MdDelete, MdError, MdDoneOutline } from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
 
@@ -181,28 +181,42 @@ function HRLeaveAddLeaves() {
                 }}
               />
 
-              <Button className="uppercase" type="submit">
-                {" "}
-                <HiOutlineSave className="mr-2 h-5 w-5" />
-                Add Leave
-              </Button>
-              <Button
-                className="uppercase"
-                color="purple"
-                onClick={updateData}
-              >
-                {" "}
-                <FaSyncAlt className="mr-2 h-5 w-5" />
-                Update Leave
-              </Button>
-              <Button
-                className="uppercase"
-                color="failure"
-                onClick={deleteData}
-              >
-                {" "}
-                <MdDelete className="mr-2 h-5 w-5" /> Delete Leave
-              </Button>
+<div className="grid lg:grid-cols-4 gap-5">
+                <Button className="uppercase" type="submit">
+                  {" "}
+                  <HiOutlineSave className="mr-2 h-5 w-5" />
+                  Add Leave
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="purple"
+                  onClick={updateData}
+                >
+                  {" "}
+                  <FaSyncAlt className="mr-2 h-5 w-5" />
+                  Update Leave
+                </Button>
+                <Button
+                  className="uppercase"
+                  color="failure"
+                  onClick={deleteData}
+                >
+                  {" "}
+                  <MdDelete className="mr-2 h-5 w-5" />
+                  Delete Leave
+                </Button>
+                <Button
+                  className="uppercase bg-slate-600"
+                  onClick={() => {
+                    setLeaveId("");
+                    setLeaveName("");
+                  }}
+                >
+                  {" "}
+                  <FaEraser className="mr-2 h-5 w-5" />
+                  Clear Leave
+                </Button>
+              </div>
             </fieldset>
           </form>
         </div>

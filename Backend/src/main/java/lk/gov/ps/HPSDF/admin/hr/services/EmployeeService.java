@@ -16,8 +16,34 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public long getCount(){
+        return employeeRepository.count();
+    }
+    public List<Object[]> getAllEmployeesData(){
+        return employeeRepository.findAllEmployeesData();
+    }
+
+    public List<Object[]> getAllEmployees(){
+        return employeeRepository.findAllEmployees();
+    }
+    public List<Object[]> sortEmployeesBySection(int sectionId){
+        return employeeRepository.sortEmployeesBySection(sectionId);
+    }
+
+    public Object[] sortEmployeesByNicNo(String  nicNo){
+        return employeeRepository.sortEmployeesByNicNo(nicNo);
+    }
+
+    public Object[] sortEmployeesByLeaveId(int  leaveId){
+        return employeeRepository.sortEmployeesByLeaveId(leaveId);
+    }
+
     public Employee getEmployee(String nicNo){
         return employeeRepository.findById(nicNo).orElse(null);
+    }
+
+    public Object[] getEmployeeAllDataByNic(String nicNo){
+        return employeeRepository.findEmployeesByNic(nicNo);
     }
 
     public Employee addEmployee(Employee employee){
@@ -68,4 +94,5 @@ public class EmployeeService {
         }
 
     }
+
 }
