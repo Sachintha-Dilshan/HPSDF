@@ -11,7 +11,7 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 
 
 
-function ARhome() {
+function ARHome() {
   const cardData = [
     {
       id: 1,
@@ -97,4 +97,4 @@ function ARhome() {
   )
 }
 
-export default ARhome
+export default ARHome
