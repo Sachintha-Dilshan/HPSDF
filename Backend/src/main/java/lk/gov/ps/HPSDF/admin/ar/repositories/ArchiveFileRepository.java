@@ -17,4 +17,10 @@ public interface ArchiveFileRepository extends JpaRepository<ArchiveFile,Long> {
     List<ArchiveFile> findTop5ByOrderByIdDesc(Long sectionId,org.springframework.data.domain.Pageable pageable);
     //@Query("SELECT f FROM ArchiveFile f WHERE f.id = :fileId AND f.archiveSection.id = :sectionId")
     Optional<ArchiveFile> findByIdAndArchiveSection_Id(Long fileId, Long sectionId);
+
+    @Query("SELECT COUNT(ag) FROM ArchiveFile ag WHERE ag.archiveSection.id = ?1")
+    int getFileCountsBySection(Long sectionId);
+    @Query("SELECT COUNT(ag) FROM ArchiveFile ag WHERE ag.archiveSection.is = ?1")
+    int getFileCountsBySection(Long sectionId);
+
 }

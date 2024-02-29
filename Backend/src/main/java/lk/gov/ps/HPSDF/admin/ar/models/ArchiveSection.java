@@ -25,6 +25,12 @@ public class ArchiveSection {
     @Column(name = "section_name")
     private String sectionName;
 
+    @Column(name="section_color")
+    private String sectionColor;
+
+    @Column(name="section_icon")
+    private String sectionIcon;
+
     @OneToMany(mappedBy = "archiveSection",cascade = CascadeType.REMOVE)//relationship between Section and subjects
     List<ArchiveSubject> subjects=new ArrayList<>();
     @JsonIgnore

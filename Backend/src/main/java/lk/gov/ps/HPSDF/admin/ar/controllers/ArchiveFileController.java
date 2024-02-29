@@ -44,6 +44,7 @@ public class ArchiveFileController {
     public ResponseEntity<List<ArchiveFile>> getRecentFiles(@PathVariable Long sectionId){
         return ResponseEntity.ok(archiveFileService.getRecentFiles(sectionId));
     }
+    @GetMapping("/")
 
     @PostMapping("/file")
     public ResponseEntity<String> saveArchiveFile(@RequestBody ArchiveSaveFileDTO fileDTO){

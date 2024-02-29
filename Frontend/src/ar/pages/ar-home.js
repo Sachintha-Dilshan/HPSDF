@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { Link } from 'react-router-dom';
+import sectionService from '../services/add-section-service';
 import ARhomecard from '../component/ar-home-card';
 import CollapseBar from '../../layouts/collapse-bar';
 import { IoIosPeople  } from "react-icons/io";
@@ -12,6 +14,22 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 
 
 function ARHome() {
+  const [sections,setSections]=useState([]);
+    
+  const fetchData=()=>{
+    sectionService.getAllSections()
+    .then((response)=>{
+        setSections(response.data);
+        console.log("check axios..........");
+        console.log(response.data);
+    })
+    .catch((e)=>{
+        console.log("hhhhhhhhhhhh");
+        console.log(e);
+    })
+  }
+  React.useEffect(()=>{fetchData();},[]);
+  
   const cardData = [
     {
       id: 1,
@@ -78,18 +96,30 @@ function ARHome() {
           Archive
         </h3>
         {/* Dashboard cards starts here */}
-        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-10  mt-8 ">
-          {cardData.map((data) => (
+        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-8  mt-8 mx-20">
+          {sections.map((section) => (
+            <Link key={section.id} to={`/AR/fileCrud/${section.id}`}>         
             <ARhomecard
-              key={data.id}
-              title={data.title}
-              count={data.count}
-              icon={data.icon}
-              title2={data.title2}
-              colr1={data.colr}
-              url={data.url}
+              key={section.id}
+              title={section.sectionName}
+              count={section.count}
+              icon={section.sectionIcon}
+              colr1={section.sectionColor}
             />
+            </Link>
           ))}
+
+            <Link  to={`/AR/archeckedOut`}>         
+            <ARhomecard
+             // key={section.id}
+              title={"Checked Out Files"}
+              count={0}
+              icon={"BsFillCartCheckFil"}
+              colr1={'bg-[#FFFFFF]'}
+            />
+            </Link>
+          
+          
         </div>
       </div>
 

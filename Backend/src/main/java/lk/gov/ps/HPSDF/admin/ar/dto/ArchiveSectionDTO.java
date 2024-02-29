@@ -8,7 +8,9 @@ import lombok.Setter;
 public class ArchiveSectionDTO {
     private Long id;
     private String sectionName;
-
+    private String sectionColor;
+    private String sectionIcon;
+    private int count;
     public ArchiveSectionDTO() {
     }
 }

@@ -19,6 +19,8 @@ import HRAddServiceSectors from "./hr/pages/hr-add-service-sector";
 import HRAddSubjects from "./hr/pages/hr-add-subject";
 import Login from "./pages/login";
 import NoPage from "./pages/no-page";
+import ArHome from "./ar/pages/ar-home-test";
+import ARCheckedOutFiles from "./ar/pages/ar-checked-out-files";
 
 function App() {
   return (
@@ -39,10 +41,7 @@ function App() {
               element={<HREmployeesAttendanceSheet />}
             />
             <Route path="addLeaves" element={<HRLeaveAddLeaves />} />
-            <Route
-              path="employeesAttendance"
-              element={<HREmployeesAttendanceSheet />}
-            />
+            <Route path="employeesAttendance" element={<HREmployeesAttendanceSheet />}  />
             <Route path="addLeaves" element={<HRLeaveAddLeaves />} />
             <Route path="addPastRecords" element={<HRLeaveAddPastRecords />} />
             <Route path="applyLeave" element={<HRLeaveApplyLeave />} />
@@ -54,6 +53,8 @@ function App() {
           <Route path="AR">
             <Route path="fileCrud/:id" element={<FileCrud />} />
             <Route path="archiveDashboard" element={<ARHome />} />
+            <Route path="testArHome" element={<ArHome/>}/>
+            <Route path="checkedOut" element={<ARCheckedOutFiles/>}/> 
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>
