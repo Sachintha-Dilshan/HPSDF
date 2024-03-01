@@ -27,7 +27,7 @@ function LeaveCollapseBar() {
               <IoCalendarSharp className="inline-block text-2xl" /> Leave
             </li>
             <ul className="ml-5" style={{ display: showEmployee ? "block" : "none" }}>
-              <Link to="/HR/applyLeave">
+              <Link to="/HR/Leave/applyLeave">
                 <li className="my-2">
                   <IoAddOutline className="inline-block text-2xl" /> Apply Leave
                 </li>
@@ -46,13 +46,13 @@ function LeaveCollapseBar() {
               className="ml-5"
               style={{ display: showSettings ? "block" : "none" }}
             >
-              <Link to="/HR/addLeaves">
+              <Link to="/HR/Leave/addLeaves">
                 <li className="my-2">
                   <IoAddOutline className="inline-block text-2xl" />
                   Edit Leave Types
                 </li>
               </Link>
-              <Link to="/HR/addPastRecords">
+              <Link to="/HR/Leave/addPastRecords">
                 <li className="my-2">
                   <IoAddOutline className="inline-block text-2xl" />
                   Edit Past Leaves

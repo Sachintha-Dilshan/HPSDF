@@ -5,7 +5,6 @@ import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
 import { FaHome, FaArchive, FaStoreAlt, FaCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth-service";
-import userRoles from "../data/user-roles";
 
 function NavigationBar() {
   const navigate = useNavigate();
@@ -55,14 +54,7 @@ function NavigationBar() {
           <Dropdown.Item
             icon={HiViewGrid}
             onClick={() => {
-              const currentUserRole = JSON.parse(
-                localStorage.getItem("user")
-              ).roles;
-              if (currentUserRole.includes(userRoles.hrAdmin))
-                navigate("/HR/dashboard");
-              else if (currentUserRole.includes(userRoles.leaveAdmin))
-                navigate("/HR/Leave/Dashboard");
-              else navigate("nopage");
+              navigate("/dashboard");
             }}
           >
             {" "}
@@ -92,7 +84,7 @@ function NavigationBar() {
       </div>
       <Navbar.Collapse>
         <NavbarLink
-          onClick={() => navigate("HR/dashboard")}
+          onClick={() => navigate("/dashboard")}
           className="cursor-pointer"
           active
         >

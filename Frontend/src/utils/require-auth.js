@@ -33,7 +33,7 @@ const RequireAuth = ({ children, userroles }) => {
   return (
     <>
       {openModal && (
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal show={openModal}>
           <Modal.Header>
             <PiProhibitFill className="inline-block text-red-500 text-4xl mr-5" />
             Prohibited
