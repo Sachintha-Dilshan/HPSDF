@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth-service";
 
@@ -8,13 +8,13 @@ import Alerts from "../components/alert";
 
 function Login() {
   let navigate = useNavigate();
-  //const form = React.useRef();
+  // const form = React.useRef();
 
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [usernameError, setUsernameError] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -37,8 +37,8 @@ function Login() {
     else {
       AuthService.login(username, password).then(
         () => {
-          navigate("/HR/dashboard");
-          window.location.reload();
+          navigate("/dashboard")
+          // window.location.reload();
         },
         (error) => {
           const resMessage =
@@ -56,10 +56,12 @@ function Login() {
 
   return (
     <div
-      className="flex items-center justify-center h-screen "
+      className="flex items-center justify-center h-screen"
       style={{
         backgroundImage:
-          process.env.PUBLIC_URL + "url('/Images/background.png')",
+          process.env.PUBLIC_URL + "url('/Images/background.jpeg')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <form
@@ -67,7 +69,7 @@ function Login() {
         onSubmit={handleLogin}
       >
         <div className="flex flex-col items-center justify-center gap-5">
-          <h2 className="text-2xl text-slate-700 uppercase text-center">
+          <h2 className="text-2xl text-slate-700 uppercase text-center font-bold">
             Hakmana Pradeshiya Sabha
           </h2>
           <div className="flex text-center justify-center">
@@ -114,7 +116,7 @@ function Login() {
           <Label htmlFor="remember">Remember me</Label>
         </div>
         {/* <Link to="/HR/dashboard"> */}
-        <Button type="submit" className="uppercase w-full">
+        <Button type="submit" className="uppercase w-full font-bold">
           Submit
         </Button>
         {/* </Link> */}

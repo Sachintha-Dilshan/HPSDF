@@ -33,7 +33,7 @@ function HRDashboard() {
       id: 1,
       title: "Total Employees",
       count: employeeCount,
-      image: "/Images/total-employees.jpg",
+      image: "/Images/total-employees.jpeg",
       url: "/HR/allEmployees"
     },
     {

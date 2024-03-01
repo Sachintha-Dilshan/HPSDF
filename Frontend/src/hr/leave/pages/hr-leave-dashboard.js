@@ -15,7 +15,7 @@ function HRLeaveDashboard() {
       id: 1,
       title: "Employees Today",
       count: 100,
-      image: "/Images/total-employees.jpg",
+      image: "/Images/total-employees.jpeg",
       url: "/HR/employeesAttendance"
     },
     {

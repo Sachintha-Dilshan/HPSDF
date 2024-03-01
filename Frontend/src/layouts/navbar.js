@@ -2,9 +2,10 @@
 import React from "react";
 import { Avatar, Dropdown, Navbar, NavbarLink } from "flowbite-react";
 import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
-import { FaHome, FaArchive, FaStoreAlt, FaCalendarCheck} from "react-icons/fa";
-import {useNavigate } from "react-router-dom";
+import { FaHome, FaArchive, FaStoreAlt, FaCalendarCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth-service";
+import userRoles from "../data/user-roles";
 
 function NavigationBar() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function NavigationBar() {
         >
           <Dropdown.Header>
             <span className="block text-sm font-bold">
-              එම්.එස්. හිරිමුතුගොඩ 
+              එම්.එස්. හිරිමුතුගොඩ
             </span>
             <span className="block truncate text-sm font-medium">
               hirimuthu@gmail.com
@@ -53,7 +54,16 @@ function NavigationBar() {
 
           <Dropdown.Item
             icon={HiViewGrid}
-            onClick={() => navigate("HR/dashboard")}
+            onClick={() => {
+              const currentUserRole = JSON.parse(
+                localStorage.getItem("user")
+              ).roles;
+              if (currentUserRole.includes(userRoles.hrAdmin))
+                navigate("/HR/dashboard");
+              else if (currentUserRole.includes(userRoles.leaveAdmin))
+                navigate("/HR/Leave/Dashboard");
+              else navigate("nopage");
+            }}
           >
             {" "}
             Dashboard{" "}
@@ -87,7 +97,7 @@ function NavigationBar() {
           active
         >
           <span className="text-white text-center uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white md:bg-cyan-800 md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
-          <FaHome className="text-xl text-white mr-2 inline-block"/>
+            <FaHome className="text-xl text-white mr-2 inline-block" />
             Home
           </span>
         </NavbarLink>
@@ -97,7 +107,7 @@ function NavigationBar() {
           className="cursor-pointer"
         >
           <span className="text-center hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
-          <FaCalendarCheck className="text-xl text-white mr-2 inline-block" />
+            <FaCalendarCheck className="text-xl text-white mr-2 inline-block" />
             Leaves
           </span>
         </NavbarLink>
@@ -107,7 +117,7 @@ function NavigationBar() {
           className="cursor-pointer"
         >
           <span className="text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
-          <FaArchive className="text-lg text-white mr-2 inline-block" />
+            <FaArchive className="text-lg text-white mr-2 inline-block" />
             Archive
           </span>
         </NavbarLink>
@@ -116,7 +126,7 @@ function NavigationBar() {
           className="cursor-pointer"
         >
           <span className="text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
-          <FaStoreAlt  className="text-xl text-white mr-2 inline-block" />
+            <FaStoreAlt className="text-xl text-white mr-2 inline-block" />
             Store
           </span>
         </NavbarLink>

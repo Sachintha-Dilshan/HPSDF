@@ -51,7 +51,6 @@ function HRAddEmployee() {
   const [subjects, setSubjects] = useState([]);
   const [imageName, setImageName] = useState([]);
 
-
   const [employeeData, setEmployeeData] = useState({
     nicNo: "",
     address: "",
@@ -71,6 +70,7 @@ function HRAddEmployee() {
     natureOfAppointment: "",
     officeOfficialAppointmentDate: "",
     permanent: "",
+    salaryCodePrefix: "",
     salaryCode: "",
     salaryIncrementDate: "",
     section: "",
@@ -78,7 +78,7 @@ function HRAddEmployee() {
     subjectNo: "",
     wopNo: "",
     sectionAssignedDate: "",
-    leaveId: ""
+    leaveId: "",
   });
 
   const fetchData = () => {
@@ -147,7 +147,7 @@ function HRAddEmployee() {
 
     // reader.readAsDataURL(uploadedImage);
     setImageUrl(URL.createObjectURL(event.target.files[0]));
-    setImageName((event)=> event.target);
+    setImageName((event) => event.target);
   };
 
   const handleChange = (event) => {
@@ -158,8 +158,6 @@ function HRAddEmployee() {
         [name]: value,
       };
     });
-
-    console.log(employeeData.dob);
   };
 
   const resetEmployeeData = () => {
@@ -182,6 +180,7 @@ function HRAddEmployee() {
       natureOfAppointment: "",
       officeOfficialAppointmentDate: "",
       permanent: "",
+      salaryCodePrefix: "",
       salaryCode: "",
       salaryIncrementDate: "",
       section: "",
@@ -189,7 +188,7 @@ function HRAddEmployee() {
       subjectNo: "",
       wopNo: "",
       sectionAssignedDate: "",
-      leaveId: ""
+      leaveId: "",
     });
     setSearchId("");
     setImage("");
@@ -281,24 +280,15 @@ function HRAddEmployee() {
       setMessage("වටුප් වර්ධක දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
-    } else if (employeeData.salaryCode === "") {
+    } else if (
+      employeeData.salaryCode === "" ||
+      employeeData.salaryCodePrefix === ""
+    ) {
       setMessage("වැටුප් කේතය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.wopNo === "") {
       setMessage("වැ.අ.වි.වැ අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.section === "") {
-      setMessage("දැනට රාජකාරියෙහි යෙදෙන අංශය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.subjectNo === "") {
-      setMessage("දැනට රාජකාරියෙහි යෙදෙන විෂය අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.sectionAssignedDate === "") {
-      setMessage("අදාල අංශයෙහි වැඩභාරගත් දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.natureOfAppointment === "") {
@@ -450,24 +440,15 @@ function HRAddEmployee() {
       setMessage("වැටුප් වර්ධක දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
-    } else if (employeeData.salaryCode === "") {
+    } else if (
+      employeeData.salaryCode === "" ||
+      employeeData.salaryCodePrefix === ""
+    ) {
       setMessage("වැටුප් කේතය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.wopNo === "") {
       setMessage("වැ.අ.වි.වැ අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.section === "") {
-      setMessage("දැනට රාජකාරියෙහි යෙදෙන අංශය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.subjectNo === "") {
-      setMessage("දැනට රාජකාරියෙහි යෙදෙන විෂය අංකය ඇතුලත් කිරීම අනිවාර්යයයි.");
-      setTitle("Empty");
-      setOpenModal(true);
-    } else if (employeeData.sectionAssignedDate === "") {
-      setMessage("අදාල අංශයෙහි වැඩභාරගත් දිනය ඇතුලත් කිරීම අනිවාර්යයයි.");
       setTitle("Empty");
       setOpenModal(true);
     } else if (employeeData.natureOfAppointment === "") {
@@ -561,7 +542,6 @@ function HRAddEmployee() {
           setImageUrl(imageUrl);
           setImage(response.data);
           setSearchId("");
-     
         })
         .catch((error) => {
           if (
@@ -589,7 +569,9 @@ function HRAddEmployee() {
           setSearchId("");
         });
     }
+    console.log(employeeData.designation);
   };
+
   return (
     <main>
       <HRCollapseBar />
@@ -855,6 +837,10 @@ function HRAddEmployee() {
                     <option
                       value={designation.designationId}
                       key={designation.designationId}
+                      style={{
+                        display:
+                          designation.designationId === 1 ? "none" : "block",
+                      }}
                     >
                       {designation.designationName}
                     </option>
@@ -1026,13 +1012,26 @@ function HRAddEmployee() {
               name="salaryIncrementDate"
               onChange={handleChange}
             />
-            <FloatingLabel
-              variant="filled"
-              label="වැටුප් කේතය"
-              value={employeeData.salaryCode}
-              name="salaryCode"
-              onChange={handleChange}
-            />
+            <div className="flex items-center justify-center gap-5">
+              <Select
+                id="salaryCodePrefix"
+                value={employeeData.salaryCodePrefix}
+                name="salaryCodePrefix"
+                onChange={handleChange}
+              >
+                <option value="">-----Select-----</option>
+                <option value="MN">MN</option>
+                <option value="PL">PL</option>
+              </Select>
+              <FloatingLabel
+                variant="filled"
+                label="වැටුප් කේතය"
+                value={employeeData.salaryCode}
+                name="salaryCode"
+                onChange={handleChange}
+              />
+            </div>
+
             <FloatingLabel
               variant="filled"
               label="වැ.අ.වි.වැ අංකය"
@@ -1049,7 +1048,7 @@ function HRAddEmployee() {
             <legend className="text-slate-600">
               රැකියා විෂය පථය පිළිබ‌ඳ තොරතුරු
             </legend>
-            <div>
+            <div hidden={employeeData.designation === "2"}>
               <Label
                 htmlFor="section"
                 className="m-1 mb-2 text-slate-500 text-center text-base"
@@ -1073,7 +1072,7 @@ function HRAddEmployee() {
               </Select>
             </div>
 
-            <div>
+            <div hidden={employeeData.designation === "2" || employeeData.salaryCodePrefix === "PL"}>
               <Label
                 htmlFor="subjectId"
                 className="m-1 mb-2 text-slate-500 text-center text-base"
@@ -1096,7 +1095,7 @@ function HRAddEmployee() {
                 })}
               </Select>
             </div>
-            <div>
+            <div hidden={employeeData.designation === "2"}>
               <Label
                 htmlFor="sectionAssignedDate"
                 className="m-1 text-slate-500 text-center"
@@ -1114,13 +1113,21 @@ function HRAddEmployee() {
             </div>
 
             <div>
+              <Label
+                htmlFor="natureOfAppointment"
+                className="m-1 mb-2 text-slate-500 text-center text-base"
+              >
+                පත්වීමේ ස්වභාවය
+              </Label>
               <Select
                 value={employeeData.natureOfAppointment}
                 name="natureOfAppointment"
                 onChange={handleChange}
               >
                 <option value="">---පත්වීමේ ස්වභාවය---</option>
-                <option value="ස්ථීර / විශ්‍රාම වැටුප් සහිත">ස්ථීර / වැටුප් සහිත</option>
+                <option value="ස්ථීර / විශ්‍රාම වැටුප් සහිත">
+                  ස්ථීර / වැටුප් සහිත
+                </option>
                 <option value="දෛනික">දෛනික</option>
                 <option value="අනියම්">අනියම්</option>
               </Select>
@@ -1163,7 +1170,7 @@ function HRAddEmployee() {
 
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>
-          {title === "Processing" && <Spinner size="xl" className="mr-5"/>}
+          {title === "Processing" && <Spinner size="xl" className="mr-5" />}
           {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}
@@ -1191,22 +1198,26 @@ function HRAddEmployee() {
           <Button onClick={() => setOpenModal(false)}>Close</Button>
           <Button
             onClick={() => {
-              EmployeeService.deleteImage.then(() => {
-                EmployeeService.removeEmployee(serachId)
-                .then((response) => {
-                  resetEmployeeData();
-                  setShow(false);
-                  setMessage(serachId + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී ");
-                  setTitle("Success");
-                  setOpenModal(true);
+              EmployeeService.deleteImage
+                .then(() => {
+                  EmployeeService.removeEmployee(serachId)
+                    .then((response) => {
+                      resetEmployeeData();
+                      setShow(false);
+                      setMessage(
+                        serachId + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී "
+                      );
+                      setTitle("Success");
+                      setOpenModal(true);
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                    });
                 })
                 .catch((e) => {
                   console.log(e);
                 });
-              }).catch((e) => {
-                console.log(e);
-              });
-              
+
               setOpenModal(false);
             }}
             style={{ display: show ? "block" : "none" }}

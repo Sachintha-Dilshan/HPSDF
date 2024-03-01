@@ -87,6 +87,9 @@ public class Employee {
     @Column(name = "salary_increment_date")
     private String salaryIncrementDate;
 
+    @Column(name = "salary_code_prefix")
+    private String salaryCodePrefix;
+
     @Column(name = "salary_code")
     private String salaryCode;
 

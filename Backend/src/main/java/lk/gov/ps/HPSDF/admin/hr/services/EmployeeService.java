@@ -81,6 +81,7 @@ public class EmployeeService {
             existingEmployee.setNatureOfAppointment(employee.getNatureOfAppointment());
             existingEmployee.setDutyPermanentDate(employee.getDutyPermanentDate());
             existingEmployee.setSalaryIncrementDate(employee.getSalaryIncrementDate());
+            existingEmployee.setSalaryCodePrefix(employee.getSalaryCodePrefix());
             existingEmployee.setSalaryCode(employee.getSalaryCode());
             existingEmployee.setWopNo(employee.getWopNo());
             existingEmployee.setSection(employee.getSection());

@@ -11,9 +11,10 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
     long count();
     @Query(
-            value = "select e.nic_no, e.name_with_initials, e.full_name, e.address, e.gender, e.marital_status, e.dob,mobile_no, e.email, e.office_official_appointment_date, d.designation_name, ss.service_sector_name, e.designation_class, e.designation_grade, e.first_appointment_date, e.duty_assigned_date, e.permanent, e.duty_permanent_date, e.salary_increment_date, e.salary_code, e.wop_no, s.section_name, sb.subject_name, e.section_assigned_date, e.nature_of_appointment, e.leave_id  from employees e,sections s,designations d, service_sectors ss, subjects sb where e.section = s.section_id and e.designation = d.designation_id and e.service_sector = ss.service_sector_id and e.subject_no = sb.subject_id and e.nic_no = ?1",
+            value = "SELECT e.nic_no, e.name_with_initials, e.full_name, e.address, e.gender, e.marital_status, e.dob, e.mobile_no, e.email, e.office_official_appointment_date, d.designation_name, ss.service_sector_name, e.designation_class, e.designation_grade, e.first_appointment_date, e.duty_assigned_date, e.permanent, e.duty_permanent_date, e.salary_increment_date, e.salary_code_prefix, e.salary_code, e.wop_no, s.section_name, sb.subject_name, e.section_assigned_date, e.nature_of_appointment, e.leave_id FROM employees e LEFT JOIN sections s ON e.section = s.section_id LEFT JOIN designations d ON e.designation = d.designation_id LEFT JOIN service_sectors ss ON e.service_sector = ss.service_sector_id LEFT JOIN subjects sb ON e.subject_no = sb.subject_id WHERE e.nic_no = ?1",
             nativeQuery = true
     )
+
     Object[] findEmployeesByNic(String nic);
 
     @Query(

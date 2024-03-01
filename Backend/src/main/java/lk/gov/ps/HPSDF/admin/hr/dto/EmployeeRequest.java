@@ -77,22 +77,20 @@ public class EmployeeRequest {
     private String salaryIncrementDate;
 
     @NotBlank(message = "Salary code is required")
+    private String salaryCodePrefix;
+
+    @NotBlank(message = "Salary code is required")
     private String salaryCode;
 
     @NotBlank(message = "WOP no is required")
     private String wopNo;
 
-    @NotNull(message = "Section is required")
     private int section;
 
-    @NotBlank(message = "Subject no is required")
     private String subjectNo;
 
-    @NotNull(message = "Section assigned date is required")
-    @Column(name = "section_assigned_date")
     private Date sectionAssignedDate;
 
     @NotNull(message = "Leave id is required")
-    @Column(name = "leave_id")
     private int leaveId;
 }

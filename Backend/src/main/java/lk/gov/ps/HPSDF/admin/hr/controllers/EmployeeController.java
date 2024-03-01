@@ -71,11 +71,12 @@ public class EmployeeController {
 
     @GetMapping("/employeeAllDataByNic/{nicNo}")
     public ResponseEntity<Object[]> getEmployeeAllData(@PathVariable String nicNo){
-        Object[] employeeDTO = employeeService.getEmployeeAllDataByNic(nicNo);
-        if(employeeDTO == null)
-            return new ResponseEntity<>(employeeDTO, HttpStatus.NOT_FOUND);
+
+        Object[] employee = employeeService.getEmployeeAllDataByNic(nicNo);
+        if(employee == null)
+            return new ResponseEntity<>(employee, HttpStatus.NOT_FOUND);
         else
-            return  new ResponseEntity<>(employeeDTO,HttpStatus.OK);
+            return  new ResponseEntity<>(employee,HttpStatus.OK);
     }
 
     @PostMapping("/employee")
@@ -101,6 +102,7 @@ public class EmployeeController {
                   employeeRequest.isPermanent(),
                   employeeRequest.getDutyPermanentDate(),
                   employeeRequest.getSalaryIncrementDate(),
+                  employeeRequest.getSalaryCodePrefix(),
                   employeeRequest.getSalaryCode(),
                   employeeRequest.getWopNo(),
                   employeeRequest.getSection(),
@@ -141,6 +143,7 @@ public class EmployeeController {
                         employeeRequest.isPermanent(),
                         employeeRequest.getDutyPermanentDate(),
                         employeeRequest.getSalaryIncrementDate(),
+                        employeeRequest.getSalaryCodePrefix(),
                         employeeRequest.getSalaryCode(),
                         employeeRequest.getWopNo(),
                         employeeRequest.getSection(),
