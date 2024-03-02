@@ -1,7 +1,9 @@
 package lk.gov.ps.HPSDF.admin.ar.services;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetCheckedOutFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveSaveFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.models.ArchiveFile;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ArchiveFileService {
@@ -32,7 +35,7 @@ public class ArchiveFileService {
     public List<ArchiveFile> getFiles(){
         return archiveFileRepository.findAll();
     }
-    public ArchiveGetFileDTO getFile(Long fileId,Long sectionId){
+    public ArchiveGetFileDTO getFile(Long fileId,String sectionId){
         ArchiveGetFileDTO fileDTO;
         Optional<ArchiveFile> file= archiveFileRepository.findByIdAndArchiveSection_Id(fileId,sectionId);
         if(file.isPresent()){
@@ -44,12 +47,27 @@ public class ArchiveFileService {
         }
 
     }
-    public List<ArchiveFile> getRecentFiles(Long sectionId){
+    public List<ArchiveFile> getRecentFiles(String sectionId){
         Pageable pageable=  PageRequest.of(0,5, Sort.by("id").descending());
         return archiveFileRepository.findTop5ByOrderByIdDesc(sectionId,pageable);
 
     }
+    public List<ArchiveGetCheckedOutFileDTO> getCheckedOutFiles(String fileNumber, String fileName, String sectionName, String subjectName, String employeeNIC){
+        List<ArchiveFile> files= archiveFileRepository
+                .findByDynamicParameters(
+                        true, fileNumber, fileName,sectionName,subjectName, employeeNIC);
+        List<ArchiveGetCheckedOutFileDTO> newfiles=files.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
 
+        return newfiles;
+    }
+    private ArchiveGetCheckedOutFileDTO convertToDTO(ArchiveFile file){
+        return modelMapper.map(file,ArchiveGetCheckedOutFileDTO.class);
+    }
+    public int getFileCountsCheckedOut(){
+        return archiveFileRepository.getFileCountsCheckedOut();
+    }
      public void saveArchiveFile(ArchiveSaveFileDTO fileDTO){
 
         Optional<ArchiveFile> archiveFile1=archiveFileRepository.findByFileNumber(fileDTO.getFileNumber());
@@ -64,7 +82,7 @@ public class ArchiveFileService {
             archiveFileRepository.save(archiveFile);
     }
 
-    public void deleteArchiveFile(Long sectionId,Long archiveFileId) {
+    public void deleteArchiveFile(String sectionId,Long archiveFileId) {
         Optional<ArchiveFile> file= archiveFileRepository.findByIdAndArchiveSection_Id(archiveFileId,sectionId);
         if(file.isPresent()){
             archiveFileRepository.deleteById(archiveFileId);
@@ -75,7 +93,7 @@ public class ArchiveFileService {
     }
 
     @Transactional
-    public void updateArchiveFile(Long sectionId,Long archiveFileId,ArchiveSaveFileDTO fileDTO) {
+    public void updateArchiveFile(String sectionId,Long archiveFileId,ArchiveSaveFileDTO fileDTO) {
 
         ArchiveFile existingFile=archiveFileRepository.findByIdAndArchiveSection_Id(archiveFileId,sectionId)
                 .orElse(null);
@@ -96,6 +114,18 @@ public class ArchiveFileService {
             BeanUtils.copyProperties(archiveFile, existingFile, "id");
             // Save the updated file
             archiveFileRepository.save(existingFile);
+        }
+    }
+
+    public void checkInArchiveFile(Long fileId) {
+        ArchiveFile existingFile=archiveFileRepository.findById(fileId)
+                .orElse(null);
+        if(existingFile!=null){
+            existingFile.setDateTime(null);
+            existingFile.setEmployee(null);
+            existingFile.setCheckedOut(false);
+            archiveFileRepository.save(existingFile);
+
         }
     }
 }

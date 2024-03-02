@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function ARFileCollapseBar() {
   const [show, setShow] = React.useState(false);
 
@@ -16,7 +16,7 @@ function ARFileCollapseBar() {
       <div className="flex flex-col h-full">
         <div style={{ display: show ? "block" : "none" }}>
           <ul className="text-white uppercase">
-          {/* <Link to="/HR/addLeaves"><li>Add Leave Details</li></Link> */}
+          <Link to="/AR/checkedOutFilesEmployee"><li>Employee</li></Link>
           </ul>
         </div>
       </div>

@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ArchiveSectionDTO {
-    private Long id;
+    private String id;
     private String sectionName;
     private String sectionColor;
     private String sectionIcon;

@@ -19,8 +19,8 @@ import java.util.List;
 @Table(name = "archive_section")
 public class ArchiveSection {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @Column(name = "section_name")
     private String sectionName;

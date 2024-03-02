@@ -53,7 +53,7 @@ public class ArchiveSectionService {
         }
 
     }
-    public ArchiveSectionDTO getSectionById(Long id){
+    public ArchiveSectionDTO getSectionById(String id){
         try{
             ArchiveSection section=archiveSectionRepository.findById(id).orElse(null);
             return modelMapper.map(section,ArchiveSectionDTO.class);
@@ -72,7 +72,7 @@ public class ArchiveSectionService {
             return true;
         }
     }
-    public boolean deleteArchiveSection(Long archiveSectionId) {
+    public boolean deleteArchiveSection(String archiveSectionId) {
         boolean doesExists= archiveSectionRepository.existsById(archiveSectionId);
         if(!doesExists){
             return false;

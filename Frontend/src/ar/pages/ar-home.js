@@ -1,20 +1,23 @@
 import React,{useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import sectionService from '../services/add-section-service';
-import ARhomecard from '../component/ar-home-card';
-import CollapseBar from '../../layouts/collapse-bar';
+import ARhomecard from '../components/ar-home-card';
+import CollapseBar from '../components/ar-file-collapse-bar'
 import { IoIosPeople  } from "react-icons/io";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { GrUserSettings } from "react-icons/gr";
 import { FaHandsHolding } from "react-icons/fa6";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import fileService from '../services/add-file-service';
 
 
 
 
 function ARHome() {
+  const navigate=useNavigate();
   const [sections,setSections]=useState([]);
+  const [checkedOutFilesCount,setCheckedOutFilesCount]=useState(0);
     
   const fetchData=()=>{
     sectionService.getAllSections()
@@ -24,8 +27,17 @@ function ARHome() {
         console.log(response.data);
     })
     .catch((e)=>{
-        console.log("hhhhhhhhhhhh");
+        console.log("error in get all setions");
         console.log(e);
+    })
+    fileService.getFileCheckedOutCount()
+    .then((response)=>{
+        setCheckedOutFilesCount(response.data);
+        console.log("count:  "+response.data);
+
+    })
+    .catch((error)=>{
+      console.log(error.response.data);
     })
   }
   React.useEffect(()=>{fetchData();},[]);
@@ -109,12 +121,13 @@ function ARHome() {
             </Link>
           ))}
 
-            <Link  to={`/AR/archeckedOut`}>         
+            <Link  to={`/AR/checkedOutFiles`}>         
             <ARhomecard
+              //onClick={() => navigate('/AR/checkedOut')} 
              // key={section.id}
               title={"Checked Out Files"}
-              count={0}
-              icon={"BsFillCartCheckFil"}
+              count={checkedOutFilesCount}
+              icon={'BsFillCartCheckFill'}
               colr1={'bg-[#FFFFFF]'}
             />
             </Link>

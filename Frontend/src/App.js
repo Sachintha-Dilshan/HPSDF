@@ -21,6 +21,7 @@ import Login from "./pages/login";
 import NoPage from "./pages/no-page";
 import ArHome from "./ar/pages/ar-home-test";
 import ARCheckedOutFiles from "./ar/pages/ar-checked-out-files";
+import AREmployeeArchiveAccess from "./ar/pages/ar-employee-ar-access";
 
 function App() {
   return (
@@ -54,7 +55,9 @@ function App() {
             <Route path="fileCrud/:id" element={<FileCrud />} />
             <Route path="archiveDashboard" element={<ARHome />} />
             <Route path="testArHome" element={<ArHome/>}/>
-            <Route path="checkedOut" element={<ARCheckedOutFiles/>}/> 
+            <Route path="checkedOutFiles" element={<ARCheckedOutFiles/>}/> 
+            <Route path="checkedOutFilesEmployee" element={<AREmployeeArchiveAccess/>}/> 
+            
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>

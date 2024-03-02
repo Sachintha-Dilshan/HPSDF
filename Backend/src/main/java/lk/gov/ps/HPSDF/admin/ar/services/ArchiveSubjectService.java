@@ -18,7 +18,7 @@ public class ArchiveSubjectService {
         this.archiveSubjectRepository = archiveSubjectRepository;
     }
 
-    public List<ArchiveSubject> getSubjectsBySectionId(Long sectionId){
+    public List<ArchiveSubject> getSubjectsBySectionId(String sectionId){
         try{
             return archiveSubjectRepository.findByArchiveSectionId(sectionId);
         }catch(Exception e){
@@ -27,7 +27,7 @@ public class ArchiveSubjectService {
 
     }
 
-    public ArchiveSubject getSubjectById(Long id){
+    public ArchiveSubject getSubjectById(String id){
         return archiveSubjectRepository.findById(id).orElse(null);
     }
     public boolean saveArchiveSubject(ArchiveSubject archiveSubject){
@@ -36,7 +36,7 @@ public class ArchiveSubjectService {
         return true;
 
     }
-    public boolean deleteArchiveSubject(Long archiveSubjectId) {
+    public boolean deleteArchiveSubject(String archiveSubjectId) {
         boolean doesExists= archiveSubjectRepository.existsById(archiveSubjectId);
         if(!doesExists){
             return false;

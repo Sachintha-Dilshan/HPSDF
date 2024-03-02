@@ -1,33 +1,42 @@
-import { Button, Table } from 'flowbite-react';
-import React from 'react';
+import { Button, Table, Modal,Spinner } from 'flowbite-react';
+import {
+  MdDelete,
+  MdDoneOutline,
+  MdRadioButtonUnchecked,
+  MdError,
+} from "react-icons/md";
+import { HiMail, HiOutlineSave,HiDocumentDuplicate } from "react-icons/hi";
+import {
+  FaSearchMinus
+} from "react-icons/fa";
 
-function ARCheckedOutFileTable() {
-    const leaveStatus = [
-        {
-            id: 1,
-            name: "Mr.Sachintha Dilshan",
-            type: "Sick leave",
-            acting: true,
-            supervisor: true,
-            hod: false
-        },
-        {
-            id: 2,
-            name: "Ms.Chani Ekanayake",
-            type: "Casual Leave",
-            acting: true,
-            supervisor: false,
-            hod: false
-        },
-        {
-            id: 3,
-            name: "Ms.Praveen Sathsara",
-            type: "Casual Leave",
-            acting: false,
-            supervisor: false,
-            hod: false
-        }
-    ];
+import { IoIosWarning } from "react-icons/io";
+import React, { useState } from 'react';
+import fileService from '../services/add-file-service';
+
+function ARCheckedOutFileTable(props) {
+    
+const [message, setMessage] = React.useState("");
+const [openModal, setOpenModal] = React.useState(false);
+const [title, setTitle] = React.useState("");
+const [show, setShow] = React.useState(false);
+
+    const checkInFile=(fileId)=>{
+    
+      console.log(fileId); 
+      fileService.checkInFile(fileId)
+      .then((response=>{
+        console.log(response.data);
+        setMessage(response.data);
+        setTitle("Success");
+        setOpenModal(true);
+      }))
+      .catch((error)=>{
+        console.log(error.response.data);
+      })
+      
+     
+    }
   return (
     <div className="overflow-auto">
       <Table striped hoverable>
@@ -44,23 +53,76 @@ function ARCheckedOutFileTable() {
 
         <Table.Body className="divide-y">
 
-        {leaveStatus.map((status) => (
-        <Table.Row key={status.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+        {props.files && props.files.map((file) => (
+        <Table.Row key={file.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
           <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-{/*{status.name}*/}
+{/*{status.name}*/}{file.fileNumber}
           </Table.Cell>
-          <Table.Cell>{/*{status.type}*/}</Table.Cell>
-          <Table.Cell >{/*{status.acting ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}</Table.Cell>
-          <Table.Cell >{/*{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}</Table.Cell>
-          <Table.Cell >{/*{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>}*/} </Table.Cell>
+          <Table.Cell>{file.fileName}</Table.Cell>
+          <Table.Cell >{/*{status.acting ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}{file.sectionName}</Table.Cell>
+          <Table.Cell >{/*{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}{file.nameWithInitials}</Table.Cell>
+          <Table.Cell >{/*{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>}*/} {file.dateTime}</Table.Cell>
           <Table.Cell>
-          {/*<Link to="/HR/leaveRequest">*/}<Button>Check In</Button>{/*</Link>*/}
+            <Button  onClick={()=>checkInFile(file.id)}>Check In</Button>
           </Table.Cell>
         </Table.Row>
       ))}
 
         </Table.Body>
       </Table>
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        
+        <Modal.Header>
+          {title === "Processing" && (
+            <Spinner size="xl" />
+          )}
+          {title === "Error" && (
+            <MdError className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Empty" && (
+            <MdRadioButtonUnchecked className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Duplicate" && (
+            <HiDocumentDuplicate className="inline-block text-yellow-400 text-4xl mr-5" />
+          )}
+          {title === "Warning" && (
+            <IoIosWarning className="inline-block text-amber-500 text-4xl mr-5" />
+          )}
+          {title === "Not Found" && (
+            <FaSearchMinus className="inline-block text-yellow-500 text-4xl mr-5" />
+          )}
+          {title === "Success" && (
+            <MdDoneOutline className="inline-block text-lime-600 text-4xl mr-5" />
+          )}
+          {title}
+        </Modal.Header>
+        <Modal.Body>
+          <div className="uppercase text-center">{message}</div>
+        </Modal.Body>
+        <Modal.Footer className="flex justify-center">
+          <Button onClick={() =>{setOpenModal(false);props.searchFile()} }>Close</Button>
+          <Button
+            // onClick={() => {
+            //   EmployeeService.removeEmployee(serachId)
+            //     .then((response) => {
+            //       resetEmployeeData();
+            //       setShow(false);
+            //       setMessage(serachId + " පද්ධතියෙන් සාර්ථකව ඉවත් කරන ලදී ");
+            //       setTitle("Success");
+            //       setOpenModal(true);
+            //     })
+            //     .catch((e) => {
+            //       console.log(e);
+            //     });
+            //   setOpenModal(false);
+            // }}
+            style={{ display: show ? "block" : "none" }}
+            color="failure"
+          >
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 package lk.gov.ps.HPSDF.admin.ar.controllers;
 
 import jakarta.persistence.EntityNotFoundException;
+import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetCheckedOutFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveSaveFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.models.ArchiveFile;
@@ -31,7 +32,7 @@ public class ArchiveFileController {
         return ResponseEntity.ok(archiveFileService.getFiles());
     }
     @GetMapping("/fileById/{sectionId}/{fileId}")
-    public ResponseEntity<?> getFile(@PathVariable Long sectionId, @PathVariable Long fileId){
+    public ResponseEntity<?> getFile(@PathVariable String sectionId, @PathVariable Long fileId){
         try{
             ArchiveGetFileDTO fileDTO=archiveFileService.getFile(fileId,sectionId);
             return ResponseEntity.ok(fileDTO);
@@ -41,11 +42,28 @@ public class ArchiveFileController {
     }
 
     @GetMapping("/recentFiles/{sectionId}")
-    public ResponseEntity<List<ArchiveFile>> getRecentFiles(@PathVariable Long sectionId){
+    public ResponseEntity<List<ArchiveFile>> getRecentFiles(@PathVariable String sectionId){
         return ResponseEntity.ok(archiveFileService.getRecentFiles(sectionId));
     }
-    @GetMapping("/")
+    @GetMapping("/checkedOutFiles")
+    public ResponseEntity<List<ArchiveGetCheckedOutFileDTO>> getCheckedOutFiles(
+            @RequestParam(required = false) String fileNumber,
+            @RequestParam(required = false) String fileName,
+            @RequestParam(required = false) String sectionName,
+            @RequestParam(required = false) String subjectName,
+            @RequestParam(required = false) String employeeNIC
+    )
+    {
+        return ResponseEntity.ok(archiveFileService
+                .getCheckedOutFiles(fileNumber,fileName,sectionName,subjectName,employeeNIC));
 
+    }
+
+    @GetMapping("/checkedOutFilesCount")
+    public ResponseEntity<Integer> getFileCountsCheckedOut(){
+        Integer count=archiveFileService.getFileCountsCheckedOut();
+        return ResponseEntity.ok(count);
+    }
     @PostMapping("/file")
     public ResponseEntity<String> saveArchiveFile(@RequestBody ArchiveSaveFileDTO fileDTO){
         try {
@@ -59,7 +77,7 @@ public class ArchiveFileController {
     }
 
     @DeleteMapping(path="file/{sectionId}/{fileId}")
-    public ResponseEntity<String> deleteArchiveFile(@PathVariable("sectionId") Long sectionId,
+    public ResponseEntity<String> deleteArchiveFile(@PathVariable("sectionId") String sectionId,
                                                     @PathVariable("fileId") Long fileId)
     {
         
@@ -72,7 +90,7 @@ public class ArchiveFileController {
 
     }
     @PutMapping("file/{sectionId}/{fileId}")
-    public ResponseEntity<String> updateArchiveFile(@PathVariable("sectionId") Long sectionId,
+    public ResponseEntity<String> updateArchiveFile(@PathVariable("sectionId") String sectionId,
                                                     @PathVariable("fileId") Long fileId,
                                                     @RequestBody ArchiveSaveFileDTO fileDTO)
     {
@@ -88,5 +106,10 @@ public class ArchiveFileController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("internal server error");
         }
 
+    }
+    @PutMapping("checkInFile/{fileId}")
+    public ResponseEntity<String> checkInArchiveFile(@PathVariable("fileId") Long fileId){
+        archiveFileService.checkInArchiveFile(fileId);
+        return ResponseEntity.ok("File has successfully Checked In");
     }
 }

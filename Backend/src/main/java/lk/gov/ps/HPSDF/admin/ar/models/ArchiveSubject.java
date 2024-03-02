@@ -18,8 +18,8 @@ import java.util.List;
 @Table(name = "archive_subject")
 public class ArchiveSubject {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @Column(name = "subject_name")
     private String subjectName;

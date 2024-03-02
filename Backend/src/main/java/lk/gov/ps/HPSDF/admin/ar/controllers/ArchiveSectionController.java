@@ -46,7 +46,7 @@ public class ArchiveSectionController {
 
 
     @GetMapping("/sectionById/{sectionId}")
-    public ResponseEntity<?> getSection(@PathVariable Long sectionId) {
+    public ResponseEntity<?> getSection(@PathVariable String sectionId) {
 
         try{
             ArchiveSectionDTO section = archiveSectionService.getSectionById(sectionId);
@@ -68,7 +68,7 @@ public class ArchiveSectionController {
     }
 
     @DeleteMapping(path = "{sectionId}")
-    public boolean deleteArchiveSection(@PathVariable("sectionId") Long sectionId) {
+    public boolean deleteArchiveSection(@PathVariable("sectionId") String sectionId) {
         return archiveSectionService.deleteArchiveSection(sectionId);
     }
 
