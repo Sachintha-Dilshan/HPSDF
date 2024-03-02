@@ -20,7 +20,7 @@ public class ArchiveSubjectController {
     }
 
     @GetMapping("/subjectsBySectionId/{sectionId}")
-    public ResponseEntity<?> getSubjectsBySectionId(@PathVariable Long sectionId){
+    public ResponseEntity<?> getSubjectsBySectionId(@PathVariable String sectionId){
         try{
             List<ArchiveSubject> subjects=archiveSubjectService.getSubjectsBySectionId(sectionId);
             return ResponseEntity.ok(subjects);

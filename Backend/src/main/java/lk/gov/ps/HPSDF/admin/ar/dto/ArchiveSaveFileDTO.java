@@ -11,8 +11,8 @@ public class ArchiveSaveFileDTO {
 
     private String fileNumber;
     private String fileName;
-    private Long archiveSectionId;
-    private Long archiveSubjectId;
+    private String archiveSectionId;
+    private String archiveSubjectId;
     private Year year;
     private Long rackId;
     private int boxNumber;
