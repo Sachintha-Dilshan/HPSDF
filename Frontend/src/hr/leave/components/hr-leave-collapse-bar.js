@@ -58,6 +58,12 @@ function LeaveCollapseBar() {
                   Edit Past Leaves
                 </li>
               </Link>
+              <Link to="/HR/Leave/editLeaveOfficers">
+                <li className="my-2">
+                  <IoAddOutline className="inline-block text-2xl" />
+                  Edit Leave Officers
+                </li>
+              </Link>
               
             </ul>
           </ul>

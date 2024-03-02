@@ -33,79 +33,86 @@ function HRSearchEmployees() {
       });
   };
 
-  const sortEmployeesByNicNo = (nicNo) => {
-    EmployeeService.sortEmployeesByNicNo(nicNo)
-      .then((response) => {
-        setEmployeeData(response.data);
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          console.log(error.response.data.error);
-        }
-      });
-  };
-
-  const sortEmployeesByLeaveId = (leaveId) => {
-    EmployeeService.sortEmployeesByLeaveId(leaveId)
-      .then((response) => {
-        setEmployeeData(response.data);
-      })
-      .catch((error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.error
-        ) {
-          console.log(error.response.data.error);
-        }
-      });
-  };
-
-  const fetchAllSections = () => {
-    sectionService
-      .getAllSections()
-      .then((response) => {
-        setSections(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
   useEffect(() => {
+    const fetchAllEmployees = async () => {
+      try {
+        const response = await EmployeeService.getEmployees();
+        setEmployeeData(response.data);
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+          console.log(error.response.data.error);
+        }
+      }
+    };
+  
     fetchAllEmployees();
-    fetchAllSections();
   }, []);
-
+  
   useEffect(() => {
-    if (sectionId) {
-      EmployeeService.sortEmployeesBySection(sectionId)
-        .then((response) => {
+    const sortEmployeesBySection = async () => {
+      if (sectionId) {
+        try {
+          const response = await EmployeeService.sortEmployeesBySection(sectionId);
           setEmployeeData(response.data);
-        })
-        .catch((error) => {
-          if (
-            error.response &&
-            error.response.data &&
-            error.response.data.error
-          ) {
+        } catch (error) {
+          if (error.response && error.response.data && error.response.data.error) {
             console.log(error.response.data.error);
           }
-        });
-    }
+        }
+      }
+    };
+  
+    sortEmployeesBySection();
   }, [sectionId]);
-
+  
   useEffect(() => {
-    if (nicNo) sortEmployeesByNicNo(nicNo);
+    const sortEmployeesByNicNo = async () => {
+      if (nicNo) {
+        try {
+          const response = await EmployeeService.sortEmployeesByNicNo(nicNo);
+          setEmployeeData(response.data);
+        } catch (error) {
+          if (error.response && error.response.data && error.response.data.error) {
+            console.log(error.response.data.error);
+          }
+        }
+      }
+    };
+  
+    sortEmployeesByNicNo();
   }, [nicNo]);
-
+  
   useEffect(() => {
-    if (leaveId) sortEmployeesByLeaveId(leaveId);
+    const sortEmployeesByLeaveId = async () => {
+      if (leaveId) {
+        try {
+          const response = await EmployeeService.sortEmployeesByLeaveId(leaveId);
+          setEmployeeData(response.data);
+        } catch (error) {
+          if (error.response && error.response.data && error.response.data.error) {
+            console.log(error.response.data.error);
+          }
+        }
+      }
+    };
+  
+    sortEmployeesByLeaveId();
   }, [leaveId]);
+  
+  useEffect(() => {
+    const fetchAllSections = async () => {
+      try {
+        const response = await sectionService.getAllSections();
+        setSections(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchAllSections();
+  }, []);
+  
 
   return (
     <main>

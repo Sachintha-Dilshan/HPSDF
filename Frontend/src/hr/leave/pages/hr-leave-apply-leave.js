@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import LeaveTypeService from "../services/leave-type-service";
 import EmployeeService from "../../services/add-new-employee-service";
+import editLeaveOfficerService from "../services/leave-edit-leave-officers-service";
 
 import {
   FloatingLabel,
@@ -16,18 +17,61 @@ function HRLeaveApplyLeave() {
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [leaveType, setLeaveType] = useState("");
   const [employeeLeaveId, setEmployeeLeaveId] = useState("");
-  const [employeeLeavePersonalData, setEmployeeLeavePersonalData] = useState([
-    [],
-  ]);
+  const [employeeLeavePersonalData, setEmployeeLeavePersonalData] = useState(
+    []
+  );
+
   const [actingOfficerLeaveId, setActingOfficerLeaveId] = useState("");
   const [actingOfficerName, setActingOfficerName] = useState("");
 
+  const [head, setHead] = useState("");
+  const [supervisor, setSupervisor] = useState("");
+
+  const [heads, setHeads] = useState([]);
+  const [supervisors, setSupervisors] = useState([]);
+
+  const getHeads = async () => {
+    try {
+      const response = await editLeaveOfficerService.getLeaveOfficers(
+        "ROLE_HEAD"
+      );
+      setHeads(response.data);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log(error.response.data.error);
+      }
+    }
+  };
+
+  const getSupervisors = async () => {
+    try {
+      const response = await editLeaveOfficerService.getLeaveOfficers(
+        "ROLE_SUPERVISOR"
+      );
+      setSupervisors(response.data);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log(error.response.data.error);
+      }
+    }
+  };
+
   useEffect(() => {
-    if (employeeLeaveId === "") setEmployeeLeavePersonalData([["", "", ""]]);
-    if (employeeLeaveId) {
+    getHeads();
+    getSupervisors();
+  }, []);
+
+  useEffect(() => {
+    if (employeeLeaveId === "") {
+      setEmployeeLeavePersonalData([]);
+    } else {
       EmployeeService.getEmployeeLeavePersonalData(employeeLeaveId)
         .then((response) => {
-          setEmployeeLeavePersonalData(response.data);
+          if (response.data && response.data.length > 0) {
+            setEmployeeLeavePersonalData(response.data || []);
+          } else {
+            setEmployeeLeavePersonalData([]);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -36,15 +80,17 @@ function HRLeaveApplyLeave() {
   }, [employeeLeaveId]);
 
   useEffect(() => {
-    if (actingOfficerLeaveId === "") setActingOfficerName("");
-
-    if (actingOfficerLeaveId) {
+    if (actingOfficerLeaveId === "") {
+      setActingOfficerName("");
+    } else {
       EmployeeService.getEmployeeName(actingOfficerLeaveId)
         .then((response) => {
-          setActingOfficerName(response.data);
+          if (response.data && response.data.length > 0)
+            setActingOfficerName(response.data || "");
+          else setActingOfficerName("");
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((error) => {
+          console.log(error);
         });
     }
   }, [actingOfficerLeaveId]);
@@ -52,12 +98,13 @@ function HRLeaveApplyLeave() {
   useEffect(() => {
     LeaveTypeService.getAllLeaveTypes()
       .then((response) => {
-        setLeaveTypes(response.data);
+        setLeaveTypes(response.data || []);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
   return (
     <main>
       <LeaveCollapseBar />
@@ -76,7 +123,13 @@ function HRLeaveApplyLeave() {
             variant="filled"
             label="නම"
             disabled
-            value={employeeLeaveId && employeeLeavePersonalData[0][0]}
+            value={
+              employeeLeaveId &&
+              employeeLeavePersonalData &&
+              employeeLeavePersonalData.length > 0
+                ? employeeLeavePersonalData[0][0]
+                : ""
+            }
             className="cursor-not-allowed bg-slate-200"
           />
           <FloatingLabel
@@ -84,14 +137,26 @@ function HRLeaveApplyLeave() {
             label="තනතුර"
             disabled
             className="cursor-not-allowed bg-slate-200"
-            value={employeeLeaveId && employeeLeavePersonalData[0][1]}
+            value={
+              employeeLeaveId &&
+              employeeLeavePersonalData &&
+              employeeLeavePersonalData.length > 0
+                ? employeeLeavePersonalData[0][1]
+                : ""
+            }
           />
           <FloatingLabel
             variant="filled"
             label="මුල් පත්වීමේ දිනය"
             className="cursor-not-allowed bg-slate-200"
             disabled
-            value={employeeLeaveId && employeeLeavePersonalData[0][2]}
+            value={
+              employeeLeaveId &&
+              employeeLeavePersonalData &&
+              employeeLeavePersonalData.length > 0
+                ? employeeLeavePersonalData[0][2]
+                : ""
+            }
           />
         </fieldset>
 
@@ -129,19 +194,17 @@ function HRLeaveApplyLeave() {
               අධීක්ෂණ නිලධාරි
             </Label>
             <Select
-              id="leaveType"
-              name="leaveType"
-              value={leaveType}
-              onChange={(event) => setLeaveType(event.target.value)}
+              id="supervisor"
+              name="supervisor"
+              value={supervisor}
+              onChange={(event) => setSupervisor(event.target.value)}
             >
               <option value="">-----Select-----</option>
-              {leaveTypes.map((item) => {
-                return (
-                  <option value={item.id} key={item.id}>
-                    {item.leaveType}
-                  </option>
-                );
-              })}
+              {supervisors.map((supervisor) => (
+                <option value={supervisor[0]} key={supervisor[0]}>
+                  {supervisor[1]}
+                </option>
+              ))}
             </Select>
           </div>
 
@@ -153,19 +216,17 @@ function HRLeaveApplyLeave() {
               දෙපාර්තමේන්තු ප්‍රධානි
             </Label>
             <Select
-              id="leaveType"
-              name="leaveType"
-              value={leaveType}
-              onChange={(event) => setLeaveType(event.target.value)}
+              id="head"
+              name="head"
+              value={head}
+              onChange={(event) => setHead(event.target.value)}
             >
               <option value="">-----Select-----</option>
-              {leaveTypes.map((item) => {
-                return (
-                  <option value={item.id} key={item.id}>
-                    {item.leaveType}
-                  </option>
-                );
-              })}
+              {heads.map((head) => (
+                <option value={head[0]} key={head[0]}>
+                  {head[1]}
+                </option>
+              ))}
             </Select>
           </div>
         </fieldset>

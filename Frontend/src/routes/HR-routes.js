@@ -15,7 +15,7 @@ import HREmployeesAttendanceSheet from "../hr/leave/pages/hr-leave-attendance-sh
 import HRLeaveAddLeaves from "../hr/leave/pages/hr-leave-add-leaves";
 import HRLeaveAddPastRecords from "../hr/leave/pages/hr-leave-add-past-records";
 import HRLeaveApplyLeave from "../hr/leave/pages/hr-leave-apply-leave";
-
+import HREditLeaveOfficers from "../hr/leave/pages/hr-leave-edit-leave-officers";
 
 const HRRoutes = [
     {
@@ -91,6 +91,11 @@ const HRRoutes = [
     {
         path : "HR/leave/applyLeave",
         element : <HRLeaveApplyLeave/>,
+        availability : [userRoles.leaveAdmin]
+    },
+    {
+        path : "HR/leave/editLeaveOfficers",
+        element : <HREditLeaveOfficers/>,
         availability : [userRoles.leaveAdmin]
     }
 ]
