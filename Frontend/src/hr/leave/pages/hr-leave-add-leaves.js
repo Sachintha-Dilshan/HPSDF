@@ -112,6 +112,7 @@ function HRLeaveAddLeaves() {
             id: leaveId,
             leaveType: leaveName,
           };
+          
           LeaveTypeService.updateLeaveType(data, leaveId)
             .then(() => {
               setMessage(

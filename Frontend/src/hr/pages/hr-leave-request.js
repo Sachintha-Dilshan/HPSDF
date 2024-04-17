@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeeLeaveChit from "../components/hr-employee-leave-chit";
@@ -7,28 +7,67 @@ import HREmployeeCard from "../components/hr-employee-card";
 import HRLeaveStatusTimeLine from "../components/hr-leave-status-timeline";
 import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import {Button } from "flowbite-react";
+import LeaveApplicationService from "../leave/services/leave-application-service";
+import EmployeeService from "../services/add-new-employee-service";
 
 import {
   FaCalendarMinus,
   FaClipboardList,
   FaCalendarCheck,
 } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 function HREmployeeLeaveRequest() {
-  const employee = {
-    name: "ඒ.එම්.කේ. නාලිකා අබේකෝන් මිය",
-    address: "මහවත්ත, මොටාගෙදර, කැකනදුර",
-    designation: "ලේකම්",
-    contactNo: "0714412472",
-  };
+  const location = useLocation();
+  const applicationId = location.state.applicationId;
+  const employeeNicNo = location.state.employeeNicNo;
 
+  const [employeeData, setEmployeeData] = useState([]);
+
+  const [leaveChit, setLeaveChit] = useState("");
+
+  const getLeaveChit = async (applicationId) => 
+  {
+    try
+    {
+      const response = await LeaveApplicationService.getLeaveChit(applicationId);
+      setLeaveChit(response.data[0]);
+    }
+    catch(error)
+    {
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log(error.response.data.error);
+      }
+    }
+    
+  }
+
+  useEffect(() => {
+    getLeaveChit(applicationId);
+  }, [applicationId]);
+  
+  useEffect(() => {
+    const getEmployeeData = async () => {
+        try {
+          const response = await EmployeeService.sortEmployeesByNicNo(employeeNicNo);
+          setEmployeeData(response.data[0]);
+        } catch (error) {
+          if (error.response && error.response.data && error.response.data.error) {
+            console.log(error.response.data.error);
+          }
+        }
+    };
+    getEmployeeData();
+  }, [employeeNicNo]);
+
+  
   const data = [
     {
       id: 1,
       active: true,
       title: "Leave Chit",
       icon: FaCalendarMinus,
-      content: <HREmployeeLeaveChit />,
+      content: <HREmployeeLeaveChit data={leaveChit} />,
     },
     {
       id: 2,
@@ -55,10 +94,10 @@ function HREmployeeLeaveRequest() {
         <div className="flex md:flex-row flex-col items-center  flex-grow gap-10">
           <div>
             <HREmployeeCard
-              name={employee.name}
-              designation={employee.designation}
-              contact={employee.contactNo}
-              key={employee.contactNo}
+              nicNo={employeeData[0]}
+              name={employeeData[1]}
+              designation={employeeData[3]}
+              contact={employeeData[2]}
             />
           </div>
           <div>

@@ -1,38 +1,33 @@
 
 'use client';
 import { FaCheck, FaHourglass} from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 import { Table } from 'flowbite-react';
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LeaveTrackingService from "../leave/services/leave-tracker-service";
+import { useState, useEffect } from "react";
 
 function HRLeaveTracker() {
+  const navigate = useNavigate();
+  const [leaveStatus, setLeaveStatus] = useState("");
+  const getLeaveRequests = async () => {
+    try {
+      const response = await LeaveTrackingService.getLeaveRequests();
+      setLeaveStatus(response.data);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log(error.response.data.error);
+      }
+    }
+  };
 
-    const leaveStatus = [
-        {
-            id: 1,
-            name: "Mr.Sachintha Dilshan",
-            type: "Sick leave",
-            acting: true,
-            supervisor: true,
-            hod: false
-        },
-        {
-            id: 2,
-            name: "Ms.Chani Ekanayake",
-            type: "Casual Leave",
-            acting: true,
-            supervisor: false,
-            hod: false
-        },
-        {
-            id: 3,
-            name: "Ms.Praveen Sathsara",
-            type: "Casual Leave",
-            acting: false,
-            supervisor: false,
-            hod: false
-        }
-    ];
+  useEffect(() => {
+    getLeaveRequests();
+  }, []);
+    
+  
+
   return (
     <div className="overflow-auto">
       <Table striped hoverable>
@@ -51,17 +46,32 @@ function HRLeaveTracker() {
 
         <Table.Body className="divide-y">
 
-        {leaveStatus.map((status) => (
-        <Table.Row key={status.id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+        {leaveStatus && leaveStatus.map((status) => (
+        <Table.Row key={status[1]} className="bg-white dark:border-gray-700 dark:bg-gray-800">
           <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            {status.name}
+            {status[2]}
           </Table.Cell>
-          <Table.Cell>{status.type}</Table.Cell>
-          <Table.Cell >{status.acting ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
-          <Table.Cell >{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
-          <Table.Cell >{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} </Table.Cell>
+          <Table.Cell>{status[3]}</Table.Cell>
+          
+          <Table.Cell >
+            {status[4] === 0 && <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass className="text-xl"/>  Pending</span>}
+            {status[4] === 1 && <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck className="text-xl"/>  Approved</span> }
+            {status[4] === 2 && <span className="text-red-600 uppercase flex gap-5 items-center" > <MdCancel className="text-xl"/>  Rejected</span> } 
+          </Table.Cell>
+          <Table.Cell >
+            {status[5] === 0 && <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass className="text-xl"/>  Pending</span>}
+            {status[5] === 1 && <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck className="text-xl"/>  Approved</span> }
+            {status[5] === 2 && <span className="text-red-600 uppercase flex gap-5 items-center" > <MdCancel className="text-xl"/>  Rejected</span> } 
+          </Table.Cell>
+          <Table.Cell >
+            {status[6] === 0 && <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass className="text-xl"/>  Pending</span>}
+            {status[6] === 1 && <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck className="text-xl"/>  Approved</span> }
+            {status[6] === 2 && <span className="text-red-600 uppercase flex gap-5 items-center" > <MdCancel className="text-xl"/>  Rejected</span> } 
+          </Table.Cell>
           <Table.Cell>
-          <Link to="/HR/leaveRequest"><Button>View</Button></Link>
+          <Button  onClick={() => {navigate("/HR/leave/leaveRequest", { state: {applicationId : status[1], employeeNicNo : status[0]} });}}>
+            View
+          </Button>
           </Table.Cell>
         </Table.Row>
       ))}

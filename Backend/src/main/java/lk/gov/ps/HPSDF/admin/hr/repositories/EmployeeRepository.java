@@ -54,6 +54,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     String findEmployeeName(int leave_id);
 
     @Query(
+            value = "select e.nic_no from employees e where leave_id = ?1",
+            nativeQuery = true
+    )
+    String findEmployeeNicNo(int leave_id);
+
+    @Query(
             value = "select e.name_with_initials, d.designation_name ,e.first_appointment_date  from employees e, designations d where e.designation = d.designation_id and leave_id = ?1",
             nativeQuery = true
     )

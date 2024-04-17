@@ -1,32 +1,25 @@
 import React from "react";
 import { FloatingLabel } from "flowbite-react";
 
-function HREmployeeLeaveChit() {
-  const leaveData = [
-    "අනියම් නිවාඩු",
-    "03",
-    "2024-02-05",
-    "2024-02-08",
-    "එම්.එස්.හිරිමුතුගොඩ මිය",
-    "පෞද්ගලික හේතුවකි",
-  ];
+function HREmployeeLeaveChit(props) {
+  const leaveData = props.data;
   const labels = [
     "නිවාඩු වර්ගය",
     "නිවාඩු ඉල්ලා සිටින දින ගණන",
     "නිවාඩු පටන් ගන්නා දිනය",
     "නැවත සේවයට පැමිණෙන දිනය",
     "වැඩ බලන නිලධාරි",
-    "නිවාඩු ඉල්ලීමට හේතු"
+    "නිවාඩු ඉල්ලීමට හේතුව"
   ];
   return(
     <fieldset className="border rounded-lg grid lg:grid-cols-3 p-5 gap-5 m-5">
     <legend className="text-slate-600">නිවාඩු අයදුම්පත</legend>
-    {leaveData.map((data, index) => (
+    {labels.map((data, index) => (
       <FloatingLabel
-        key={labels[index]} // Assuming each label corresponds to the data at the same index
+        key={data} // Assuming each label corresponds to the data at the same index
         variant="filled"
-        label={labels[index]}
-        value={data}
+        label={data}
+        value={leaveData[index]}
         disabled={true}
       />
     ))}

@@ -3,6 +3,8 @@ import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import LeaveTypeService from "../services/leave-type-service";
 import EmployeeService from "../../services/add-new-employee-service";
 import editLeaveOfficerService from "../services/leave-edit-leave-officers-service";
+import LeaveApplicationService from "../services/leave-application-service";
+import LeaveTrackingService from "../services/leave-tracker-service";
 
 import {
   FloatingLabel,
@@ -10,26 +12,63 @@ import {
   Datepicker,
   Label,
   Button,
+  Modal,
 } from "flowbite-react";
+import { MdError, MdDoneOutline, MdRadioButtonUnchecked } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 
 function HRLeaveApplyLeave() {
   const [leaveTypes, setLeaveTypes] = useState([]);
-  const [leaveType, setLeaveType] = useState("");
-  const [employeeLeaveId, setEmployeeLeaveId] = useState("");
   const [employeeLeavePersonalData, setEmployeeLeavePersonalData] = useState(
     []
   );
 
-  const [actingOfficerLeaveId, setActingOfficerLeaveId] = useState("");
   const [actingOfficerName, setActingOfficerName] = useState("");
-
-  const [head, setHead] = useState("");
-  const [supervisor, setSupervisor] = useState("");
 
   const [heads, setHeads] = useState([]);
   const [supervisors, setSupervisors] = useState([]);
 
+  const [message, setMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+
+  const [applicationData, setApplicationData] = useState({
+    employeeLeaveId: "",
+    actingOfficerLeaveId: "",
+    supervisorNicNo: "",
+    hodNicNo: "",
+    leaveType: "",
+    leaveCommencingDate: "",
+    dateOfResumingDuties: "",
+    leavePeriod: "",
+    reason: "",
+    status: 1,  // Status => {1 : Pending, 2 : Approved, 3 : Rejected }
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setApplicationData((prevData) => {
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
+  };
+
+  const resetApplicationData = () => {
+    setApplicationData({
+      employeeLeaveId: "",
+      actingOfficerLeaveId: "",
+      supervisorNicNo: "",
+      hodNicNo: "",
+      leaveType: "",
+      leaveCommencingDate: "",
+      dateOfResumingDuties: "",
+      leavePeriod: "",
+      reason: "",
+      status: 1,
+    });
+  };
   const getHeads = async () => {
     try {
       const response = await editLeaveOfficerService.getLeaveOfficers(
@@ -62,10 +101,12 @@ function HRLeaveApplyLeave() {
   }, []);
 
   useEffect(() => {
-    if (employeeLeaveId === "") {
+    if (applicationData.employeeLeaveId === "") {
       setEmployeeLeavePersonalData([]);
     } else {
-      EmployeeService.getEmployeeLeavePersonalData(employeeLeaveId)
+      EmployeeService.getEmployeeLeavePersonalData(
+        applicationData.employeeLeaveId
+      )
         .then((response) => {
           if (response.data && response.data.length > 0) {
             setEmployeeLeavePersonalData(response.data || []);
@@ -77,13 +118,13 @@ function HRLeaveApplyLeave() {
           console.log(error);
         });
     }
-  }, [employeeLeaveId]);
+  }, [applicationData.employeeLeaveId]);
 
   useEffect(() => {
-    if (actingOfficerLeaveId === "") {
+    if (applicationData.actingOfficerLeaveId === "") {
       setActingOfficerName("");
     } else {
-      EmployeeService.getEmployeeName(actingOfficerLeaveId)
+      EmployeeService.getEmployeeName(applicationData.actingOfficerLeaveId)
         .then((response) => {
           if (response.data && response.data.length > 0)
             setActingOfficerName(response.data || "");
@@ -93,7 +134,7 @@ function HRLeaveApplyLeave() {
           console.log(error);
         });
     }
-  }, [actingOfficerLeaveId]);
+  }, [applicationData.actingOfficerLeaveId]);
 
   useEffect(() => {
     LeaveTypeService.getAllLeaveTypes()
@@ -104,6 +145,77 @@ function HRLeaveApplyLeave() {
         console.log(error);
       });
   }, []);
+
+  const saveApplication = async () => {
+    if (applicationData.employeeLeaveId === "" && employeeLeavePersonalData) {
+      setMessage("අයදුම්කරුගේ නිවාඩු අංකය ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (
+      applicationData.actingOfficerLeaveId === "" &&
+      actingOfficerName
+    ) {
+      setMessage("වැඩ බලන නිලධාරිගෙ නිවාඩු අංකය ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.supervisorNicNo === "") {
+      setMessage("අධීක්ෂණ නිලධාරියෙකු ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.hodNicNo === "") {
+      setMessage("දෙපාර්තමේන්තු ප්‍රධානීව ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.leaveCommencingDate === "") {
+      setMessage("නිවාඩු පටන් ගන්නා දිනය ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.dateOfResumingDuties === "") {
+      setMessage("නැවත සේවයට පැමිණෙන දිනය ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.leavePeriod === "") {
+      setMessage("නිවාඩු ඉල්ලා සිටින දින ගණන ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else if (applicationData.reason === "") {
+      setMessage("නිවාඩු ඉල්ලීමට හේතුව ඇතුලත් කිරීම අනිවාර්යයි.");
+      setTitle("Empty");
+      setOpenModal(true);
+    } else {
+      try {
+
+        const response = await LeaveApplicationService.saveLeaveApplication(
+          applicationData
+        );
+        await LeaveTrackingService.saveLeaveTrackingDetails
+        (
+          {
+            applicationSubmittedTimeStamp : new Date(),
+            leaveApplicationId : response.data.applicationId
+          }
+        )
+        setMessage(
+        "නිවාඩුව සාර්ථකව අයදුම් කරන ලදී. \n අයදුම්පත්‍ර අංකය : " +
+            response.data.applicationId
+        );
+        setTitle("Success");
+        setOpenModal(true);
+        resetApplicationData();
+
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          setMessage(error.response.data.error);
+          setTitle("Error");
+          setOpenModal(true);
+        }
+      }
+    }
+  };
 
   return (
     <main>
@@ -116,17 +228,16 @@ function HRLeaveApplyLeave() {
           <FloatingLabel
             variant="filled"
             label="නිවාඩු අංකය"
-            value={employeeLeaveId}
-            onChange={(event) => setEmployeeLeaveId(event.target.value)}
+            name="employeeLeaveId"
+            value={applicationData.employeeLeaveId}
+            onChange={handleChange}
           />
           <FloatingLabel
             variant="filled"
             label="නම"
             disabled
             value={
-              employeeLeaveId &&
-              employeeLeavePersonalData &&
-              employeeLeavePersonalData.length > 0
+              employeeLeavePersonalData && employeeLeavePersonalData.length > 0
                 ? employeeLeavePersonalData[0][0]
                 : ""
             }
@@ -138,9 +249,7 @@ function HRLeaveApplyLeave() {
             disabled
             className="cursor-not-allowed bg-slate-200"
             value={
-              employeeLeaveId &&
-              employeeLeavePersonalData &&
-              employeeLeavePersonalData.length > 0
+              employeeLeavePersonalData && employeeLeavePersonalData.length > 0
                 ? employeeLeavePersonalData[0][1]
                 : ""
             }
@@ -151,9 +260,7 @@ function HRLeaveApplyLeave() {
             className="cursor-not-allowed bg-slate-200"
             disabled
             value={
-              employeeLeaveId &&
-              employeeLeavePersonalData &&
-              employeeLeavePersonalData.length > 0
+              employeeLeavePersonalData && employeeLeavePersonalData.length > 0
                 ? employeeLeavePersonalData[0][2]
                 : ""
             }
@@ -170,18 +277,18 @@ function HRLeaveApplyLeave() {
             <FloatingLabel
               variant="filled"
               label="නිවාඩු අංකය"
-              value={actingOfficerLeaveId}
-              name="leaveId"
-              onChange={(event) => setActingOfficerLeaveId(event.target.value)}
+              value={applicationData.actingOfficerLeaveId}
+              name="actingOfficerLeaveId"
+              onChange={handleChange}
             />
 
             <FloatingLabel
-              id="supervisor"
+              id="actingOfficer"
               variant="filled"
               label="නම"
               className="cursor-not-allowed bg-slate-200"
               disabled
-              name="employeeName"
+              name="actingOfficerName}"
               value={actingOfficerName}
             />
           </fieldset>
@@ -195,9 +302,9 @@ function HRLeaveApplyLeave() {
             </Label>
             <Select
               id="supervisor"
-              name="supervisor"
-              value={supervisor}
-              onChange={(event) => setSupervisor(event.target.value)}
+              name="supervisorNicNo"
+              value={applicationData.supervisorNicNo}
+              onChange={handleChange}
             >
               <option value="">-----Select-----</option>
               {supervisors.map((supervisor) => (
@@ -217,9 +324,9 @@ function HRLeaveApplyLeave() {
             </Label>
             <Select
               id="head"
-              name="head"
-              value={head}
-              onChange={(event) => setHead(event.target.value)}
+              name="hodNicNo"
+              value={applicationData.hodNicNo}
+              onChange={handleChange}
             >
               <option value="">-----Select-----</option>
               {heads.map((head) => (
@@ -243,8 +350,8 @@ function HRLeaveApplyLeave() {
             <Select
               id="leaveType"
               name="leaveType"
-              value={leaveType}
-              onChange={(event) => setLeaveType(event.target.value)}
+              value={applicationData.leaveType}
+              onChange={handleChange}
             >
               <option value="">-----Select-----</option>
               {leaveTypes.map((item) => {
@@ -264,7 +371,22 @@ function HRLeaveApplyLeave() {
             >
               නිවාඩු පටන් ගන්නා දිනය
             </Label>
-            <Datepicker id="leaveCommencingDate" />
+            <Datepicker
+              id="leaveCommencingDate"
+              name="leaveCommencingDate"
+              value={applicationData.leaveCommencingDate}
+              onSelectedDateChanged={(date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const day = String(date.getDate()).padStart(2, "0");
+                setApplicationData((prevData) => {
+                  return {
+                    ...prevData,
+                    leaveCommencingDate: `${year}-${month}-${day}`,
+                  };
+                });
+              }}
+            />
           </div>
 
           <div>
@@ -274,21 +396,66 @@ function HRLeaveApplyLeave() {
             >
               නැවත සේවයට පැමිණෙන දිනය
             </Label>
-            <Datepicker id="dateOfResumingDuties" />
+            <Datepicker
+              id="dateOfResumingDuties"
+              name="dateOfResumingDuties"
+              value={applicationData.dateOfResumingDuties}
+              onSelectedDateChanged={(date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, "0");
+                const day = String(date.getDate()).padStart(2, "0");
+                setApplicationData((prevData) => {
+                  return {
+                    ...prevData,
+                    dateOfResumingDuties: `${year}-${month}-${day}`,
+                  };
+                });
+              }}
+            />
           </div>
           <FloatingLabel
             variant="filled"
             label="නිවාඩු ඉල්ලා සිටින දින ගණන"
             type="number"
+            name="leavePeriod"
+            value={applicationData.leavePeriod}
+            onChange={handleChange}
           />
 
-          <FloatingLabel variant="filled" label="නිවාඩු ඉල්ලීමට හේතු" />
-          <Button className="font-bold">
+          <FloatingLabel
+            variant="filled"
+            label="නිවාඩු ඉල්ලීමට හේතු"
+            name="reason"
+            value={applicationData.reason}
+            onChange={handleChange}
+          />
+          <Button className="font-bold" onClick={saveApplication}>
             <IoSend className="mr-4 h-5 w-5" />
             අයදුම් කරන්න
           </Button>
         </fieldset>
       </div>
+
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal.Header>
+          {title === "Error" && (
+            <MdError className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Empty" && (
+            <MdRadioButtonUnchecked className="inline-block text-red-500 text-4xl mr-5" />
+          )}
+          {title === "Success" && (
+            <MdDoneOutline className="inline-block text-lime-600 text-4xl mr-5" />
+          )}
+          {title}
+        </Modal.Header>
+        <Modal.Body>
+          <div>{message}</div>
+        </Modal.Body>
+        <Modal.Footer className="flex justify-center">
+          <Button onClick={() => setOpenModal(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </main>
   );
 }
