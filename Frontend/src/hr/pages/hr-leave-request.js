@@ -16,6 +16,7 @@ import {
   FaCalendarCheck,
 } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import LeaveTrackingService from "../leave/services/leave-tracker-service";
 
 function HREmployeeLeaveRequest() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function HREmployeeLeaveRequest() {
   const [employeeData, setEmployeeData] = useState([]);
 
   const [leaveChit, setLeaveChit] = useState("");
+  const [leaveRequest, setLeaveRequest] = useState("");
 
   const getLeaveChit = async (applicationId) => 
   {
@@ -42,10 +44,26 @@ function HREmployeeLeaveRequest() {
     
   }
 
+  const getLeaveRequest = async (applicationId) => 
+  {
+    try
+    {
+      const response = await LeaveTrackingService.getLeaveTrackingData(applicationId);
+      setLeaveRequest(response.data[0]);
+    }
+    catch(error)
+    {
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log(error.response.data.error);
+      }
+    }
+  }
+
   useEffect(() => {
+    getLeaveRequest(applicationId);
     getLeaveChit(applicationId);
   }, [applicationId]);
-  
+
   useEffect(() => {
     const getEmployeeData = async () => {
         try {
@@ -60,6 +78,9 @@ function HREmployeeLeaveRequest() {
     getEmployeeData();
   }, [employeeNicNo]);
 
+  const getApproval = () => {
+
+  }
   
   const data = [
     {
@@ -94,7 +115,7 @@ function HREmployeeLeaveRequest() {
         <div className="flex md:flex-row flex-col items-center  flex-grow gap-10">
           <div>
             <HREmployeeCard
-              nicNo={employeeData[0]}
+              nicNo={employeeNicNo}
               name={employeeData[1]}
               designation={employeeData[3]}
               contact={employeeData[2]}
@@ -102,12 +123,12 @@ function HREmployeeLeaveRequest() {
           </div>
           <div>
             {/* Leave tracking status goes here */}
-            <HRLeaveStatusTimeLine/>
+            <HRLeaveStatusTimeLine data={leaveRequest}/>
           </div>
           <div>
             <fieldset className="border rounded-lg p-5 flex gap-20">
               <legend>අධීක්ෂණ නිලධාරි අනුමැතිය</legend>
-              <Button color="success" pill className="uppercase">
+              <Button color="success" pill className="uppercase" onSubmit={getApproval}>
                 Approve
               </Button>
               <Button color="failure" pill className="uppercase">

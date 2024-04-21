@@ -17,10 +17,17 @@ const getLeaveRequests = () => {
     return axios.get(API_URL + "getLeaveRequests", { headers: AuthHeader() });
 };
 
+const getLeaveTrackingData = (applicationId) => {
+  return axios.get(API_URL + `getLeaveTrackingData/${applicationId}`, {
+    headers: AuthHeader(),
+  });
+};
+
 const LeaveTrackingService = {
   saveLeaveTrackingDetails,
   updateLeaveTrackerDetails,
-  getLeaveRequests
+  getLeaveRequests,
+  getLeaveTrackingData
 };
 
 export default LeaveTrackingService;
