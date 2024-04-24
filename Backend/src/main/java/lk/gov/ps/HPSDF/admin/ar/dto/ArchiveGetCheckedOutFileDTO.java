@@ -13,11 +13,20 @@ public class ArchiveGetCheckedOutFileDTO {
     private String fileName;
     private String sectionName;
     private String subjectName;
-    private String nameWithInitials;
+    private String employeeFullName;
+    private String employeeNicNo;
     private LocalDateTime dateTime;
 
     public ArchiveGetCheckedOutFileDTO() {
     }
 
-
+    @Override
+    public String toString() {
+        return "ArchiveGetCheckedOutFileDTO{" +
+                "id=" + id +
+                ", fileNumber='" + fileNumber + '\'' +
+                ", fullName='" + employeeFullName + '\'' +
+                ", employeeId='" + employeeNicNo + '\'' +
+                '}';
+    }
 }

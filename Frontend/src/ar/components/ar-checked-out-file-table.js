@@ -60,7 +60,7 @@ const [show, setShow] = React.useState(false);
           </Table.Cell>
           <Table.Cell>{file.fileName}</Table.Cell>
           <Table.Cell >{/*{status.acting ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}{file.sectionName}</Table.Cell>
-          <Table.Cell >{/*{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}{file.nameWithInitials}</Table.Cell>
+          <Table.Cell >{/*{status.supervisor ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>} */}{file.employeeFullName}</Table.Cell>
           <Table.Cell >{/*{status.hod ? <span className="text-green-500 uppercase flex gap-5 items-center" > <FaCheck/>  Approved</span> : <span className="text-orange-400 uppercase flex gap-5 items-center"> <FaHourglass/>  Pending</span>}*/} {file.dateTime}</Table.Cell>
           <Table.Cell>
             <Button  onClick={()=>checkInFile(file.id)}>Check In</Button>

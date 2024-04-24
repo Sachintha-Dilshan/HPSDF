@@ -100,7 +100,7 @@ function ARHome() {
     },
   ];
   return (
-    <main class="flex justify">
+    <main className="flex justify">
 
       <CollapseBar />
       <div>

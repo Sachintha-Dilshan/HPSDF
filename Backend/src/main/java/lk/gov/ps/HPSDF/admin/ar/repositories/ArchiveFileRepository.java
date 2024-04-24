@@ -30,6 +30,7 @@ public interface ArchiveFileRepository extends JpaRepository<ArchiveFile,Long> {
             "WHERE (:isCheckedOut IS NULL OR af.isCheckedOut = :isCheckedOut) " +
             "AND (:fileNumber IS NULL OR af.fileNumber = :fileNumber) " +
             "AND (:fileName IS NULL OR af.fileName = :fileName) " +
+            "AND (:year IS NULL OR af.year = :year) " +
             "AND (:sectionName IS NULL OR af.archiveSection.sectionName = :sectionName) " +
             "AND (:subjectName IS NULL OR af.archiveSubject.subjectName = :subjectName) " +
             "AND (:employeeNIC IS NULL OR af.employee.nicNo = :employeeNIC)")
@@ -37,9 +38,13 @@ public interface ArchiveFileRepository extends JpaRepository<ArchiveFile,Long> {
             @Param("isCheckedOut") Boolean isCheckedOut,
             @Param("fileNumber") String fileNumber,
             @Param("fileName") String fileName,
+            @Param("year") String year,
             @Param("sectionName") String sectionName,
             @Param("subjectName") String subjectName,
             @Param("employeeNIC") String employeeNIC
     );
+
+
+
 
 }

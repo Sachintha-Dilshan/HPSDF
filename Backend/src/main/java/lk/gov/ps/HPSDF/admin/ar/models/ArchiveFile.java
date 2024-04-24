@@ -33,7 +33,7 @@ public class ArchiveFile {
     @ManyToOne
     @JoinColumn(name = "subject_id",referencedColumnName = "id")//foreign key for Subject
     private ArchiveSubject archiveSubject;
-
+    @Column(name = "year")
     private Year year;
     @ManyToOne
     @JoinColumn(name = "rack_id",referencedColumnName = "id")//foreign key for RackId

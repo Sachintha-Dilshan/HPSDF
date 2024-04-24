@@ -22,6 +22,12 @@ import NoPage from "./pages/no-page";
 import ArHome from "./ar/pages/ar-home-test";
 import ARCheckedOutFiles from "./ar/pages/ar-checked-out-files";
 import AREmployeeArchiveAccess from "./ar/pages/ar-employee-ar-access";
+import ARSearchFile from "./ar/pages/ar-search-file";
+import ARFileLocation from "./ar/pages/ar-file-location";
+import ARCheckedOutFileEmployeeTable from "./ar/components/ar-checked-out-file-employee-table";
+import STSearchItems from "./st/pages/st-search-item";
+import STAddItem from "./st/pages/st-add-item";
+import STCheckInOutItems from "./st/pages/st-check-in-out-items";
 
 function App() {
   return (
@@ -57,7 +63,15 @@ function App() {
             <Route path="testArHome" element={<ArHome/>}/>
             <Route path="checkedOutFiles" element={<ARCheckedOutFiles/>}/> 
             <Route path="checkedOutFilesEmployee" element={<AREmployeeArchiveAccess/>}/> 
+            <Route path="searchFiles" element={<ARSearchFile/>}/>
+            <Route path="fileLocation" element={<ARFileLocation/>}/>
             
+            
+          </Route>
+          <Route path="ST">
+            <Route path="searchItems" element={<STSearchItems/>}/>
+            <Route path="addItems" element={<STAddItem/>}/>
+            <Route path="checkInOutItems" element={<STCheckInOutItems/>}/>
           </Route>
           <Route path="*" element={<NoPage />} />
         </Route>

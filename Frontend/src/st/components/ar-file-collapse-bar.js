@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoPeople, IoAddOutline, IoSettingsSharp } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
-function ARFileCollapseBar() {
+function STCollapseBar() {
   const [show, setShow] = React.useState(false);
   const [showSettings,setShowSettings]=React.useState(false);
 
@@ -20,12 +20,13 @@ function ARFileCollapseBar() {
       <div className="flex flex-col h-full">
         <div style={{ display: show ? "block" : "none" }}>
           <ul className="text-white uppercase">
-          <Link to="/AR/searchFiles"><li className="font-bold my-5"><IoIosSearch className="inline-block text-2xl" />Search File</li></Link>
-          <Link to="/AR/checkedOutFilesEmployee"><li className="font-bold my-5"><IoPeople className="inline-block text-2xl" />Employee Profile</li></Link>
-          {/* <li
+          <Link to="/ST/searchItems"><li className="font-bold my-5"><IoIosSearch className="inline-block text-2xl" />Search Items</li></Link>
+          <Link to="/ST/checkInOutItems"><li className="font-bold my-5"><IoPeople className="inline-block text-2xl" />Check In Out Item</li></Link>
+          
+          <li
           className="font-bold my-5"
            onMouseEnter={()=>setShowSettings((prevShow)=>!prevShow)}
-           onMouseLeave={()=>setShowSettings((prevShow)=>!prevShow)}
+          //  onMouseLeave={()=>setShowSettings((prevShow)=>!prevShow)}
            >
             <IoSettingsSharp className="inline-block text-2xl" />Settings
           </li>
@@ -33,11 +34,11 @@ function ARFileCollapseBar() {
               className="ml-5"
               style={{ display: showSettings ? "block" : "none" }}
             >
-              <li>
+             <Link to="/ST/addItems"> <li>
               <IoAddOutline className="inline-block text-2xl" />
-                ADD NEW SECTION
-              </li>
-            </ul> */}
+                ADD ITEMS
+              </li></Link>
+            </ul>
           </ul>
         </div>
       </div>
@@ -45,4 +46,4 @@ function ARFileCollapseBar() {
   );
 }
 
-export default ARFileCollapseBar;
+export default STCollapseBar;

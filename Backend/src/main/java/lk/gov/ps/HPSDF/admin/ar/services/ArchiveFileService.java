@@ -5,9 +5,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetCheckedOutFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetFileDTO;
+import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveGetSearchFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveSaveFileDTO;
 import lk.gov.ps.HPSDF.admin.ar.models.ArchiveFile;
 import lk.gov.ps.HPSDF.admin.ar.repositories.ArchiveFileRepository;
+import lk.gov.ps.HPSDF.admin.hr.models.Employee;
+import lk.gov.ps.HPSDF.admin.hr.repositories.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,11 +28,13 @@ import java.util.stream.Collectors;
 @Component
 public class ArchiveFileService {
     private ArchiveFileRepository archiveFileRepository;
+    private EmployeeRepository employeeRepository;
     private ModelMapper modelMapper;
 
     @Autowired
-    public ArchiveFileService(ArchiveFileRepository archiveFileRepository, ModelMapper modelMapper) {
+    public ArchiveFileService(ArchiveFileRepository archiveFileRepository, ModelMapper modelMapper, EmployeeRepository employeeRepository) {
         this.archiveFileRepository = archiveFileRepository;
+        this.employeeRepository=employeeRepository;
         this.modelMapper=modelMapper;
     }
 
@@ -52,18 +58,33 @@ public class ArchiveFileService {
         return archiveFileRepository.findTop5ByOrderByIdDesc(sectionId,pageable);
 
     }
-    public List<ArchiveGetCheckedOutFileDTO> getCheckedOutFiles(String fileNumber, String fileName, String sectionName, String subjectName, String employeeNIC){
+    public List<ArchiveGetCheckedOutFileDTO> getCheckedOutFiles(String fileNumber, String fileName,String year, String sectionName, String subjectName, String employeeNIC){
         List<ArchiveFile> files= archiveFileRepository
                 .findByDynamicParameters(
-                        true, fileNumber, fileName,sectionName,subjectName, employeeNIC);
+                        true, fileNumber, fileName,year,sectionName,subjectName, employeeNIC);
         List<ArchiveGetCheckedOutFileDTO> newfiles=files.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
-
+        for (ArchiveGetCheckedOutFileDTO file : newfiles) {
+            System.out.println(file); // Assuming you've overridden toString() in ArchiveGetCheckedOutFileDTO
+        }
         return newfiles;
     }
     private ArchiveGetCheckedOutFileDTO convertToDTO(ArchiveFile file){
         return modelMapper.map(file,ArchiveGetCheckedOutFileDTO.class);
+    }
+    public List<ArchiveGetSearchFileDTO> getSearchFiles(String fileNumber, String fileName, String year, String sectionName, String subjectName, String employeeNIC) {
+        List<ArchiveFile> files= archiveFileRepository
+                .findByDynamicParameters(
+                        null, fileNumber, fileName,year,sectionName,subjectName, employeeNIC);
+        List<ArchiveGetSearchFileDTO> newfiles=files.stream()
+                .map(this::convertToSearchDTO)
+                .collect(Collectors.toList());
+
+        return newfiles;
+    }
+    private ArchiveGetSearchFileDTO convertToSearchDTO(ArchiveFile file){
+        return modelMapper.map(file,ArchiveGetSearchFileDTO.class);
     }
     public int getFileCountsCheckedOut(){
         return archiveFileRepository.getFileCountsCheckedOut();
@@ -125,6 +146,28 @@ public class ArchiveFileService {
             existingFile.setEmployee(null);
             existingFile.setCheckedOut(false);
             archiveFileRepository.save(existingFile);
+
+        }
+    }
+
+
+    public void checkOutArchiveFile(Long fileId, String employeeId) {
+        ArchiveFile existingFile=archiveFileRepository.findById(fileId)
+                .orElse(null);
+        if(existingFile==null){
+            throw new EntityNotFoundException("File with file id " +fileId +" is not found");
+        }else{
+           Optional<Employee> employee =employeeRepository.findById(employeeId);
+            System.out.println("hoooooooooooooooooo");
+            if(!employee.isPresent()){
+                throw new EntityNotFoundException("Employee with id "+employeeId+" is not found.");
+            }else{
+                existingFile.setDateTime(LocalDateTime.now());
+                existingFile.setCheckedOut(true);
+                existingFile.setEmployee(employee.get());
+                archiveFileRepository.save(existingFile);
+
+            }
 
         }
     }

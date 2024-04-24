@@ -5,6 +5,7 @@ const API_URL = "http://localhost:8080/api/auth/ar/";
 
 
 
+
 const findByFileName = fileName => {
   return axios.get(API_URL + `fileByName/${fileName}`, { headers: AuthHeader() });
 };
@@ -28,6 +29,9 @@ const getAllFiles = () => {
     }
     if(file.fileName!==undefined && file.fileName!=="" && file.fileName!==null){
       url+=`&fileName=${file.fileName}`;
+    }
+    if(file.year!==undefined && file.year!=="" && file.year!==null){
+      url+=`&year=${file.year}`;
     }
     if(file.section!==undefined && file.section!=="" && file.section!==null){
       url+=`&sectionName=${file.section}`;
@@ -53,6 +57,31 @@ const getAllFiles = () => {
 // section:"",
 // subject:"",
 // employeeId:""
+const getSearchFiles=(file)=>{
+  
+  let url=API_URL + "searchFile?";
+  if(file.fileNumber!==undefined && file.fileNumber!=="" && file.fileNumber!==null){
+    url+=`&fileNumber=${file.fileNumber}`;
+  }
+  if(file.fileName!==undefined && file.fileName!=="" && file.fileName!==null){
+    url+=`&fileName=${file.fileName}`;
+  }
+  if(file.year!==undefined && file.year!=="" && file.year!==null){
+    url+=`&year=${file.year}`;
+  }
+  if(file.section!==undefined && file.section!=="" && file.section!==null){
+    url+=`&sectionName=${file.section}`;
+  }
+  if(file.subject!==undefined && file.subject!=="" && file.subject!==null){
+    url+=`&subjectName=${file.subject}`;
+  }
+  if(file.employeeId!==undefined && file.employeeId!=="" && file.employeeId!==null){
+    url+=`&employeeNIC=${file.employeeId}`;
+  }
+  console.log(url);
+  return axios.get(url,{headers:AuthHeader()});
+  
+}
 
 
 const getCheckedoutFilesEmployee=(employeeId)=>{
@@ -70,6 +99,10 @@ const getFileCheckedOutCount = ()=> {
     return axios.put(API_URL + `file/${sectionId}/${fileId}`, data, { headers: AuthHeader() } );
   };
 
+  const checkOutFile=(fileId,employeeId)=>{
+    return axios.put(API_URL+ `checkOutFile/${fileId}/${employeeId}`,{headers:AuthHeader()});
+  }
+
   const checkInFile=(fileId)=>{
     return axios.put(API_URL+`checkInFile/${fileId}`,{ headers: AuthHeader() } )
   }
@@ -86,9 +119,12 @@ const getFileCheckedOutCount = ()=> {
     getRecentFiles,
     getFile,
     getCheckedoutFiles,
+    getCheckedoutFilesEmployee,
+    getSearchFiles,
     getFileCheckedOutCount,
     addFile,
     updateFile,
+    checkOutFile,
     checkInFile,
     removeFile,
     findByFileName
