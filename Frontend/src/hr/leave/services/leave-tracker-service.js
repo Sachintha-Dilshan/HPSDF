@@ -10,7 +10,7 @@ const saveLeaveTrackingDetails = (data) => {
 };
 
 const updateLeaveTrackerDetails = (data,id) => {
-    return axios.put(API_URL + `updateLeaveTracker/${id}`, data, { headers: AuthHeader() } );
+  return axios.put(API_URL + `updateLeaveTracker/${id}`, data, { headers: AuthHeader() } );
 };
 
 const getLeaveRequests = () => {

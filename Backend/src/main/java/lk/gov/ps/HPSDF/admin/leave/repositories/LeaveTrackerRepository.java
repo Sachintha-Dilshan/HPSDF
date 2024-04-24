@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LeaveTrackerRepository extends JpaRepository<LeaveTracker, Integer> {
     @Query(
-            value = "select e.nic_no, a.application_id, e.name_with_initials, t.leave_type, l.acting_officer_approval_status, l.supervisor_approval_status, l.hod_approval_status  from employees e, leave_application a,leave_tracker l, leave_types t  where e.nic_no = a.employee_nic_no and a.application_id = l.leave_application_id and a.leave_type=t.id",
+            value = "select e.nic_no, a.application_id, e.name_with_initials, t.leave_type, l.acting_officer_approval_status, l.supervisor_approval_status, l.hod_approval_status  from employees e, leave_application a,leave_tracker l, leave_types t  where e.nic_no = a.employee_nic_no and a.application_id = l.leave_application_id and a.leave_type=t.id order by a.application_id desc",
             nativeQuery = true
     )
     List<Object[]> getLeaveRequests();

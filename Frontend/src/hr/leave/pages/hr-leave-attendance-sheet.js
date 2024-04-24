@@ -4,35 +4,31 @@ import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import { Table, Button, TextInput, Select } from "flowbite-react";
 import { FaEdit } from "react-icons/fa";
 import { HiOutlineSave } from "react-icons/hi";
+import EmployeeService from "../../services/add-new-employee-service";
+import { useState, useEffect } from "react";
 
 function HREmployeesAttendanceSheet() {
-  const attendanceData = [
-    {
-      id: 1, // Leave ID
-      name: "Mr. Sachintha Dilshan",
-      date: "2024-01-25",
-      present: true,
-      timeIn: "09:00",
-      timeOut: "17:30",
-    },
-    {
-      id: 2, // Leave ID
-      name: "Ms. Chani Ekanayake",
-      date: "2024-01-25",
-      present: false,
-      remarks: "Sick leave",
-    },
-    {
-      id: 3, // Leave ID
-      name: "Ms. Praveen Sathsara",
-      date: "2024-01-25",
-      present: true,
-      timeIn: "10:15",
-      timeOut: "17:45",
-      remarks: "Meeting delay",
-    },
-  ];
+  const [employeeData, setEmployeeData] = useState("");
 
+  useEffect(() => {
+    const getAllEmployees = async () => {
+      try {
+
+        const response = await EmployeeService.getAllEmployees();
+        setEmployeeData(response.data);
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.error
+        ) {
+          console.log(error.response.data.error);
+        }
+      }
+    };
+
+    getAllEmployees();
+  }, []);
   const [edit, setEdit] = React.useState(true);
   function handleClick() {
     setEdit((prevEdit) => !prevEdit);
@@ -55,17 +51,17 @@ function HREmployeesAttendanceSheet() {
               Present Today
             </span>
             <Button pill className="inline-block">
-              <span className="flex justify-center flex-grow">105</span>
+              <span className="flex justify-center flex-grow">0</span>
             </Button>
             <span className="flex items-center text-slate-600">
               Absent Today
             </span>
             <Button pill className="inline-block">
-              <span className="flex justify-center flex-grow">12</span>
+              <span className="flex justify-center flex-grow">0</span>
             </Button>
             <span className="flex items-center text-slate-600">Late Today</span>
             <Button pill className="inline-block">
-              <span className="flex justify-center flex-grow">5</span>
+              <span className="flex justify-center flex-grow">0</span>
             </Button>
           </fieldset>
 
@@ -88,23 +84,23 @@ function HREmployeesAttendanceSheet() {
             </Table.Head>
 
             <Table.Body className="divide-y">
-              {attendanceData.map((data) => (
+              {employeeData && employeeData.map((data) => (
                 <Table.Row
-                  key={data.id}
+                  key={data.nicNo}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {data.id}
+                    {data.leaveId}
                   </Table.Cell>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                    {data.name}
+                    {data.nameWithInitials}
                   </Table.Cell>
-                  <Table.Cell>{data.date}</Table.Cell>
+                  <Table.Cell>{new Date().getFullYear()}-{new Date().getMonth() + 1}-{new Date().getDate()}</Table.Cell>
                   <Table.Cell>
                     <Select
                       id="status"
                       required
-                      placeholder={data.present}
+                      placeholder={""}
                       disabled={edit}
                     >
                       <option value={true}>Present</option>
@@ -115,7 +111,7 @@ function HREmployeesAttendanceSheet() {
                     <TextInput
                       type="text"
                       id="disabledInput1"
-                      placeholder={data.timeIn}
+                      placeholder={""}
                       disabled={edit}
                       style={{ textAlign: "center" }}
                     />
@@ -124,7 +120,7 @@ function HREmployeesAttendanceSheet() {
                     <TextInput
                       type="text"
                       id="disabledInput1"
-                      placeholder={data.timeOut}
+                      placeholder={""}
                       disabled={edit}
                       style={{ textAlign: "center" }}
                     />
@@ -133,7 +129,7 @@ function HREmployeesAttendanceSheet() {
                     <TextInput
                       type="text"
                       id="disabledInput1"
-                      placeholder={data.remarks}
+                      placeholder={""}
                       disabled={edit}
                       style={{ textAlign: "center" }}
                     />

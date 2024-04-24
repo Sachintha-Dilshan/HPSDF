@@ -15,9 +15,53 @@ const getLeaveChit = (applicationId) => {
   });
 };
 
+const getApprovedLeaveApplications = (nicNo) => {
+  return axios.get(API_URL + `getApprovedLeaveApplications/${nicNo}`, {
+    headers: AuthHeader(),
+  });
+};
+
+const getOnLeaveTodayApplications = () => {
+  return axios.get(API_URL + "getOnLeaveTodayApplications", {
+    headers: AuthHeader(),
+  });
+};
+
+
+const getOnLeaveTodayApplicationsCount = () => {
+  return axios.get(API_URL + "getOnLeaveTodayApplicationsCount", {
+    headers: AuthHeader(),
+  });
+};
+
+const getLeaveRequests = (nicNo) => {
+  return axios.get(API_URL + `getLeaveRequests/${nicNo}`, {
+    headers: AuthHeader(),
+  });
+};
+
+
+const getLeaveRequestsCount = (nicNo) => {
+  return axios.get(API_URL + `getLeaveRequestsCount/${nicNo}`, {
+    headers: AuthHeader(),
+  });
+};
+
+const updateApplicationStatus = (data, applicationId) => {
+  return axios.put(API_URL + `updateApplicationStatus/${applicationId}`, data, {
+    headers: AuthHeader(),
+  });
+};
+
 const LeaveApplicationService = {
   saveLeaveApplication,
-  getLeaveChit
+  getLeaveChit,
+  getApprovedLeaveApplications,
+  getOnLeaveTodayApplications,
+  getOnLeaveTodayApplicationsCount,
+  getLeaveRequests,
+  getLeaveRequestsCount,
+  updateApplicationStatus
 };
 
 export default LeaveApplicationService;

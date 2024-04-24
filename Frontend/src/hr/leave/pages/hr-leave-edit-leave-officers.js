@@ -34,7 +34,7 @@ function HREditLeaveOfficers() {
   const getHeads = async () => {
     try {
       const response = await editLeaveOfficerService.getLeaveOfficers(
-        "ROLE_HEAD"
+        "ROLE_CHAIRMAN"
       );
       setHeads(response.data);
     } catch (error) {
@@ -47,7 +47,7 @@ function HREditLeaveOfficers() {
   const getSupervisors = async () => {
     try {
       const response = await editLeaveOfficerService.getLeaveOfficers(
-        "ROLE_SUPERVISOR"
+        "ROLE_SECRETARY"
       );
       setSupervisors(response.data);
     } catch (error) {
@@ -123,7 +123,7 @@ function HREditLeaveOfficers() {
       } else {
         const head = {
           nicNo: nicNo,
-          role: "ROLE_HEAD",
+          role: "ROLE_CHAIRMAN",
         };
         const response = await editLeaveOfficerService.addLeaveOfficer(head);
 
@@ -155,7 +155,7 @@ function HREditLeaveOfficers() {
       } else {
         const supervisor = {
           nicNo: supervisorNicNo,
-          role: "ROLE_SUPERVISOR",
+          role: "ROLE_SECRETARY",
         };
         const response = await editLeaveOfficerService.addLeaveOfficer(
           supervisor

@@ -18,12 +18,12 @@ public class PastLeaveRecordService {
     }
 
 
-    public List<Object[]> getByLeaveId(int leaveId){
-        return pastLeaveRecordsRepository.findRecordById(leaveId);
+    public List<Object[]> getByNicNo(String nicNO){
+        return pastLeaveRecordsRepository.findRecordByNicNO(nicNO);
     }
 
     public PastLeaveRecord update(PastLeaveRecord pastLeaveRecord){
-        PastLeaveRecord existingRecord = pastLeaveRecordsRepository.findRecord(pastLeaveRecord.getLeaveId(), pastLeaveRecord.getYear());
+        PastLeaveRecord existingRecord = pastLeaveRecordsRepository.findRecord(pastLeaveRecord.getNicNo(), pastLeaveRecord.getYear());
         if(existingRecord != null){
             existingRecord.setCasualLeave(pastLeaveRecord.getCasualLeave());
             existingRecord.setVacationLeave(pastLeaveRecord.getVacationLeave());
@@ -32,11 +32,11 @@ public class PastLeaveRecordService {
             return existingRecord;
     }
 
-    public boolean delete(int leaveId,int year){
-        PastLeaveRecord pastLeaveRecord = pastLeaveRecordsRepository.findRecord(leaveId, year);
+    public boolean delete(String nicNo, int year){
+        PastLeaveRecord pastLeaveRecord = pastLeaveRecordsRepository.findRecord(nicNo, year);
         if(pastLeaveRecord != null)
         {
-            pastLeaveRecordsRepository.deleteRecord(leaveId, year);
+            pastLeaveRecordsRepository.deleteRecord(nicNo, year);
             return true;
         }
         else

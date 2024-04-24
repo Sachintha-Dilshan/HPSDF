@@ -7,8 +7,8 @@ const getAll = () => {
   return axios.get(API_URL + "getAllPastRecords", { headers: AuthHeader() });
 };
 
-const getByLeaveId = (leaveId) => {
-  return axios.get(API_URL + `getPastRecordByLeaveId/${leaveId}`, {
+const getByNicNo = (nicNo) => {
+  return axios.get(API_URL + `getPastRecordByNicNo/${nicNo}`, {
     headers: AuthHeader(),
   });
 };
@@ -23,15 +23,15 @@ const update = (data) => {
   });
 };
 
-const remove = (leaveId, year) => {
-  return axios.delete(API_URL + `deletePastRecord/${leaveId}/${year}`, {
+const remove = (nicNo, year) => {
+  return axios.delete(API_URL + `deletePastRecord/${nicNo}/${year}`, {
     headers: AuthHeader(),
   });
 };
 
 const PastRecordService = {
   getAll,
-  getByLeaveId,
+  getByNicNo,
   add,
   update,
   remove

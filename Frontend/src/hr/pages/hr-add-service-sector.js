@@ -13,8 +13,15 @@ import {
   MdRadioButtonUnchecked,
 } from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
+import userRoles from "../../data/user-roles";
 
 function HRAddServiceSectors() {
+  const currentUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).roles
+    : null;
+  const roles = userRoles;
+
+
   const [serviceSectorName, setServiceSectorName] = React.useState("");
   const [serviceSectorData, setServiceSectorData] = React.useState([]);
   const [serviceSectorId, setServiceSectorId] = React.useState("");
@@ -174,7 +181,7 @@ function HRAddServiceSectors() {
         </h3>
 
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
-          <form onSubmit={handleSubmit}>
+          {currentUser.includes(roles.hrAdmin) && (<form onSubmit={handleSubmit}>
           <fieldset className="border rounded-lg grid lg:grid-cols-6 p-5 md:gap-10 gap-5 m-5">
 
               <FloatingLabel
@@ -223,7 +230,7 @@ function HRAddServiceSectors() {
                   <FaEraser className="mr-2 h-5 w-5" /> Clear Service Sector
                 </Button>
             </fieldset>
-          </form>
+          </form> )}
         </div>
         <div className="overflow-auto flex justify-center">
           <Table striped hoverable>

@@ -53,6 +53,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     )
     String findEmployeeName(int leave_id);
 
+
+
     @Query(
             value = "select e.nic_no from employees e where leave_id = ?1",
             nativeQuery = true
@@ -64,4 +66,22 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
             nativeQuery = true
     )
     Object[] findEmployeeLeavePersonalData(int leave_id);
+
+    @Query(
+            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id and e.dob = curdate()",
+            nativeQuery = true
+    )
+    List<Object[]> findEmployeeBirthdayToday();
+
+    @Query(
+            value = "select count(e.nic_no) from employees e where e.dob = curdate()",
+            nativeQuery = true
+    )
+    int findEmployeeBirthdayTodayCount();
+
+    @Query(
+            value = "select e.nic_no,e.name_with_initials,e.mobile_no,d.designation_name from employees e, designations d  where e.designation = d.designation_id and email = ?1",
+            nativeQuery = true
+    )
+    Object[] getEmployeeByEmail(String email);
 }

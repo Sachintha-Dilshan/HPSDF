@@ -5,6 +5,8 @@ import EmployeeService from "../../services/add-new-employee-service";
 import editLeaveOfficerService from "../services/leave-edit-leave-officers-service";
 import LeaveApplicationService from "../services/leave-application-service";
 import LeaveTrackingService from "../services/leave-tracker-service";
+import userRoles from "../../../data/user-roles";
+import HRCollapseBar from "../../components/hr-collapse-bar";
 
 import {
   FloatingLabel,
@@ -13,11 +15,17 @@ import {
   Label,
   Button,
   Modal,
+  Spinner
 } from "flowbite-react";
 import { MdError, MdDoneOutline, MdRadioButtonUnchecked } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 
 function HRLeaveApplyLeave() {
+  const currentUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).roles
+    : null;
+  const roles = userRoles;
+
   const [leaveTypes, setLeaveTypes] = useState([]);
   const [employeeLeavePersonalData, setEmployeeLeavePersonalData] = useState(
     []
@@ -42,7 +50,7 @@ function HRLeaveApplyLeave() {
     dateOfResumingDuties: "",
     leavePeriod: "",
     reason: "",
-    status: 1,  // Status => {1 : Pending, 2 : Approved, 3 : Rejected }
+    status: 0,  // Status => {0 : Pending, 1 : Approved, 2 : Rejected }
   });
 
   const handleChange = (event) => {
@@ -72,7 +80,7 @@ function HRLeaveApplyLeave() {
   const getHeads = async () => {
     try {
       const response = await editLeaveOfficerService.getLeaveOfficers(
-        "ROLE_HEAD"
+        "ROLE_CHAIRMAN"
       );
       setHeads(response.data);
     } catch (error) {
@@ -85,7 +93,7 @@ function HRLeaveApplyLeave() {
   const getSupervisors = async () => {
     try {
       const response = await editLeaveOfficerService.getLeaveOfficers(
-        "ROLE_SUPERVISOR"
+        "ROLE_SECRETARY"
       );
       setSupervisors(response.data);
     } catch (error) {
@@ -184,6 +192,9 @@ function HRLeaveApplyLeave() {
       setOpenModal(true);
     } else {
       try {
+        setMessage("සැකසෙමින් පවතී..");
+        setTitle("Processing");
+        setOpenModal(true);
 
         const response = await LeaveApplicationService.saveLeaveApplication(
           applicationData
@@ -219,7 +230,10 @@ function HRLeaveApplyLeave() {
 
   return (
     <main>
-      <LeaveCollapseBar />
+      {currentUser.some((role) =>
+        [roles.hrAdmin, roles.chairman, roles.secretary].includes(role)
+      ) && <HRCollapseBar />}
+      {currentUser.includes(roles.leaveAdmin) && <LeaveCollapseBar />}
       <div className="flex flex-col  gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
           Apply Leave
@@ -438,6 +452,7 @@ function HRLeaveApplyLeave() {
 
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>
+        {title === "Processing" && <Spinner size="xl" className="mr-5" />}
           {title === "Error" && (
             <MdError className="inline-block text-red-500 text-4xl mr-5" />
           )}

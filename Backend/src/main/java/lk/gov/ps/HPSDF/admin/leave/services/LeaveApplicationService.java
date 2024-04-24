@@ -8,6 +8,8 @@ import lk.gov.ps.HPSDF.admin.leave.repositories.LeaveApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LeaveApplicationService {
     @Autowired
@@ -39,5 +41,37 @@ public class LeaveApplicationService {
 
     public Object[] getLeaveChit(int applicationId){
         return leaveApplicationRepository.getLeaveChit(applicationId);
+    }
+
+    public List<Object[]> getApprovedLeaveApplications(String nicNo){
+        return leaveApplicationRepository.getApprovedLeaveApplications(nicNo);
+    }
+
+    public List<Object[]> getOnLeaveTodayApplications()
+    {
+        return leaveApplicationRepository.getOnLeaveTodayApplications();
+    }
+
+    public int getOnLeaveTodayApplicationsCount()
+    {
+        return leaveApplicationRepository.getOnLeaveTodayApplicationsCount();
+    }
+
+    public List<Object[]> getLeaveRequests(String nicNo)
+    {
+        return leaveApplicationRepository.getLeaveRequests(nicNo);
+    }
+
+    public int getLeaveRequestsCount(String nicNo)
+    {
+        return leaveApplicationRepository.getLeaveRequestsCount(nicNo);
+    }
+    public LeaveApplication updateApplicationStatus(LeaveApplication leaveApplication, int applicationId)
+    {
+        LeaveApplication existingLeaveApplication = leaveApplicationRepository.findById(applicationId).orElse(null);
+
+        existingLeaveApplication.setStatus(leaveApplication.getStatus());
+
+        return leaveApplicationRepository.save(existingLeaveApplication);
     }
 }

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @IdClass(PastLeaveRecordId.class)
 public class PastLeaveRecord {
     @Id
-    @Column(name = "leave_id")
+    @Column(name = "nic_no")
     @NotNull
-    private int leaveId;
+    private String nicNo;
 
     @Id
     @Column(name = "year")

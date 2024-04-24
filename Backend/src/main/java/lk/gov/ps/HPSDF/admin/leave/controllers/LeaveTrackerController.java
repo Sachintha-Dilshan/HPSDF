@@ -31,6 +31,7 @@ public class LeaveTrackerController {
 
     @PutMapping("/updateLeaveTracker/{id}")
     public ResponseEntity<LeaveTracker> updateLeaveTracker(@RequestBody @Valid  LeaveTracker leaveTracker, @PathVariable int id){
+        System.out.println(leaveTracker.toString());
         LeaveTracker _leaveTracker = leaveTrackerService.updateLeaveTracker(leaveTracker, id);
         if(_leaveTracker == null)
             return new ResponseEntity<>(_leaveTracker,HttpStatus.NOT_FOUND);

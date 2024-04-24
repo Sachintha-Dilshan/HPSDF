@@ -10,7 +10,9 @@ import HRAddSubjects from "../hr/pages/hr-add-subject";
 
 import HRLeaveDashboard from "../hr/leave/pages/hr-leave-dashboard";
 import HREmployeeLeaveRequest from "../hr/pages/hr-leave-request";
+import HRPendingLeaveRequests from "../hr/pages/hr-pending-leave-requests";
 import HROnLeaveToday from "../hr/pages/hr-on-leave-today";
+import HREmployeeBirthdayToday from "../hr/pages/hr-employee-birthday-today";
 import HREmployeesAttendanceSheet from "../hr/leave/pages/hr-leave-attendance-sheet";
 import HRLeaveAddLeaves from "../hr/leave/pages/hr-leave-add-leaves";
 import HRLeaveAddPastRecords from "../hr/leave/pages/hr-leave-add-past-records";
@@ -21,7 +23,7 @@ const HRRoutes = [
     {
         path : "HR/dashboard",
         element : <HRDashboard/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/addEmployee",
@@ -31,32 +33,32 @@ const HRRoutes = [
     {
         path : "HR/employeeProfile",
         element : <HREmployeeProfile/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary]
     },
     {
         path : "HR/allEmployees",
         element : <HRSearchEmployees/>,
-        availability : [userRoles.hrAdmin, userRoles.user]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.leaveAdmin, userRoles.user]
     },
     {
         path : "HR/addSections",
         element : <HRAddSections/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/addDesignations",
         element : <HRAddDesignations/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/addServiceSectors",
         element : <HRAddServiceSectors/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/addSubjects",
         element : <HRAddSubjects/>,
-        availability : [userRoles.hrAdmin]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/Leave/dashboard",
@@ -67,11 +69,24 @@ const HRRoutes = [
         path : "HR/Leave/leaveRequest",
         element : <HREmployeeLeaveRequest/>,
         availability : [userRoles.chairman, userRoles.secretary, userRoles.hrAdmin, userRoles.leaveAdmin, userRoles.user]   
+
+    },
+    {
+        path : "HR/Leave/pendingLeaveRequests",
+        element : <HRPendingLeaveRequests/>,
+        availability : [userRoles.chairman, userRoles.secretary, userRoles.hrAdmin, userRoles.leaveAdmin, userRoles.user]   
+
+    },
+    {
+        path : "HR/Leave/birthdayToday",
+        element : <HREmployeeBirthdayToday/>,
+        availability : [userRoles.chairman, userRoles.secretary, userRoles.hrAdmin, userRoles.leaveAdmin, userRoles.user]   
+
     },
     {
         path : "HR/Leave/onLeaveToday",
         element : <HROnLeaveToday/>,
-        availability : [userRoles.chairman, userRoles.hrAdmin, userRoles.leaveAdmin]
+        availability : [userRoles.chairman, userRoles.hrAdmin, userRoles.leaveAdmin, userRoles.secretary, userRoles.user]
     },
     {
         path : "HR/Leave/employeeAttendanceSheet",
@@ -91,7 +106,7 @@ const HRRoutes = [
     {
         path : "HR/leave/applyLeave",
         element : <HRLeaveApplyLeave/>,
-        availability : [userRoles.leaveAdmin]
+        availability : [userRoles.leaveAdmin, userRoles.user, userRoles.hrAdmin, userRoles.chairman, userRoles.chairman]
     },
     {
         path : "HR/leave/editLeaveOfficers",

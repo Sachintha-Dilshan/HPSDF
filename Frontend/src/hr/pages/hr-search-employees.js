@@ -7,9 +7,16 @@ import EmployeeService from "../services/add-new-employee-service";
 import sectionService from "../services/add-section-service";
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import userRoles from "../../data/user-roles";
+import LeaveCollapseBar from "../leave/components/hr-leave-collapse-bar";
 
 function HRSearchEmployees() {
   const navigate = useNavigate();
+  const currentUser = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user")).roles
+  : null;
+const roles = userRoles;
+
   const [employeeData, setEmployeeData] = useState([]);
   const [sections, setSections] = useState([]);
   const [nicNo, setNicNo] = useState("");
@@ -117,7 +124,8 @@ function HRSearchEmployees() {
   return (
     <main>
       {/* Collapse bar starts here */}
-      <HRCollapseBar />
+      {currentUser.some(role => [roles.hrAdmin, roles.chairman, roles.secretary].includes(role)) && <HRCollapseBar />}
+      {currentUser.includes(roles.leaveAdmin) && <LeaveCollapseBar />}
       {/* Collapse bae ends here */}
 
       <div className="flex flex-col gap-2 m-5">
@@ -175,7 +183,7 @@ function HRSearchEmployees() {
               return (
                 <div
                   onClick={() => {
-                    navigate("/HR/employeeProfile", { state: employee });
+                    navigate(currentUser.some(role => [roles.hrAdmin, roles.chairman, roles.secretary].includes(role)) && "/HR/employeeProfile", { state: employee });
                   }}
                   key={employee[0]}
                 >

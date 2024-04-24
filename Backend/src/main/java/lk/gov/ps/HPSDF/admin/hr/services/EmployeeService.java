@@ -23,6 +23,11 @@ public class EmployeeService {
     public String getEmployeeName(int leaveId){
         return employeeRepository.findEmployeeName(leaveId);
     }
+
+    public String getEmployeeNicNo(int leaveId){
+        return employeeRepository.findEmployeeNicNo(leaveId);
+    }
+
     public List<Object[]> getAllEmployeesData(){
         return employeeRepository.findAllEmployeesData();
     }
@@ -30,12 +35,25 @@ public class EmployeeService {
     public List<Object[]> getAllEmployees(){
         return employeeRepository.findAllEmployees();
     }
+
+    public List<Object[]> findEmployeeBirthdayToday(){
+        return employeeRepository.findEmployeeBirthdayToday();
+    }
+
+    public int findEmployeeBirthdayTodayCount(){
+        return employeeRepository.findEmployeeBirthdayTodayCount();
+    }
     public List<Object[]> sortEmployeesBySection(int sectionId){
         return employeeRepository.sortEmployeesBySection(sectionId);
     }
 
     public Object[] getEmployeeLeavePersonalData(int  leaveId){
         return employeeRepository.findEmployeeLeavePersonalData(leaveId);
+    }
+
+    public Object[] getEmployeeByEmail(String email)
+    {
+        return employeeRepository.getEmployeeByEmail(email);
     }
 
 

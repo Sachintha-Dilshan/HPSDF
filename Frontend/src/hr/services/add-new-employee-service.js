@@ -15,6 +15,10 @@ const getEmployeeName = (leaveId) => {
   return axios.get(API_URL + `employeeName/${leaveId}`, { headers: AuthHeader() });
 };
 
+const getEmployeeNicNo = (leaveId) => {
+  return axios.get(API_URL + `getEmployeeNicNo/${leaveId}`, { headers: AuthHeader() });
+};
+
 const getEmployeeLeavePersonalData = (leaveId) => {
   return axios.get(API_URL + `getEmployeeLeavePersonalData/${leaveId}`, { headers: AuthHeader() });
 };
@@ -45,6 +49,18 @@ const getEmployeeAllDataByNic = (nicNo) => {
 
 const getEmployees = () => {
   return axios.get(API_URL + "allEmployees", { headers: AuthHeader() });
+};
+
+const findEmployeeBirthdayToday = () => {
+  return axios.get(API_URL + "findEmployeeBirthdayToday", { headers: AuthHeader() });
+};
+
+const findEmployeeBirthdayTodayCount = () => {
+  return axios.get(API_URL + "findEmployeeBirthdayTodayCount", { headers: AuthHeader() });
+};
+
+const getEmployeeByEmail = (data) => {
+  return axios.post(API_URL + "getEmployeeByEmail", data, { headers: AuthHeader() });
 };
 
 const addEmployee = (data) => {
@@ -85,9 +101,13 @@ const EmployeeService = {
   getAllEmployees,
   getCount,
   getEmployeeName,
+  getEmployeeNicNo,
+  getEmployeeByEmail,
   getEmployeeLeavePersonalData,
   getAllEmployeesData,
   getEmployees,
+  findEmployeeBirthdayToday,
+  findEmployeeBirthdayTodayCount,
   sortEmployeesBySection,
   sortEmployeesByNicNo,
   sortEmployeesByLeaveId,

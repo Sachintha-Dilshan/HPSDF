@@ -30,7 +30,7 @@ function HRLeaveDashboard() {
       title: "Leave requests",
       count: 5,
       image: "/Images/leave-request.jpg",
-      url: "/HR/leaveRequest"
+      url: "/HR/Leave/employeeAttendanceSheet"
     },
     {
       id: 4,

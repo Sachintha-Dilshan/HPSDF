@@ -2,8 +2,8 @@ import React from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeePersonalData from "../components/hr-employee-personal-data";
-//import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
-//import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
+import HRIndividualLeaveRegister from "../components/hr-employee-individual-leave-register";
+import HREmployeeAttendantSheet from "../components/hr-employee-individual-attendance-sheet";
 import HREmployeeCard from "../components/hr-employee-card";
 import { useLocation } from "react-router-dom";
 //import { FloatingLabel } from "flowbite-react";
@@ -48,14 +48,14 @@ function HREmployeeProfile() {
       active: true,
       title: "Attendance Data",
       icon: FaCalendarCheck,
-      //content: <HREmployeeAttendantSheet />,
+      content: <HREmployeeAttendantSheet />,
     },
     {
       id: 5,
       active: true,
       title: "Leave Data",
       icon: FaUmbrellaBeach,
-      //content: <HRIndividualLeaveRegister />,
+      content: <HRIndividualLeaveRegister nicNo = {employee[0]}/>,
     },
   ];
   return (

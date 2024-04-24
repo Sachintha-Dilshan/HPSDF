@@ -36,14 +36,14 @@ public class PastLeaveRecordController {
             return new ResponseEntity<>(_pastLeaveRecord, HttpStatus.OK);
     }
 
-    @GetMapping("/getPastRecordByLeaveId/{leaveId}")
-    public ResponseEntity<List<Object[]>>  getByYear(@PathVariable int leaveId){
-        return ResponseEntity.ok(pastLeaveRecordService.getByLeaveId(leaveId));
+    @GetMapping("/getPastRecordByNicNo/{nicNo}")
+    public ResponseEntity<List<Object[]>>  getByNicNo(@PathVariable String nicNo){
+        return ResponseEntity.ok(pastLeaveRecordService.getByNicNo(nicNo));
 
     }
-    @DeleteMapping("/deletePastRecord/{leaveId}/{year}")
-    public String delete(@PathVariable int leaveId, @PathVariable int year){
-        if(pastLeaveRecordService.delete(leaveId, year))
+    @DeleteMapping("/deletePastRecord/{nicNo}/{year}")
+    public String delete(@PathVariable String nicNo, @PathVariable int year){
+        if(pastLeaveRecordService.delete(nicNo, year))
             return "Past leave record has been deleted";
         else
             return "Past leave record is not found";

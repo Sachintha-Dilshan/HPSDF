@@ -22,6 +22,7 @@ function HRLeaveAddPastRecords() {
     vacationLeave: "",
   });
   const [employeeName, setEmployeeName] = useState("");
+  const [employeeNicNo, setEmployeeNicNo] = useState("");
   const [leaveData, setLeaveData] = useState([]);
   const [message, setMessage] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -54,7 +55,7 @@ function HRLeaveAddPastRecords() {
       setEmployeeName("");
     }
     if (data.leaveId && employeeName) {
-      PastRecordService.getByLeaveId(data.leaveId)
+      PastRecordService.getByNicNo(employeeNicNo)
         .then((response) => {
           setLeaveData(response.data);
         })
@@ -62,13 +63,21 @@ function HRLeaveAddPastRecords() {
           console.log(e);
         });
     }
-  }, [data, employeeName]);
+  }, [data, employeeNicNo, employeeName]);
 
   useEffect(() => {
     if (data.leaveId) {
       EmployeeService.getEmployeeName(data.leaveId)
         .then((response) => {
           setEmployeeName(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      
+      EmployeeService.getEmployeeNicNo(data.leaveId)
+        .then((response) => {
+          setEmployeeNicNo(response.data);
         })
         .catch((e) => {
           console.log(e);
@@ -93,7 +102,7 @@ function HRLeaveAddPastRecords() {
         setOpenModal(true);
       } else {
         let record = {
-          leaveId: data.leaveId,
+          nicNo: employeeNicNo,
           year: data.year,
           casualLeave: data.casualLeave,
           vacationLeave: data.vacationLeave,
@@ -146,7 +155,7 @@ function HRLeaveAddPastRecords() {
         setOpenModal(true);
       } else {
         let record = {
-          leaveId: data.leaveId,
+          nicNo: employeeNicNo,
           year: data.year,
           casualLeave: data.casualLeave,
           vacationLeave: data.vacationLeave,
@@ -357,7 +366,7 @@ function HRLeaveAddPastRecords() {
           <Button
             onClick={() => {
             
-              PastRecordService.remove(data.leaveId, data.year)
+              PastRecordService.remove(employeeNicNo, data.year)
                 .then(( ) => {
                   setShow(false);
                   setMessage(

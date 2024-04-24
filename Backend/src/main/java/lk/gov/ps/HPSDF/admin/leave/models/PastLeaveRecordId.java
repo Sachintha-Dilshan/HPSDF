@@ -10,6 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PastLeaveRecordId implements Serializable {
-    private int leaveId;
+    private String nicNo;
     private int year;
 }

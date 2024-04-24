@@ -14,8 +14,14 @@ import {
   MdRadioButtonUnchecked,
 } from "react-icons/md";
 import { IoIosWarning } from "react-icons/io";
+import userRoles from "../../data/user-roles";
 
 function HRAddSubjects() {
+  const currentUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).roles
+    : null;
+  const roles = userRoles;
+
   const [subjectId, setSubjectId] = useState("");
   const [subjectName, setSubjectName] = useState("");
   const [sectionId, setSectionId] = useState("");
@@ -208,7 +214,7 @@ function HRAddSubjects() {
         </h3>
 
         <div style={{ fontFamily: "Noto Sans Sinhala" }}>
-          <form onSubmit={handleSubmit}>
+          {currentUser.includes(roles.hrAdmin) && (<form onSubmit={handleSubmit}>
             <fieldset className="border rounded-lg grid lg:grid-cols-7 p-5 md:gap-10 gap-5 m-5">
            
               {/* <FloatingLabel
@@ -285,7 +291,7 @@ function HRAddSubjects() {
                   Clear Subject
                 </Button>
             </fieldset>
-          </form>
+          </form>)}
         </div>
         <div className="overflow-auto flex justify-center">
           <Table striped hoverable>

@@ -32,6 +32,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployeeName(leaveId));
     }
 
+    @GetMapping("/getEmployeeNicNo/{leaveId}")
+    public ResponseEntity<String> getEmployeeNicNo(@PathVariable int leaveId){
+        return ResponseEntity.ok(employeeService.getEmployeeNicNo(leaveId));
+    }
+
 
     @GetMapping("/allEmployeesData")
     public ResponseEntity<List<Object[]>> getAllEmployeesData(){
@@ -60,6 +65,17 @@ public class EmployeeController {
     public ResponseEntity<Object[]> sortEmployeesByLeaveId(@PathVariable int leaveId){
         return ResponseEntity.ok(employeeService.sortEmployeesByLeaveId(leaveId));
     }
+    @GetMapping("/findEmployeeBirthdayToday")
+    public ResponseEntity<List<Object[]>> findEmployeeBirthdayToday()
+    {
+        return ResponseEntity.ok(employeeService.findEmployeeBirthdayToday());
+    }
+    @GetMapping("/findEmployeeBirthdayTodayCount")
+    public ResponseEntity<Integer> findEmployeeBirthdayTodayCount()
+    {
+        return ResponseEntity.ok(employeeService.findEmployeeBirthdayTodayCount());
+    }
+
     @GetMapping("/employee/{nicNo}")
     public ResponseEntity<Employee> getEmployee(@PathVariable String nicNo){
         Employee employee = employeeService.getEmployee(nicNo);
@@ -79,6 +95,11 @@ public class EmployeeController {
             return  new ResponseEntity<>(employee,HttpStatus.OK);
     }
 
+    @PostMapping("/getEmployeeByEmail")
+    public ResponseEntity<Object[]> getEmployeeByEmail(@RequestBody Employee employee)
+    {
+        return ResponseEntity.ok(employeeService.getEmployeeByEmail(employee.getEmail()));
+    }
     @PostMapping("/employee")
     public ResponseEntity<Employee> addEmployee(@RequestBody @Valid EmployeeRequest employeeRequest){
         Employee employee = employeeService.addEmployee(

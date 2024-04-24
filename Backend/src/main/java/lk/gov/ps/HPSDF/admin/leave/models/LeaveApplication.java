@@ -57,7 +57,7 @@ public class LeaveApplication {
 
     @Column(name = "leave_period")
     @NotNull(message = "Leave period is required.")
-    private int leavePeriod;
+    private double leavePeriod;
 
     @Column(name = "reason")
     @NotBlank(message = "Reason for leave is required.")

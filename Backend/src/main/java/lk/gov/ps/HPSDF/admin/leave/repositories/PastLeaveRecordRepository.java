@@ -13,23 +13,23 @@ import java.util.List;
 @Repository
 public interface PastLeaveRecordRepository extends JpaRepository<PastLeaveRecord, Integer> {
     @Query(
-            value = "select year, casual_leave, vacation_leave from past_leave_records where leave_id = ?1",
+            value = "select year, casual_leave, vacation_leave from past_leave_records where nic_no = ?1",
             nativeQuery = true
     )
-    List<Object[]> findRecordById(int leave_id);
+    List<Object[]> findRecordByNicNO(String nic_no);
 
     @Query(
-            value = "select * from past_leave_records where leave_id = ?1 and year = ?2",
+            value = "select * from past_leave_records where nic_no = ?1 and year = ?2",
             nativeQuery = true
     )
-    PastLeaveRecord findRecord(int leave_id, int year);
+    PastLeaveRecord findRecord(String nic_no, int year);
 
     @Modifying
     @Query(
-            value = "delete from past_leave_records where leave_id = ?1 and year = ?2",
+            value = "delete from past_leave_records where nic_no = ?1 and year = ?2",
             nativeQuery = true
     )
     @Transactional
-    void deleteRecord(int leave_id, int year);
+    void deleteRecord(String nic_no, int year);
 
 }

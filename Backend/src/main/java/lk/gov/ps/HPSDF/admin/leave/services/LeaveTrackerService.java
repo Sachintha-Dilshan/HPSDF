@@ -18,15 +18,28 @@ public class LeaveTrackerService {
         return leaveTrackerRepository.save(leaveTracker);
     }
 
-    public LeaveTracker updateLeaveTracker(LeaveTracker leaveTracker, int id){
+    public LeaveTracker updateLeaveTracker(LeaveTracker leaveTracker,int id){
+        System.out.println("********************************************Application Id :" + leaveTracker.getLeaveApplicationId());
         LeaveTracker existingLeaveTracker = leaveTrackerRepository.findById(id).orElse(null);
         if(existingLeaveTracker != null){
-            existingLeaveTracker.setActingOfficerApprovalStatus(leaveTracker.getActingOfficerApprovalStatus());
-            existingLeaveTracker.setActingOfficerApprovalTimeStamp(leaveTracker.getActingOfficerApprovalTimeStamp());
-            existingLeaveTracker.setSupervisorApprovalStatus(leaveTracker.getSupervisorApprovalStatus());
-            existingLeaveTracker.setSupervisorApprovalTimeStamp(leaveTracker.getSupervisorApprovalTimeStamp());
-            existingLeaveTracker.setHodApprovalStatus(leaveTracker.getHodApprovalStatus());
-            existingLeaveTracker.setHodApprovalTimeStamp(leaveTracker.getHodApprovalTimeStamp());
+            if(leaveTracker.getActingOfficerApprovalTimeStamp() != null)
+            {
+                existingLeaveTracker.setActingOfficerApprovalStatus(leaveTracker.getActingOfficerApprovalStatus());
+                existingLeaveTracker.setActingOfficerApprovalTimeStamp(leaveTracker.getActingOfficerApprovalTimeStamp());
+            }
+
+            if(leaveTracker.getSupervisorApprovalTimeStamp() != null)
+            {
+                existingLeaveTracker.setSupervisorApprovalStatus(leaveTracker.getSupervisorApprovalStatus());
+                existingLeaveTracker.setSupervisorApprovalTimeStamp(leaveTracker.getSupervisorApprovalTimeStamp());
+            }
+
+            if(leaveTracker.getHodApprovalTimeStamp() != null)
+            {
+                existingLeaveTracker.setHodApprovalStatus(leaveTracker.getHodApprovalStatus());
+                existingLeaveTracker.setHodApprovalTimeStamp(leaveTracker.getHodApprovalTimeStamp());
+            }
+
             return leaveTrackerRepository.save(existingLeaveTracker);
         } else
             return existingLeaveTracker;
