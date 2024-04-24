@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoPeople, IoAddOutline, IoSettingsSharp } from "react-icons/io5";
 
+
 function HRCollapseBar() {
   const [show, setShow] = React.useState(false);
   const [showSettings, setShowSettings] = React.useState(false);

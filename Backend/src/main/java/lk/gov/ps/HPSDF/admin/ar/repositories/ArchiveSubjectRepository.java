@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArchiveSubjectRepository extends JpaRepository<ArchiveSubject,Long> {
+public interface ArchiveSubjectRepository extends JpaRepository<ArchiveSubject,String> {
     @Query
-    List<ArchiveSubject> findByArchiveSectionId(Long id);
+    List<ArchiveSubject> findByArchiveSectionId(String id);
 }

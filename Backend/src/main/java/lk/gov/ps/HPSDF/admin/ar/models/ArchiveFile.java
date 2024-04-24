@@ -1,6 +1,7 @@
 package lk.gov.ps.HPSDF.admin.ar.models;
 
 import jakarta.persistence.*;
+import lk.gov.ps.HPSDF.admin.hr.models.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 
 @Entity
@@ -31,7 +33,7 @@ public class ArchiveFile {
     @ManyToOne
     @JoinColumn(name = "subject_id",referencedColumnName = "id")//foreign key for Subject
     private ArchiveSubject archiveSubject;
-
+    @Column(name = "year")
     private Year year;
     @ManyToOne
     @JoinColumn(name = "rack_id",referencedColumnName = "id")//foreign key for RackId
@@ -40,6 +42,16 @@ public class ArchiveFile {
     private int boxNumber;
     @Column(name ="file_index")
     private int fileIndex;
+    @Column(name="checkedout_time",columnDefinition = "timestamp default null")
+    private LocalDateTime dateTime;
+    @Column(name="is_checkedout" ,columnDefinition="boolean default false")
+    private boolean isCheckedOut;
+//    @Column(name = "employee_id",columnDefinition = "BIGINT DEFAULT NULL")//foreign key for employee table
+//    private Long employeeId;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id",columnDefinition = "VARCHAR(255) DEFAULT NULL")
+    private Employee employee;
 
     @Override
     public String toString() {
@@ -53,6 +65,9 @@ public class ArchiveFile {
                 ", rack=" + rack +
                 ", boxNumber=" + boxNumber +
                 ", fileIndex=" + fileIndex +
+                ", dateTime=" + dateTime +
+                ", isCheckedOut=" + isCheckedOut +
+                ", employeeId=" + employee +
                 '}';
     }
 }

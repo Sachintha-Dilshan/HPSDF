@@ -2,6 +2,7 @@ package lk.gov.ps.HPSDF.admin.ar.services;
 
 import lk.gov.ps.HPSDF.admin.ar.dto.ArchiveSectionDTO;
 import lk.gov.ps.HPSDF.admin.ar.models.ArchiveSection;
+import lk.gov.ps.HPSDF.admin.ar.repositories.ArchiveFileRepository;
 import lk.gov.ps.HPSDF.admin.ar.repositories.ArchiveSectionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,15 @@ import java.util.stream.Collectors;
 @Component
 public class ArchiveSectionService {
     private ArchiveSectionRepository archiveSectionRepository;
+    private ArchiveFileRepository archiveFileRepository;
     private ModelMapper modelMapper;
 
     @Autowired
-    public ArchiveSectionService(ArchiveSectionRepository archiveSectionRepository,ModelMapper modelMapper) {
+    public ArchiveSectionService(ArchiveSectionRepository archiveSectionRepository,
+                                 ArchiveFileRepository archiveFileRepository,
+                                 ModelMapper modelMapper) {
         this.archiveSectionRepository = archiveSectionRepository;
+        this.archiveFileRepository=archiveFileRepository;
         this.modelMapper=modelMapper;
     }
 
@@ -29,13 +34,17 @@ public class ArchiveSectionService {
         // Log the exception or handle it accordingly
             throw new RuntimeException("Error occurred while retrieving archive sections", e);
         }
-
     }
     public List<ArchiveSectionDTO> getAllSections(){
         try{
             List<ArchiveSection> sections=archiveSectionRepository.findAll();
             return sections.stream()
-                    .map(section->modelMapper.map(section, ArchiveSectionDTO.class))
+                    .map(section-> {
+                        int fileCount = archiveFileRepository.getFileCountsBySection(section.getId());
+                        ArchiveSectionDTO archiveSectionDTO=modelMapper.map(section, ArchiveSectionDTO.class);
+                        archiveSectionDTO.setCount(fileCount);
+                        return archiveSectionDTO;
+                    })
                     .collect(Collectors.toList());
 
         }   catch (Exception e) {
@@ -44,7 +53,7 @@ public class ArchiveSectionService {
         }
 
     }
-    public ArchiveSectionDTO getSectionById(Long id){
+    public ArchiveSectionDTO getSectionById(String id){
         try{
             ArchiveSection section=archiveSectionRepository.findById(id).orElse(null);
             return modelMapper.map(section,ArchiveSectionDTO.class);
@@ -63,7 +72,7 @@ public class ArchiveSectionService {
             return true;
         }
     }
-    public boolean deleteArchiveSection(Long archiveSectionId) {
+    public boolean deleteArchiveSection(String archiveSectionId) {
         boolean doesExists= archiveSectionRepository.existsById(archiveSectionId);
         if(!doesExists){
             return false;

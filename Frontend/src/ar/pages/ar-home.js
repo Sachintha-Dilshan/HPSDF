@@ -1,17 +1,47 @@
-import React from 'react';
-import ARhomecard from '../component/ar-home-card';
-import CollapseBar from '../../layouts/collapse-bar';
+import React,{useState} from 'react';
+import { Link ,useNavigate} from 'react-router-dom';
+import sectionService from '../services/add-section-service';
+import ARhomecard from '../components/ar-home-card';
+import CollapseBar from '../components/ar-file-collapse-bar'
 import { IoIosPeople  } from "react-icons/io";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { GrUserSettings } from "react-icons/gr";
 import { FaHandsHolding } from "react-icons/fa6";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import fileService from '../services/add-file-service';
 
 
 
 
 function ARHome() {
+  const navigate=useNavigate();
+  const [sections,setSections]=useState([]);
+  const [checkedOutFilesCount,setCheckedOutFilesCount]=useState(0);
+    
+  const fetchData=()=>{
+    sectionService.getAllSections()
+    .then((response)=>{
+        setSections(response.data);
+        console.log("check axios..........");
+        console.log(response.data);
+    })
+    .catch((e)=>{
+        console.log("error in get all setions");
+        console.log(e);
+    })
+    fileService.getFileCheckedOutCount()
+    .then((response)=>{
+        setCheckedOutFilesCount(response.data);
+        console.log("count:  "+response.data);
+
+    })
+    .catch((error)=>{
+      console.log(error.response.data);
+    })
+  }
+  React.useEffect(()=>{fetchData();},[]);
+  
   const cardData = [
     {
       id: 1,
@@ -70,7 +100,7 @@ function ARHome() {
     },
   ];
   return (
-    <main class="flex justify">
+    <main className="flex justify">
 
       <CollapseBar />
       <div>
@@ -78,18 +108,31 @@ function ARHome() {
           Archive
         </h3>
         {/* Dashboard cards starts here */}
-        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-10  mt-8 ">
-          {cardData.map((data) => (
+        <div className="grid  lg:grid-cols-3 md:grid-cols-1 gap-8  mt-8 mx-20">
+          {sections.map((section) => (
+            <Link key={section.id} to={`/AR/fileCrud/${section.id}`}>         
             <ARhomecard
-              key={data.id}
-              title={data.title}
-              count={data.count}
-              icon={data.icon}
-              title2={data.title2}
-              colr1={data.colr}
-              url={data.url}
+              key={section.id}
+              title={section.sectionName}
+              count={section.count}
+              icon={section.sectionIcon}
+              colr1={section.sectionColor}
             />
+            </Link>
           ))}
+
+            <Link  to={`/AR/checkedOutFiles`}>         
+            <ARhomecard
+              //onClick={() => navigate('/AR/checkedOut')} 
+             // key={section.id}
+              title={"Checked Out Files"}
+              count={checkedOutFilesCount}
+              icon={'BsFillCartCheckFill'}
+              colr1={'bg-[#FFFFFF]'}
+            />
+            </Link>
+          
+          
         </div>
       </div>
 

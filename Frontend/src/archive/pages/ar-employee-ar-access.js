@@ -19,7 +19,7 @@ function AREmployeeArchiveAccess() {
             <span className=" text-xl text-slate-500 font-semibold uppercase lg:mt-14 lg:-ml-20">
             MR.HARSHA GIHAN
             </span>
-            </fieldset>      
+        </fieldset>      
 
             <div className="flex flex-col  lg:ml-20  mt-12">
         <ARCheckedOutFileEmployeeTable/>
