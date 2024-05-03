@@ -6,11 +6,15 @@ import { FaHome, FaArchive, FaStoreAlt, FaCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth-service";
 import EmployeeService from "../hr/services/add-new-employee-service";
+import userRoles from "../data/user-roles";
 
 function NavigationBar() {
   const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState();
   const [imageUrl, setImageUrl] = useState("");
+  const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).roles : null;
+  const roles = userRoles;
+
 
   const userEmail = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).email
@@ -148,15 +152,16 @@ function NavigationBar() {
           </span>
         </NavbarLink>
 
-        <NavbarLink
-          onClick={() => navigate("archive")}
+        {!currentUser.includes(roles.archivist) && <NavbarLink
+          onClick={() => navigate("/AR/archiveDashboard")}
           className="cursor-pointer"
         >
           <span className="text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
             <FaArchive className="text-lg text-white mr-2 inline-block" />
             Archive
           </span>
-        </NavbarLink>
+          </NavbarLink>}
+
         <NavbarLink
           onClick={() => navigate("store")}
           className="cursor-pointer"

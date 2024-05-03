@@ -33,7 +33,7 @@ const HRRoutes = [
     {
         path : "HR/employeeProfile",
         element : <HREmployeeProfile/>,
-        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary]
+        availability : [userRoles.hrAdmin, userRoles.chairman, userRoles.secretary, userRoles.archivist]
     },
     {
         path : "HR/allEmployees",
@@ -106,7 +106,7 @@ const HRRoutes = [
     {
         path : "HR/leave/applyLeave",
         element : <HRLeaveApplyLeave/>,
-        availability : [userRoles.leaveAdmin, userRoles.user, userRoles.hrAdmin, userRoles.chairman, userRoles.chairman]
+        availability : [userRoles.leaveAdmin, userRoles.user, userRoles.hrAdmin, userRoles.chairman, userRoles.chairman, userRoles.archivist]
     },
     {
         path : "HR/leave/editLeaveOfficers",

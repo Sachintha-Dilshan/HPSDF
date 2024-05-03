@@ -3,6 +3,7 @@ import RequireAuth from "../utils/require-auth";
 import RedirectIfLoggedIn from "../utils/redirect-if-logged-in";
 
 import HRRoutes from "./HR-routes";
+import ArchiveRoutes from "./Archive-routes";
 import unprotectedRoutes from "./unprotected-routes";
 
 import PageLayout from "../layouts/page-layout";
@@ -27,8 +28,23 @@ const AppRoutes = () => {
       })}
 
       <Route path="/" element={<PageLayout />}>
-        <Route path = "dashboard" element = {<RedirectToDashboard/>}/>
+        <Route path="dashboard" element={<RedirectToDashboard />} />
         {HRRoutes.map((item) => {
+          return (
+            <Route
+              key={item.path}
+              exact
+              path={item.path}
+              element={
+                <RequireAuth userroles={item.availability}>
+                  {item.element}
+                </RequireAuth>
+              }
+            />
+          );
+        })}
+
+        {ArchiveRoutes.map((item) => {
           return (
             <Route
               key={item.path}

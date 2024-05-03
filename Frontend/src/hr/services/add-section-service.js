@@ -1,7 +1,8 @@
 import axios from "axios";
 import AuthHeader from "../../services/auth-header";
+import BASE_URL from "../../services/base-url";
 
-const API_URL = "http://localhost:8080/api/auth/hr/";
+const API_URL = BASE_URL + "/api/auth/hr/";
 
 const getAllSections = () => {
     return axios.get(API_URL + "section", { headers: AuthHeader() });
