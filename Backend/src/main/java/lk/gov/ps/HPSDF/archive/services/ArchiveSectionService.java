@@ -36,32 +36,7 @@ public class ArchiveSectionService {
         return archiveSectionRepository.findById(id).orElse(null);
     }
 
-    public List<ArchiveSection> getAllSectionsSubjects(){
-        try{
-            return archiveSectionRepository.findAll();
-        }   catch (Exception e) {
-        // Log the exception or handle it accordingly
-            throw new RuntimeException("Error occurred while retrieving archive sections", e);
-        }
-    }
-    public List<ArchiveSectionDTO> getAllSections(){
-        try{
-            List<ArchiveSection> sections=archiveSectionRepository.findAll();
-            return sections.stream()
-                    .map(section-> {
-                        int fileCount = archiveFileRepository.getFileCountsBySection(section.getId());
-                        ArchiveSectionDTO archiveSectionDTO=modelMapper.map(section, ArchiveSectionDTO.class);
-                        archiveSectionDTO.setCount(fileCount);
-                        return archiveSectionDTO;
-                    })
-                    .collect(Collectors.toList());
 
-        }   catch (Exception e) {
-            // Log the exception or handle it accordingly
-            throw new RuntimeException("Error occurred while retrieving archive sections", e);
-        }
-
-    }
     public ArchiveSectionDTO getSectionById(String id){
         try{
             ArchiveSection section=archiveSectionRepository.findById(id).orElse(null);

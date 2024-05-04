@@ -1,6 +1,7 @@
 package lk.gov.ps.HPSDF.archive.controllers;
 
 import jakarta.validation.Valid;
+import lk.gov.ps.HPSDF.archive.models.ArchiveSection;
 import lk.gov.ps.HPSDF.archive.models.ArchiveSubject;
 import lk.gov.ps.HPSDF.archive.services.ArchiveSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,14 @@ public class ArchiveSubjectController {
             return new ResponseEntity<>(_subject, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PutMapping("/updateArchiveSubject/{id}")
+    public ResponseEntity<ArchiveSubject> updateArchiveSubject(@RequestBody ArchiveSubject archiveSubject, @PathVariable int id){
+        ArchiveSubject _archiveSubject = archiveSubjectService.updateArchiveSubject(archiveSubject, id);
+        if(_archiveSubject == null)
+            return new ResponseEntity<>(_archiveSubject,HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(_archiveSubject, HttpStatus.OK);
+    }
 
     @GetMapping("/getAllArchiveSubjects")
     public ResponseEntity<List<ArchiveSubject>> getAllArchiveSubjects(){
@@ -42,6 +51,15 @@ public class ArchiveSubjectController {
         }
 
     }
+
+    @DeleteMapping("/deleteArchiveSubject/{id}")
+    public String deleteArchiveSubject(@PathVariable int id){
+        if(archiveSubjectService.deleteArchiveSubject(id))
+            return "Subject has been deleted";
+        else
+            return "Subject is not found";
+    }
+
 
 
 }

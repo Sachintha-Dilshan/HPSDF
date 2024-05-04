@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import LeaveTypeService from "../services/leave-type-service";
 
@@ -11,13 +11,13 @@ import { IoIosWarning } from "react-icons/io";
 
 
 function HRLeaveAddLeaves() {
-  const [leaveName, setLeaveName] = React.useState("");
-  const [leaveData, setLeaveData] = React.useState([]);
-  const [leaveId, setLeaveId] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [openModal, setOpenModal] = React.useState(false);
-  const [title, setTitle] = React.useState("");
-  const [show, setShow] = React.useState(false);
+  const [leaveName, setLeaveName] = useState("");
+  const [leaveData, setLeaveData] = useState([]);
+  const [leaveId, setLeaveId] = useState("");
+  const [message, setMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [show, setShow] = useState(false);
   const fetchAllData = () => {
     LeaveTypeService.getAllLeaveTypes()
       .then((response) => {
@@ -32,26 +32,7 @@ function HRLeaveAddLeaves() {
     fetchAllData();
   }, []);
 
-  // const fetchRealTimeData = () => {
-  //   LeaveTypeService.findByLeaveName(leaveName)
-  //     .then((response) => {
-  //       setLeaveData(response.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
-
-  // const fetchLeaveTypeByName = () => {
-  //   LeaveTypeService.findByLeaveName(leaveName)
-  //     .then((response) => {
-  //       alert(response.data.leaveType + " \n දැනටමත් පද්ධතියට ඇතුලත් කර ඇත");
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

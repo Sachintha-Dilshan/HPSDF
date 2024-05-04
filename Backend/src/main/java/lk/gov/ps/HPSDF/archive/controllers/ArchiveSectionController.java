@@ -40,29 +40,6 @@ public class ArchiveSectionController {
         else
             return new ResponseEntity<>(section,HttpStatus.OK);
     }
-    @GetMapping("/sectionssubjects")
-    public ResponseEntity<?> getSectionsSubjects() {
-//        List<ArchiveSection>
-        try{
-            List<ArchiveSection> sections=archiveSectionService.getAllSectionsSubjects();
-            return ResponseEntity.ok(sections);
-        } catch (RuntimeException e) {
-        // Log the exception or handle it accordingly
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while retrieving archive sections");
-        }
-    }
-
-    @GetMapping("/sections")
-    public ResponseEntity<?> getSections() {
-//        List<ArchiveSection>
-        try{
-            List<ArchiveSectionDTO> sections=archiveSectionService.getAllSections();
-            return ResponseEntity.ok(sections);
-        } catch (RuntimeException e) {
-            // Log the exception or handle it accordingly
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while retrieving archive sections");
-        }
-    }
 
 
     @GetMapping("/sectionById/{sectionId}")
@@ -75,11 +52,7 @@ public class ArchiveSectionController {
         catch(RuntimeException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("NO ..Section with this id");
         }
-//        if (section != null) {
-//            return new ResponseEntity<>(section, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//        }
+
     }
 
 

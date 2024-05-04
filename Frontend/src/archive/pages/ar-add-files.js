@@ -248,8 +248,8 @@ const FileCrud = (props) => {
   };
 
   const updateFile = async () => {
-    if (fileId !== "") {
-      setMessage("FILE ID IS REQUIRED");
+    if (fileId === "") {
+      setMessage("File id is required");
       setTitle("Empty");
       setOpenModal(true);
     } else {
@@ -547,7 +547,7 @@ const FileCrud = (props) => {
         </div>
         {/* Table starts here */}
         <div className="overflow-auto">
-          <Table striped hoverable className="text-center">
+          <Table striped hoverable >
             <Table.Head>
               <Table.HeadCell>File ID</Table.HeadCell>
               <Table.HeadCell>File Number</Table.HeadCell>

@@ -4,34 +4,40 @@ import BASE_URL from "../../services/base-url";
 
 const API_URL = BASE_URL + "/api/auth/ar/";
 
-
 const getSubjectsBySectionId = (sectionId) => {
-    return axios.get(API_URL + `subjectsBySectionId/${sectionId}`, { headers: AuthHeader() });
-  };
-  
-  // const getSectionById = id => {
-  //   return axios.get(API_URL + `sectionById/${id}`, { headers: AuthHeader() });
-  // };
-  
-  // const addSection = data => {
-  //   return axios.post(API_URL + "file", data, { headers: AuthHeader() } );
-  // };
-  
-  // const updateSecion = (data,id) => {
-  //   return axios.put(API_URL + `file/${id}`, data, { headers: AuthHeader() } );
-  // };
-  
-  // const removeSection = id => {
-  //   return axios.delete(API_URL + `file/${id}`, { headers: AuthHeader() });
-  // };
-    
+  return axios.get(API_URL + `subjectsBySectionId/${sectionId}`, {
+    headers: AuthHeader(),
+  });
+};
 
-  
-  
-  const subjectService = {
-    getSubjectsBySectionId,
-    
-   
-  };
-  
-  export default subjectService;
+const getAllSubject = () => {
+  return axios.get(API_URL + "getAllArchiveSubjects" , {
+    headers: AuthHeader(),
+  });
+};
+
+const saveArchiveSubject = (data) => {
+  return axios.post(API_URL + "saveArchiveSubject", data, {
+    headers: AuthHeader(),
+  });
+};
+
+const updateArchiveSubject = (id, data) => {
+  return axios.put(API_URL + `updateArchiveSubject/${id}`, data, {
+    headers: AuthHeader(),
+  });
+};
+
+const deleteArchiveSubject = id => {
+  return axios.delete(API_URL + `deleteArchiveSubject/${id}`, { headers: AuthHeader() });
+};
+
+const subjectService = {
+  saveArchiveSubject,
+  updateArchiveSubject,
+  getSubjectsBySectionId,
+  getAllSubject,
+  deleteArchiveSubject
+};
+
+export default subjectService;

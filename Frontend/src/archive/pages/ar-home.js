@@ -48,11 +48,11 @@ function ARHome() {
   }, []);
 
   return (
-    <main className="flex justify">
+    <main >
       <CollapseBar />
-      <div className="flex flex-col gap-2 ml-5 mr-5">
+      <div className="flex flex-col gap-2 m-5">
         <h3 className="text-center text-lg text-slate-500 font-semibold border-b-2 border-b-slate-200 uppercase">
-          Archive
+          Archive Dashboard
         </h3>
 
         {/* Dashboard cards starts here */}

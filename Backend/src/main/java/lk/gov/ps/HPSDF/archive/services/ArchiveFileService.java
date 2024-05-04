@@ -63,9 +63,16 @@ public class ArchiveFileService {
     }
 
     public List<ArchiveFile> searchFiles(ArchiveFile archiveFile) {
+        Sort sort = Sort.by(Sort.Order.asc("id"));
+        Pageable pageable = PageRequest.of(0, 100, sort);
+
         return archiveFileRepository.findByAttributes(
-                archiveFile.getFileNumber(), archiveFile.getFileName(), archiveFile.getYear(),
-                archiveFile.getArchiveSection(), archiveFile.getArchiveSubject()
+                archiveFile.getFileNumber(),
+                archiveFile.getFileName(),
+                archiveFile.getYear(),
+                archiveFile.getArchiveSection(),
+                archiveFile.getArchiveSubject(),
+                pageable
         );
     }
 

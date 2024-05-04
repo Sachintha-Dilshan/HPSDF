@@ -1,16 +1,16 @@
-import React from "react";
+import {React, useState} from "react";
 import { Link } from "react-router-dom";
 import { IoPeople, IoAddOutline, IoSettingsSharp } from "react-icons/io5";
 import userRoles from "../../data/user-roles";
 
 function HRCollapseBar() {
-  const [show, setShow] = React.useState(false);
-  const [showSettings, setShowSettings] = React.useState(false);
-  const [showEmployee, setShowEmployee] = React.useState(false);
+  const [show, setShow] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showEmployee, setShowEmployee] = useState(false);
   const currentUser = localStorage.getItem("user")
-  ? JSON.parse(localStorage.getItem("user")).roles
-  : null;
-const roles = userRoles;
+    ? JSON.parse(localStorage.getItem("user")).roles
+    : null;
+  const roles = userRoles;
   return (
     <div
       className=" rounded-tr-3xl rounded-br-3xl items-center px-1 py-10 my-2  w-8  bg-gray-700 transition-all duration-300 ease-in-out hover:w-60 cursor-pointer fixed left-0 top-16 bottom-14 z-50"
@@ -23,24 +23,28 @@ const roles = userRoles;
       </div>
       <div className="flex flex-col h-full">
         <div style={{ display: show ? "block" : "none" }}>
-           <ul className="text-white uppercase">
-           {currentUser.includes(roles.hrAdmin) && (<li
-              className="font-bold my-5"
-              onMouseEnter={() => setShowEmployee((prevShow) => !prevShow)}
-              onClick={() => setShowEmployee((prevShow) => !prevShow)}
-            >
-              <IoPeople className="inline-block text-2xl" /> Employee
-            </li>)}
-            {currentUser.includes(roles.hrAdmin) && ( <ul
-              className="ml-5"
-              style={{ display: showEmployee ? "block" : "none" }}
-            >
-              <Link to="/HR/addEmployee">
-                <li className="my-2">
-                  <IoAddOutline className="inline-block text-2xl" /> Add New
-                </li>
-              </Link>
-            </ul>)}
+          <ul className="text-white uppercase">
+            {currentUser.includes(roles.hrAdmin) && (
+              <li
+                className="font-bold my-5"
+                onMouseEnter={() => setShowEmployee((prevShow) => !prevShow)}
+                onClick={() => setShowEmployee((prevShow) => !prevShow)}
+              >
+                <IoPeople className="inline-block text-2xl" /> Employee
+              </li>
+            )}
+            {currentUser.includes(roles.hrAdmin) && (
+              <ul
+                className="ml-5"
+                style={{ display: showEmployee ? "block" : "none" }}
+              >
+                <Link to="/HR/addEmployee">
+                  <li className="my-2">
+                    <IoAddOutline className="inline-block text-2xl" /> Add New
+                  </li>
+                </Link>
+              </ul>
+            )}
 
             <li
               className="font-bold my-5"

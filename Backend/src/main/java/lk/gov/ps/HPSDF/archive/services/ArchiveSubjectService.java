@@ -3,6 +3,7 @@ package lk.gov.ps.HPSDF.archive.services;
 import lk.gov.ps.HPSDF.archive.models.ArchiveSubject;
 import lk.gov.ps.HPSDF.archive.repositories.ArchiveSubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,8 +19,25 @@ public class ArchiveSubjectService {
         return archiveSubjectRepository.save(subject);
     }
 
+    public ArchiveSubject updateArchiveSubject(ArchiveSubject archiveSubject, int id){
+        ArchiveSubject existingArchiveSubject = archiveSubjectRepository.findById(id).orElse(null);
+        if(existingArchiveSubject != null)
+        {
+            existingArchiveSubject.setSubjectName(archiveSubject.getSubjectName());
+            existingArchiveSubject.setArchiveSection(archiveSubject.getArchiveSection());
+            return archiveSubjectRepository.save(existingArchiveSubject);
+        }
+        else
+            return existingArchiveSubject;
+
+    }
     public List<ArchiveSubject> getAllArchiveSubjects(){
-        return archiveSubjectRepository.findAll();
+        try{
+            Sort sort = Sort.by(Sort.Direction.DESC, "id"); // Sort by ID in descending order
+            return archiveSubjectRepository.findAll(sort);
+        } catch(Exception e){
+            throw new RuntimeException("Error occurred while fetching subjects into services.", e);
+        }
     }
     public List<ArchiveSubject> getSubjectsBySectionId(String sectionId){
         try{
@@ -30,17 +48,15 @@ public class ArchiveSubjectService {
 
     }
 
-    public ArchiveSubject getSubjectById(String id){
-        return archiveSubjectRepository.findById(id).orElse(null);
-    }
-
-    public boolean deleteArchiveSubject(String archiveSubjectId) {
-        boolean doesExists= archiveSubjectRepository.existsById(archiveSubjectId);
-        if(!doesExists){
-            return false;
-        }else{
-            archiveSubjectRepository.deleteById(archiveSubjectId);
+    public boolean deleteArchiveSubject(int id){
+        if(archiveSubjectRepository.existsById(id))
+        {
+            archiveSubjectRepository.deleteById(id);
             return true;
         }
+        else
+            return false;
+
     }
+
 }

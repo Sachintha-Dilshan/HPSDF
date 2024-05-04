@@ -12,16 +12,17 @@ function NavigationBar() {
   const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState();
   const [imageUrl, setImageUrl] = useState("");
-  const currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).roles : null;
+  const currentUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).roles
+    : null;
   const roles = userRoles;
-
 
   const userEmail = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).email
     : null;
 
-  useEffect(() => {
-    const getEmployeeByEmail = async () => {
+  useEffect(()=>{
+    const getEmployeeData = async () => {
       try {
         const data = {
           email: userEmail,
@@ -39,13 +40,10 @@ function NavigationBar() {
           console.log(error.response.data.error);
         }
       }
-    };
+      const employeeId = JSON.parse(localStorage.getItem("nicNo"));
 
-    const getProfileImage = async () => {
       try {
-        const response = await EmployeeService.getImage(
-          JSON.parse(localStorage.getItem("nicNo"))
-        );
+        const response = await EmployeeService.getImage(employeeId);
         const imageUrl = URL.createObjectURL(response.data);
         setImageUrl(imageUrl);
       } catch (error) {
@@ -57,10 +55,10 @@ function NavigationBar() {
           console.log(error.response.data.error);
         }
       }
-    };
-    getEmployeeByEmail();
-    getProfileImage();
-  }, [userEmail]);
+    }
+
+    getEmployeeData();
+  },[userEmail]);
 
   return (
     <Navbar
@@ -97,7 +95,9 @@ function NavigationBar() {
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm font-bold">{employeeData && employeeData[1]}</span>
+            <span className="block text-sm font-bold">
+              {employeeData && employeeData[1]}
+            </span>
             <span className="block truncate text-sm font-medium">
               {employeeData && employeeData[3]}
             </span>
@@ -113,7 +113,9 @@ function NavigationBar() {
           </Dropdown.Item>
           <Dropdown.Item
             icon={HiUserCircle}
-            onClick={() => navigate("HR/employeeProfile", { state: employeeData })}
+            onClick={() =>
+              navigate("HR/employeeProfile", { state: employeeData })
+            }
           >
             Profile
           </Dropdown.Item>
@@ -152,15 +154,17 @@ function NavigationBar() {
           </span>
         </NavbarLink>
 
-        {!currentUser.includes(roles.archivist) && <NavbarLink
-          onClick={() => navigate("/AR/archiveDashboard")}
-          className="cursor-pointer"
-        >
-          <span className="text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
-            <FaArchive className="text-lg text-white mr-2 inline-block" />
-            Archive
-          </span>
-          </NavbarLink>}
+        {!currentUser.includes(roles.archivist) && (
+          <NavbarLink
+            onClick={() => navigate("/AR/archiveDashboard")}
+            className="cursor-pointer"
+          >
+            <span className="text-center w-full hover:text-black md:hover:text-white text-white  uppercase md:px-4 md:py-1 md:rounded-full md:border md:border-solid md:border-white  md:hover:bg-cyan-700  transition ease-in-out duration-300 flex items-center justify-center">
+              <FaArchive className="text-lg text-white mr-2 inline-block" />
+              Archive
+            </span>
+          </NavbarLink>
+        )}
 
         <NavbarLink
           onClick={() => navigate("store")}
