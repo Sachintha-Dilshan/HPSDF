@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import editLeaveOfficerService from "../services/leave-edit-leave-officers-service";
 

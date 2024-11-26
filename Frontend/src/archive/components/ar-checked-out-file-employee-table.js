@@ -1,5 +1,5 @@
 import { Button, Table, Modal, Spinner } from "flowbite-react";
-import { React, useState } from "react";
+import { useState } from "react";
 import { MdDoneOutline, MdRadioButtonUnchecked, MdError } from "react-icons/md";
 import { HiDocumentDuplicate } from "react-icons/hi";
 import { FaSearchMinus } from "react-icons/fa";

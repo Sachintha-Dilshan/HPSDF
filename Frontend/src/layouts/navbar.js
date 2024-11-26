@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Avatar, Dropdown, Navbar, NavbarLink } from "flowbite-react";
 import { HiLogout, HiViewGrid, HiUserCircle } from "react-icons/hi";
 import { FaHome, FaArchive, FaStoreAlt, FaCalendarCheck } from "react-icons/fa";

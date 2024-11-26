@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HREmployeeCard from "../components/hr-employee-card";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import EmployeeService from "../services/add-new-employee-service";

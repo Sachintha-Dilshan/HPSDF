@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import {useState, useEffect} from 'react';
 import { Footer } from "flowbite-react";
 
 function FooterBar() {
-  const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
-  React.useEffect(() => {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+ useEffect(() => {
     // Update the currentYear state when the component mounts
     // This ensures that the year is updated when the component is first rendered
     setCurrentYear(new Date().getFullYear());

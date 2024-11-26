@@ -11,15 +11,15 @@ import {
 } from "react-icons/fa";
 
 import { IoIosWarning } from "react-icons/io";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import fileService from '../services/add-file-service';
 
 function ARCheckedOutFileTable(props) {
     
-const [message, setMessage] = React.useState("");
-const [openModal, setOpenModal] = React.useState(false);
-const [title, setTitle] = React.useState("");
-const [show, setShow] = React.useState(false);
+const [message, setMessage] = useState("");
+const [openModal, setOpenModal] = useState(false);
+const [title, setTitle] = useState("");
+const [show, setShow] = useState(false);
 
     const checkInFile=(fileId)=>{
     

@@ -1,5 +1,5 @@
 import { Button, FloatingLabel } from "flowbite-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GiBookshelf } from "react-icons/gi";
 import { ImDrawer } from "react-icons/im";

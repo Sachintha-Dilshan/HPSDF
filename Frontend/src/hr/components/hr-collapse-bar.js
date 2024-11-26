@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {useState} from "react";
 import { Link } from "react-router-dom";
 import { IoPeople, IoAddOutline, IoSettingsSharp } from "react-icons/io5";
 import userRoles from "../../data/user-roles";

@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {useState, useEffect} from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import LeaveTypeService from "../services/leave-type-service";
 
@@ -28,7 +28,7 @@ function HRLeaveAddLeaves() {
       });
   };
 
-  React.useEffect(() => {
+useEffect(() => {
     fetchAllData();
   }, []);
 

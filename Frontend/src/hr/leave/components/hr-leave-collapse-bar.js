@@ -1,11 +1,11 @@
-import React from "react";
+import {useState} from 'react';
 import { Link } from "react-router-dom";
 import {IoAddOutline, IoSettingsSharp, IoCalendarSharp } from "react-icons/io5";
 
 function LeaveCollapseBar() {
-  const [show, setShow] = React.useState(false);
-  const [showSettings, setShowSettings] = React.useState(false);
-  const [showEmployee, setShowEmployee] = React.useState(false);
+  const [show, setShow] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showEmployee, setShowEmployee] = useState(false);
   return (
     <div
       className=" rounded-tr-3xl rounded-br-3xl items-center px-1 py-10 my-2  w-8  bg-gray-700 transition-all duration-300 ease-in-out hover:w-60 cursor-pointer fixed left-0 top-16 bottom-14 z-50"

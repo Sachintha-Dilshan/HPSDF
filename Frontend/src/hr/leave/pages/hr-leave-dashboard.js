@@ -1,4 +1,3 @@
-import React from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 import HRDashboardCard from "../../components/hr-dashboard-card";
 import Tab from "../../../components/tabs";

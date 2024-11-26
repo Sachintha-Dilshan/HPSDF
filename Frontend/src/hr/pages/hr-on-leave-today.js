@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import HRLeaveStatusTimeLine from "../components/hr-leave-status-timeline";
 import LeaveApplicationService from "../leave/services/leave-application-service";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import EmployeeService from "../services/add-new-employee-service";
 
 import { FloatingLabel } from "flowbite-react";

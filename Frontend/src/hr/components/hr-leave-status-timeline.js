@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Timeline } from "flowbite-react";
 import { HiArrowNarrowRight, HiCalendar } from "react-icons/hi";
 import FormattedDate from "./hr-date-converter";

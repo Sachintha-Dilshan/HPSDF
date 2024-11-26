@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import subjectService from "../services/add-subject-service";
 import sectionService from "../services/add-section-service";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Table, Modal, Spinner } from "flowbite-react";
 import { FloatingLabel } from "flowbite-react";
 import { useState, useEffect } from "react";

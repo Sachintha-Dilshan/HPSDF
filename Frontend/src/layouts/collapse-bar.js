@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function CollapseBar() {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
 
   return (
     <div

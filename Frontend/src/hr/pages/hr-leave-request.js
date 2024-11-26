@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeeLeaveChit from "../components/hr-employee-leave-chit";

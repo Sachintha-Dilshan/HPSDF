@@ -1,12 +1,12 @@
-import React from "react";
+import {Fragment} from 'react';
 import AppRoutes from "./routes/app-routes";
 
 function App() {
   return (
     <div className="App" style={{ fontFamily: "Noto Sans Sinhala" }}>
-      <React.Fragment>
+      <Fragment>
         <AppRoutes />
-      </React.Fragment>
+      </Fragment>
     </div>
   );
 }

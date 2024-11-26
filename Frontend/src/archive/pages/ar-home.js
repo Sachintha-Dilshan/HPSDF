@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import sectionService from "../services/add-section-service";
 import ARhomecard from "../components/ar-home-card";

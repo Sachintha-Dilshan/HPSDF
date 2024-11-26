@@ -1,5 +1,4 @@
 import { Button, Table } from "flowbite-react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function ARSearchFileTable(props) {

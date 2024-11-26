@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ARFileCollapseBar from "../components/ar-file-collapse-bar";
 import { FloatingLabel, Table, Button, Modal } from "flowbite-react";
 

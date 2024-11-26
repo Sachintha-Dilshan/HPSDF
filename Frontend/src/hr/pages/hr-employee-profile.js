@@ -1,4 +1,3 @@
-import React from "react";
 import HRCollapseBar from "../components/hr-collapse-bar";
 import Tab from "../../components/tabs";
 import HREmployeePersonalData from "../components/hr-employee-personal-data";

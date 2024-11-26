@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from 'react';
 import HRCollapseBar from "../components/hr-collapse-bar";
 import designationService from "../services/add-designation-service";
 
@@ -21,13 +21,13 @@ function HRAddDesignations() {
     : null;
   const roles = userRoles;
 
-  const [designationName, setDesignationName] = React.useState("");
-  const [designationData, setDesignationData] = React.useState([]);
-  const [designationId, setDesignationId] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [openModal, setOpenModal] = React.useState(false);
-  const [title, setTitle] = React.useState("");
-  const [show, setShow] = React.useState(false);
+  const [designationName, setDesignationName] = useState("");
+  const [designationData, setDesignationData] = useState([]);
+  const [designationId, setDesignationId] = useState("");
+  const [message, setMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [show, setShow] = useState(false);
   const fetchAllData = () => {
     designationService
       .getAllDesignations()
@@ -39,7 +39,7 @@ function HRAddDesignations() {
       });
   };
 
-  React.useEffect(() => {
+useEffect(() => {
     fetchAllData();
   }, []);
 

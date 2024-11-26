@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useEffect} from 'react';
 import HRCollapseBar from "../components/hr-collapse-bar";
 import serviceSectorService from "../services/add-service-sector-service";
 
@@ -22,13 +22,13 @@ function HRAddServiceSectors() {
   const roles = userRoles;
 
 
-  const [serviceSectorName, setServiceSectorName] = React.useState("");
-  const [serviceSectorData, setServiceSectorData] = React.useState([]);
-  const [serviceSectorId, setServiceSectorId] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [openModal, setOpenModal] = React.useState(false);
-  const [title, setTitle] = React.useState("");
-  const [show, setShow] = React.useState(false);
+  const [serviceSectorName, setServiceSectorName] = useState("");
+  const [serviceSectorData, setServiceSectorData] = useState([]);
+  const [serviceSectorId, setServiceSectorId] = useState("");
+  const [message, setMessage] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [title, setTitle] = useState("");
+  const [show, setShow] = useState(false);
   const fetchAllData = () => {
     serviceSectorService
       .getAllServiceSectors()
@@ -40,7 +40,7 @@ function HRAddServiceSectors() {
       });
   };
 
-  React.useEffect(() => {
+ useEffect(() => {
     fetchAllData();
   }, []);
 

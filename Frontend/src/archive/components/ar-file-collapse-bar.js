@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoPeople } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";

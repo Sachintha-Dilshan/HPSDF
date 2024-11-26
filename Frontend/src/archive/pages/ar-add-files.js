@@ -1,7 +1,7 @@
 import fileService from "../services/add-file-service";
 import sectionService from "../services/add-section-service";
 import rackService from "../services/add-rack-service";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   FloatingLabel,
   Select,

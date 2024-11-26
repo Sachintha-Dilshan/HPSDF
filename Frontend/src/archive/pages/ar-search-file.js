@@ -1,5 +1,5 @@
 import { Button, FloatingLabel, Select } from "flowbite-react";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import fileService from "../services/add-file-service";
 import sectionService from "../services/add-section-service";
 import subjectService from "../services/add-subject-service";

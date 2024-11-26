@@ -1,4 +1,3 @@
-import React from "react";
 import LeaveCollapseBar from "../components/hr-leave-collapse-bar";
 
 import { Table, Button, TextInput, Select } from "flowbite-react";
@@ -29,7 +28,7 @@ function HREmployeesAttendanceSheet() {
 
     getAllEmployees();
   }, []);
-  const [edit, setEdit] = React.useState(true);
+  const [edit, setEdit] = useState(true);
   function handleClick() {
     setEdit((prevEdit) => !prevEdit);
   }

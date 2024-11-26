@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import NavigationBar from "./navbar";
 import FooterBar from "./footer";

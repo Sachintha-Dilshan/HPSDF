@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ARFileCollapseBar from "../components/ar-file-collapse-bar";
 import sectionService from "../services/add-section-service";
 import subjectService from "../services/add-subject-service";

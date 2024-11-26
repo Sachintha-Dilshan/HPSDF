@@ -1,4 +1,3 @@
-import React from "react";
 import { FloatingLabel } from "flowbite-react";
 
 function HREmployeeLeaveChit(props) {
